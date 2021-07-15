@@ -1,25 +1,16 @@
 module.exports = {
   reactStrictMode: true,
-}
-const withAntdLess = require('next-plugin-antd-less');
+};
+const withAntdLess = require("next-plugin-antd-less");
 
 module.exports = {
-  NODE_ENV: process.env.NODE_ENV
-}
+  NODE_ENV: process.env.NODE_ENV,
+};
 
 module.exports = withAntdLess({
-  // optional
-  modifyVars: { '@primary-color': '#04f' },
-  // optional
-  lessVarsFilePath: './styles/antd.less',
-  // optional
-  lessVarsFilePathAppendToEndOfContent: false,
-  // optional https://github.com/webpack-contrib/css-loader#object
-  cssLoaderOptions: {},
-
-  // Other Config Here...
-
-  webpack(config) {
-    return config;
-  }
+  modifyVars: {
+    "@primary-color": "#FF4838",
+    "@secondary-color": "#162B32",
+  },
+  // lessVarsFilePath: "./styles/variables.less",
 });

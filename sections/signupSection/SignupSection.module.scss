@@ -1,7 +1,8 @@
 .card {
-    width: 800px;
-    margin-top: 5%;
+    min-width: 650px;
     min-height: 500px;
+    margin-top: 5%;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
 .japanBackground {
@@ -9,3 +10,11 @@
     width: 50px;
     position: relative;
 }
+
+@media screen and (max-width: 640px) {
+    .card {
+        min-width: 0px!important;
+        min-height: 0px!important;
+        margin-top: 5%;
+    }
+  }

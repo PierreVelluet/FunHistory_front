@@ -3,40 +3,34 @@ import { Card } from "antd";
 import Image from "next/image";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 import classes from "./SignupSection.module.scss";
 
 const SignupSection = () => {
-
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
+    axios
+    .post("http://localhost:5000/api/")
   };
 
   return (
     <Card className={classes.card}>
       <div className="d-flex justify-content-center align-items-center flex-column">
-        <div className={"d-flex justify-content-center align-items-center mb-2"}>
-          <div className={classes.japanBackground}>
-            {/* <Image
-              src={"/World.png"}
-              objectFit="cover"
-              layout="fill"
-              alt="Japanese samourai sun"
-              unoptimized={process.env.NODE_ENV === "development"}
-            /> */}
-          </div>
-
+        <div
+          className={"d-flex justify-content-center align-items-center mb-2"}
+        >
           <h1>Because History should be fun</h1>
         </div>
-          <div style={{width: "100%", height: "80px", position: "relative"}}>
+        <div style={{ width: "100%", height: "80px", position: "relative" }}>
           <Image
-              src={"/humanEvolution.png"}
-              objectFit="contain"
-              layout="fill"
-              alt="Japanese samourai sun"
-              unoptimized={process.env.NODE_ENV === "development"}
-            />
-            </div>
+            src={"/humanEvolution.png"}
+            objectFit="contain"
+            layout="fill"
+            alt="Japanese samourai sun"
+            unoptimized={process.env.NODE_ENV === "development"}
+          />
+        </div>
         <Form
           name="normal_login"
           className="login-form"
@@ -45,7 +39,13 @@ const SignupSection = () => {
         >
           <Form.Item
             name="username"
-            rules={[{ required: true, message: "Please input your name!", validateTrigger: "onBlur", }]}
+            rules={[
+              {
+                required: true,
+                message: "Please input your name!",
+                validateTrigger: "onBlur",
+              },
+            ]}
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
@@ -57,10 +57,11 @@ const SignupSection = () => {
             rules={[
               {
                 validateTrigger: "onBlur",
-                type: 'email',
-                message: 'Please input a valid E-mail!',
-                required: true
-              },]}
+                type: "email",
+                message: "Please input a valid E-mail!",
+                required: true,
+              },
+            ]}
           >
             <Input
               prefix={<MailOutlined className="site-form-item-icon" />}
@@ -69,7 +70,14 @@ const SignupSection = () => {
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Password must be 8 characters minimum", min: 8, validateTrigger: "onBlur", }]}
+            rules={[
+              {
+                required: true,
+                message: "Password must be 8 characters minimum",
+                min: 8,
+                validateTrigger: "onBlur",
+              },
+            ]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
@@ -95,7 +103,8 @@ const SignupSection = () => {
             >
               Log in
             </Button>
-            Or <a href="">register now!</a>
+            <span className="ms-2">Or </span>
+            <a href="">register now!</a>
           </Form.Item>
         </Form>
       </div>
