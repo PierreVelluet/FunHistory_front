@@ -15,7 +15,7 @@ export default function Home() {
         Hello
       </main>
       <div style={{height: "5500px"}}>
-kfkf
+
       </div>
 
       <footer className={styles.footer}>

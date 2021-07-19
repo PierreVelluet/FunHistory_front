@@ -11,6 +11,9 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@ant-design/pro-form": "^1.31.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.35",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "antd": "^4.16.7",
     "axios": "^0.21.1",
     "babel-plugin-import": "^1.13.3",
