@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Button } from "antd";
+import { Menu, Button, Card } from "antd";
 import {
   AppstoreOutlined,
   MenuUnfoldOutlined,
@@ -9,6 +9,7 @@ import {
   ContainerOutlined,
   MailOutlined,
 } from "@ant-design/icons";
+import Image from "next/image";
 import classes from "./Header.module.less";
 
 const { SubMenu } = Menu;
@@ -25,6 +26,23 @@ const SideBar = () => {
       theme="dark"
       inlineCollapsed={toggleCollapsed}
     >
+      <div className={classes.openProfile}>
+        <div className="d-flex">
+          <div className={classes.avatar}>
+            <Image
+              src="/Pierre_pro.jpg"
+              layout="fill"
+              objectFit="cover"
+              alt="profile picture"
+              className={classes.avatarImage}
+            />
+          </div>
+          <div className={classes.informationContainer}>
+            <p>Hello</p>
+            <p>Hello</p>
+          </div>
+        </div>
+      </div>
       <Menu.Item key="1" icon={<PieChartOutlined />}>
         Option 1
       </Menu.Item>
