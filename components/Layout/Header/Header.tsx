@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import { Menu, Button, Divider } from "antd";
+import { Menu, Tooltip, Progress } from "antd";
 import {
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
   SettingFilled,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,10 +10,10 @@ import { faGlobeAsia, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./Header.module.less";
 
-const { SubMenu } = Menu;
-
 const SideBar = () => {
   const [toggleCollapsed, setToggleColapsed] = useState(false);
+  const [gearSpinning, setGearSpinning ] = useState(false)
+  const [logoutSpinning, setLogoutSpinning ] = useState(false)
 
   return (
     <Menu
@@ -26,15 +21,14 @@ const SideBar = () => {
       defaultSelectedKeys={["1"]}
       defaultOpenKeys={["sub1"]}
       mode="inline"
-      theme="dark"
       inlineCollapsed={toggleCollapsed}
     >
-      <div className={classes.dividerContainer}>
-        <Divider className={classes.divider} />
-      </div>
       <div className={classes.openProfile}>
         <div className="d-flex mb-2 justify-content-between">
           <div className="d-flex">
+          <Tooltip title="change settings" placement="right" color={"gray"} key={"settings"}>
+                <SettingFilled spin={gearSpinning} onMouseEnter={() => setGearSpinning(true)} onMouseLeave={() => setGearSpinning(false)} className={classes.gearIcon} />
+                </Tooltip>
             <div className={classes.avatar}>
               <Image
                 src="/Pierre_pro.jpg"
@@ -47,17 +41,27 @@ const SideBar = () => {
             </div>
             <div className={classes.informationContainer}>
               <p>Pierre Velluet</p>
-              <p>Level: 2</p>
               <p>Game(s) completed: {3}</p>
               <p>Contribution(s): {1}</p>
             </div>
+            <Tooltip title="logout" placement="left" color={"gray"} key={"logout"}>
+            <LogoutOutlined spin={logoutSpinning} onMouseEnter={() => setLogoutSpinning(true)} onMouseLeave={() => setLogoutSpinning(false)} className={classes.logoutIcon}/>
+            </Tooltip>
           </div>
-          <SettingFilled className={classes.gearIcon} />
         </div>
-        <Button className={classes.logoutBtn}>Log out</Button>
-      </div>
-      <div className={classes.dividerContainer}>
-        <Divider className={classes.divider} />
+        <div className={classes.progressContainer}>
+          <p className="mb-1">level 1</p>
+          <Progress
+            status="active"
+            showInfo={false}
+            trailColor="lightgray"
+            strokeColor={{
+              "0%": "#FF4838",
+              "100%": "green",
+            }}
+            percent={60}
+          />
+        </div>
       </div>
       <Menu.Item
         key="1"
