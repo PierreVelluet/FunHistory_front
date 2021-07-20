@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { Menu, Tooltip, Progress } from "antd";
+import { Menu, Tooltip, Progress, Dropdown } from "antd";
 import {
   SettingFilled,
-  LogoutOutlined
+  LogoutOutlined,
+  TrophyFilled,
+  PlusCircleFilled,
+  QuestionCircleOutlined,
 } from "@ant-design/icons";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,8 +15,28 @@ import classes from "./Header.module.less";
 
 const SideBar = () => {
   const [toggleCollapsed, setToggleColapsed] = useState(false);
-  const [gearSpinning, setGearSpinning ] = useState(false)
-  const [logoutSpinning, setLogoutSpinning ] = useState(false)
+  const [gearSpinning, setGearSpinning] = useState(false);
+
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="">
+          <div className="d-flex align-items-center">
+            <SettingFilled />
+            <p className={classes.menuText}>Settings </p>
+          </div>
+        </a>
+      </Menu.Item>
+      <Menu.Item>
+        <a target="_blank" rel="noopener noreferrer" href="">
+          <div className="d-flex align-items-center">
+            <LogoutOutlined />
+            <p className={classes.menuText}>Logout </p>
+          </div>
+        </a>
+      </Menu.Item>
+    </Menu>
+  );
 
   return (
     <Menu
@@ -26,9 +49,6 @@ const SideBar = () => {
       <div className={classes.openProfile}>
         <div className="d-flex mb-2 justify-content-between">
           <div className="d-flex">
-          <Tooltip title="change settings" placement="right" color={"gray"} key={"settings"}>
-                <SettingFilled spin={gearSpinning} onMouseEnter={() => setGearSpinning(true)} onMouseLeave={() => setGearSpinning(false)} className={classes.gearIcon} />
-                </Tooltip>
             <div className={classes.avatar}>
               <Image
                 src="/Pierre_pro.jpg"
@@ -41,13 +61,59 @@ const SideBar = () => {
             </div>
             <div className={classes.informationContainer}>
               <p>Pierre Velluet</p>
-              <p>Game(s) completed: {3}</p>
-              <p>Contribution(s): {1}</p>
+              {/* <p>Game(s) completed: {3}</p> */}
+              <div>
+                <p>Apprentice</p>
+                <Tooltip
+                  title={
+                    <p>
+                      There are 4 grade:
+                      <br />
+                      <div className="d-flex align-ites-center">
+                        <div className={classes.romanInt}>I</div> Apprentice
+                      </div>{" "}
+                      <br />
+                      <div className="d-flex align-ites-center">
+                        <div className={classes.romanInt}>II</div> Confirmed
+                      </div>{" "}
+                      <br />
+                      <div className="d-flex align-ites-center">
+                        <div className={classes.romanInt}>III</div> Expert
+                      </div>{" "}
+                      <br />
+                      <div className="d-flex align-ites-center">
+                        <div className={classes.romanInt}>IV</div> Master
+                      </div>{" "}
+                      <br />
+                    </p>
+                  }
+                  placement="right"
+                  color={"gray"}
+                  key={"settings"}
+                >
+                  <QuestionCircleOutlined />
+                </Tooltip>
+              </div>
             </div>
-            <Tooltip title="logout" placement="left" color={"gray"} key={"logout"}>
-            <LogoutOutlined spin={logoutSpinning} onMouseEnter={() => setLogoutSpinning(true)} onMouseLeave={() => setLogoutSpinning(false)} className={classes.logoutIcon}/>
-            </Tooltip>
+            <Dropdown overlay={menu} placement="bottomRight" arrow>
+              <PlusCircleFilled
+                spin={gearSpinning}
+                onMouseEnter={() => setGearSpinning(true)}
+                onMouseLeave={() => setGearSpinning(false)}
+                className={classes.plusIcon}
+              />
+            </Dropdown>
           </div>
+        </div>
+        <div className="div">
+          <Tooltip
+            title="1st game !"
+            placement="right"
+            color={"gray"}
+            key={"settings"}
+          >
+            <TrophyFilled className={classes.trophy} />
+          </Tooltip>
         </div>
         <div className={classes.progressContainer}>
           <p className="mb-1">level 1</p>
