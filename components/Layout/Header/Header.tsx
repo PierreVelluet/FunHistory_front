@@ -62,36 +62,36 @@ const SideBar = () => {
             <div className={classes.informationContainer}>
               <p>Pierre Velluet</p>
               {/* <p>Game(s) completed: {3}</p> */}
-              <div>
-                <p>Apprentice</p>
+              <div className={"d-flex align-items-center"}>
+                <p className="me-1">Apprentice</p>
                 <Tooltip
                   title={
                     <p>
-                      There are 4 grade:
+                      There are 4 grades:
                       <br />
                       <div className="d-flex align-ites-center">
-                        <div className={classes.romanInt}>I</div> Apprentice
-                      </div>{" "}
-                      <br />
+                        {" "}
+                        <br />
+                        <div className={classes.romanInt}>
+                          I
+                        </div> Apprentice{" "}
+                      </div>
                       <div className="d-flex align-ites-center">
                         <div className={classes.romanInt}>II</div> Confirmed
-                      </div>{" "}
-                      <br />
+                      </div>
                       <div className="d-flex align-ites-center">
-                        <div className={classes.romanInt}>III</div> Expert
-                      </div>{" "}
-                      <br />
+                        <div className={classes.romanInt}>III</div> Expert{" "}
+                      </div>
                       <div className="d-flex align-ites-center">
                         <div className={classes.romanInt}>IV</div> Master
-                      </div>{" "}
-                      <br />
+                      </div>
                     </p>
                   }
                   placement="right"
                   color={"gray"}
                   key={"settings"}
                 >
-                  <QuestionCircleOutlined />
+                  <QuestionCircleOutlined className={classes.infoGradeIcon} />
                 </Tooltip>
               </div>
             </div>
