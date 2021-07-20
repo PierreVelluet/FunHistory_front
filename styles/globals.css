@@ -1,25 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Eczar&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Eczar&family=Fira+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap');
 
 html,
 body {
   padding: 0;
   margin: 0;
-  
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'STIX Two Math', serif!important;
+  color: #F1F1EF!important;
 }
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Eczar', serif;
   padding: 0!important;
   margin: 0!important;
+  color: #F1F1EF!important;
+}
+
+#mainMenu .ant-menu-item-selected {
+  background-color: #CD7F32 !important;
 }
 
 p {
   padding: 0;
   margin: 0!important;
-  font-family: 'Fira Sans', sans-serif;
+  color: #F1F1EF!important;
 }
 
 a {

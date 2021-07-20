@@ -4,10 +4,6 @@
 @padding-space: 144px;
 @text-color: #314659;
 
-p {
-  color: white;
-}
-
 .sidebar {
   position: fixed;
   height: 100vh;
@@ -19,7 +15,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 200px;
+  height: 150px;
   padding: 10px;
 }
 
@@ -27,7 +23,7 @@ p {
   position: relative;
   height: 70px;
   width: 70px;
-  border: 1px solid white;
+  border: 1px solid #F1F1EF!important;
   border-radius: 50%;
   
 }
@@ -44,24 +40,30 @@ p {
   flex-direction: column;
   padding: 10px 0px;
   margin-left: 10px;
+  border-left: 1px solid #C19434;
+  padding-left: 10px;
 }
 
+.cardProfile {
+  border-bottom: 1px solid #C19434!important;
+  padding-bottom: 10px;
+}
 
 .plusIcon {
   font-size: 22px;
-  color: white!important;
+  color: #C19434!important;
   position: absolute;
   cursor: pointer;
   padding-right: 10px;
   right: 0;
   &:hover {
-    color: gray!important;
+    color: #C19434!important;
     transform: scale(1.2);
   }
 }
 
 .infoGradeIcon {
-  color: gray;
+  color: #C19434!important;
 }
 
 .romanInt {
@@ -71,8 +73,13 @@ p {
   text-decoration: italic ;
 }
 
+.romanText {
+  font-family: 'STIX Two Math', serif;
+  text-decoration: italic ;
+}
+
 .navIcon {
-  font-size: 22px!important;
+  height: 22px;
 }
 
 .dividerContainer {
@@ -80,7 +87,7 @@ p {
 }
 
 .divider {
-  border-color: white;
+  border-color: #F1F1EF!important;
   margin: 0px;
 }
 
@@ -93,7 +100,7 @@ p {
 
 .trophy {
   font-size: 25px!important;
-  color: #CD7F32;
+  color: #CD7F32!important;
 }
 
 a {
@@ -103,5 +110,13 @@ a {
 .menuText {
   color: black;
   margin-left: 10px!important;
+  
+}
+
+.menuItem {
+  color: #F1F1EF!important;
+  &:hover {
+    color:#C19434!important;
+  }
   
 }

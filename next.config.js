@@ -9,8 +9,8 @@ module.exports = {
 
 module.exports = withAntdLess({
   modifyVars: {
-    "@primary-color": "#FF4838",
-    "@secondary-color": "#162B32",
+    "@primary-color": "#CD7F32",
+    "@secondary-color": "#34421E",
   },
   // lessVarsFilePath: "./styles/variables.less",
 });

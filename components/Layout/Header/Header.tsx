@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobeAsia, faAddressCard } from "@fortawesome/free-solid-svg-icons";
 
 import classes from "./Header.module.less";
+import cx from "classnames";
 
 const SideBar = () => {
   const [toggleCollapsed, setToggleColapsed] = useState(false);
@@ -19,7 +20,7 @@ const SideBar = () => {
 
   const menu = (
     <Menu>
-      <Menu.Item>
+      <Menu.Item key="Settings">
         <a target="_blank" rel="noopener noreferrer" href="">
           <div className="d-flex align-items-center">
             <SettingFilled />
@@ -27,7 +28,7 @@ const SideBar = () => {
           </div>
         </a>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="Logout">
         <a target="_blank" rel="noopener noreferrer" href="">
           <div className="d-flex align-items-center">
             <LogoutOutlined />
@@ -40,6 +41,7 @@ const SideBar = () => {
 
   return (
     <Menu
+    id="mainMenu"
       className={classes.sidebar}
       defaultSelectedKeys={["1"]}
       defaultOpenKeys={["sub1"]}
@@ -47,8 +49,8 @@ const SideBar = () => {
       inlineCollapsed={toggleCollapsed}
     >
       <div className={classes.openProfile}>
-        <div className="d-flex mb-2 justify-content-between">
-          <div className="d-flex">
+        <div className={cx(classes.cardProfile, "d-flex mb-2 justify-content-between")}>
+          <div className={cx("d-flex")}>
             <div className={classes.avatar}>
               <Image
                 src="/Pierre_pro.jpg"
@@ -61,39 +63,8 @@ const SideBar = () => {
             </div>
             <div className={classes.informationContainer}>
               <p>Pierre Velluet</p>
-              {/* <p>Game(s) completed: {3}</p> */}
-              <div className={"d-flex align-items-center"}>
-                <p className="me-1">Apprentice</p>
-                <Tooltip
-                  title={
-                    <p>
-                      There are 4 grades:
-                      <br />
-                      <div className="d-flex align-ites-center">
-                        {" "}
-                        <br />
-                        <div className={classes.romanInt}>
-                          I
-                        </div> Apprentice{" "}
-                      </div>
-                      <div className="d-flex align-ites-center">
-                        <div className={classes.romanInt}>II</div> Confirmed
-                      </div>
-                      <div className="d-flex align-ites-center">
-                        <div className={classes.romanInt}>III</div> Expert{" "}
-                      </div>
-                      <div className="d-flex align-ites-center">
-                        <div className={classes.romanInt}>IV</div> Master
-                      </div>
-                    </p>
-                  }
-                  placement="right"
-                  color={"gray"}
-                  key={"settings"}
-                >
-                  <QuestionCircleOutlined className={classes.infoGradeIcon} />
-                </Tooltip>
-              </div>
+              <p>European</p>
+              <p>velluetp@gmail.com</p>
             </div>
             <Dropdown overlay={menu} placement="bottomRight" arrow>
               <PlusCircleFilled
@@ -105,18 +76,41 @@ const SideBar = () => {
             </Dropdown>
           </div>
         </div>
-        <div className="div">
-          <Tooltip
-            title="1st game !"
-            placement="right"
-            color={"gray"}
-            key={"settings"}
-          >
-            <TrophyFilled className={classes.trophy} />
-          </Tooltip>
-        </div>
         <div className={classes.progressContainer}>
-          <p className="mb-1">level 1</p>
+          <div className={"d-flex align-items-center"}>
+            <p className={cx(classes.romanText, "me-1")}>Apprentice</p>
+            <Tooltip
+              title={
+                <div>
+                  There are 4 grades:
+                  <br />
+                  <div className="d-flex align-ites-center">
+                    {" "}
+                    <br />
+                    <div className={classes.romanInt}>I</div>{" "}
+                    <span className={classes.romanText}>Apprentice</span>{" "}
+                  </div>
+                  <div className="d-flex align-ites-center">
+                    <div className={classes.romanInt}>II </div>{" "}
+                    <span className={classes.romanText}>Confirmed</span>
+                  </div>
+                  <div className="d-flex align-ites-center">
+                    <div className={classes.romanInt}>III</div>{" "}
+                    <span className={classes.romanText}>Expert</span>{" "}
+                  </div>
+                  <div className="d-flex align-ites-center">
+                    <div className={classes.romanInt}>IV</div>{" "}
+                    <span className={classes.romanText}>Master</span>
+                  </div>
+                </div>
+              }
+              placement="right"
+              color={"gray"}
+              key={"settings"}
+            >
+              <QuestionCircleOutlined className={classes.infoGradeIcon} />
+            </Tooltip>
+          </div>
           <Progress
             status="active"
             showInfo={false}
@@ -131,6 +125,7 @@ const SideBar = () => {
       </div>
       <Menu.Item
         key="1"
+        className={classes.menuItem}
         icon={
           <FontAwesomeIcon className={classes.navIcon} icon={faGlobeAsia} />
         }
@@ -139,18 +134,13 @@ const SideBar = () => {
       </Menu.Item>
       <Menu.Item
         key="2"
+        className={classes.menuItem}
         icon={
           <FontAwesomeIcon className={classes.navIcon} icon={faAddressCard} />
         }
       >
         About
       </Menu.Item>
-      {/* <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-        <Menu.Item key="5">Option 5</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
-        <Menu.Item key="7">Option 7</Menu.Item>
-        <Menu.Item key="8">Option 8</Menu.Item>
-      </SubMenu> */}
     </Menu>
   );
 };
