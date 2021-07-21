@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
     "sections": ["sections/*"],
-    "interfaces" : ["typescript/interfaces/*"]
+    "interfaces" : ["typescript/interfaces"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

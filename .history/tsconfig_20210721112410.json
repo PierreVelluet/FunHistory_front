@@ -15,8 +15,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-    "sections": ["sections/*"],
-    "interfaces" : ["typescript/interfaces/*"]
+    "sections": ["sections/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
