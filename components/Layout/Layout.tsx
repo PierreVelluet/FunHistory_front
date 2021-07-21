@@ -8,8 +8,9 @@ const Layout = ({children}:{ children: React.ReactNode }) => {
     return (
         <>
         <Header />
+        <div style={{marginLeft: "270px"}}>
         {children}
-        <div>Footer</div>
+        </div>
         </>
     )
 }

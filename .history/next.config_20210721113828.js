@@ -12,6 +12,6 @@ module.exports = withAntdLess({
   modifyVars: {
     "@primary-color": "#C19434",
     "@secondary-color": "#34421E",
-    "@thirdary-color": "#F1F1EF"
+    ""
   },
 });

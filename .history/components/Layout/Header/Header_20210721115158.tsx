@@ -49,7 +49,7 @@ interface Igrade {
 const grades: Igrade[] = [
   {
     romanNumber: "I",
-    gradeName: "Apprentice",
+    gradeName: "Apprentince",
   },
   {
     romanNumber: "II",
@@ -68,7 +68,6 @@ const grades: Igrade[] = [
 const SideBar = () => {
   const [toggleCollapsed, setToggleColapsed] = useState(false);
   const [gearSpinning, setGearSpinning] = useState(false);
-  const [userGrade, setUserGrade ] = useState<number>(0);
 
   return (
     <Menu
@@ -114,19 +113,37 @@ const SideBar = () => {
         </div>
         <div className={classes.progressContainer}>
           <div className={"d-flex align-items-center"}>
-            <p className={cx(classes.romanText, "me-1")}>{grades?.[userGrade]?.gradeName}</p>
+            <p className={cx(classes.romanText, "me-1")}>Apprentice</p>
             <Tooltip
               title={
-                  <div className="d-flex justify-content-center flex-column">
+                <>
+                  There are 4 grades:
+                  <br /> <br />
+                  <div className="d-flex align-items-center">
                     {grades?.map((el: Igrade) => {
                       return (
-                        <div className="d-flex">
-                          <div className={classes.romanInt}>{el?.romanNumber}</div>{" "}
-                          <p className={classes.romanText}>{el?.gradeName}</p>{" "}
-                        </div>
+                        <>
+                          <div className={classes.romanInt}>I</div>{" "}
+                          <span className={classes.romanText}>Apprentice</span>{" "}
+                        </>
                       );
                     })}
                   </div>
+                  {/* <div className={classes.romanInt}>I</div>{" "}
+                    <span className={classes.romanText}>Apprentice</span>{" "}
+                  </div>
+                  <div className="d-flex align-ites-center">
+                    <div className={classes.romanInt}>II </div>{" "}
+                    <span className={classes.romanText}>Confirmed</span>
+                  </div>
+                  <div className="d-flex align-ites-center">
+                    <div className={classes.romanInt}>III</div>{" "}
+                    <span className={classes.romanText}>Expert</span>{" "}
+                  </div>
+                  <div className="d-flex align-ites-center">
+                    <div className={classes.romanInt}>IV</div>{" "}
+                    <span className={classes.romanText}>Master</span> */}
+                </>
               }
               placement="right"
               color={"#C19434"}

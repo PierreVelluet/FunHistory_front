@@ -22,12 +22,6 @@ h1, h2, h3, h4, h5 {
   color: #C19434!important;
 }
 
-
-a {
-  text-decoration: none!important;
-}
-
-
 #mainMenu .ant-menu-item-selected:hover {
   color: #C19434!important;
 }
