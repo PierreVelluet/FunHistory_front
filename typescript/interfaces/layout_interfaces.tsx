@@ -1,4 +1,4 @@
 export interface ImenuKeys {
-    title: string;
-    icon: object;
-  }
+  title: string;
+  icon: object;
+}

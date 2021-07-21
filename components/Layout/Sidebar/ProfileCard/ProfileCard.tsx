@@ -1,11 +1,15 @@
-import react from "react";
+import React from "react";
 import Image from "next/image";
 import { Tooltip, Progress, Dropdown } from "antd";
-import { PlusCircleFilled, QuestionCircleOutlined,
-    SettingFilled,
-    LogoutOutlined, } from "@ant-design/icons";
+import {
+  PlusCircleFilled,
+  QuestionCircleOutlined,
+  SettingFilled,
+  LogoutOutlined,
+} from "@ant-design/icons";
 
-import { ImenuKeys } from "interfaces/layout_interfaces.tsx";
+// import { ImenuKeys } from "../../../../interfaces/layout_interfaces"; //works
+import { ImenuKeys } from "interfaces/layout_interfaces.js"
 
 import classes from "./ProfileCard.module.less";
 import cx from "classnames";
@@ -17,10 +21,12 @@ interface Igrade {
 
 const settingMenu = () => {
 
-    const items: Readonly<ImenuKeys>[] = [
-      { title: "Settings", icon: <SettingFilled /> },
-      { title: "Logout", icon: <LogoutOutlined /> },
-    ];
+  const items: Readonly<ImenuKeys>[] = [
+    { title: "Settings", icon: <SettingFilled /> },
+    { title: "Logout", icon: <LogoutOutlined /> },
+  ];
+
+};
 
 const ProfileCard = () => {
   return (
