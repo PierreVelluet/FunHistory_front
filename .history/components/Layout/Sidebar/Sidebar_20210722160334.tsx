@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobeAsia, faAddressCard } from "@fortawesome/free-solid-svg-icons";
@@ -9,7 +8,7 @@ import { ImenuKeys } from "interfaces/layout_interfaces";
 import classes from "./Sidebar.module.less";
 import ProfileCard from "./ProfileCard/ProfileCard";
 
-const navbarMenu = (): JSX.Element => {
+const navbarMenu = () => {
   const items: Readonly<ImenuKeys>[] = [
     { title: "Discover a country", icon: faGlobeAsia },
     { title: "Who am I?", icon: faAddressCard },

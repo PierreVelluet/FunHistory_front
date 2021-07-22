@@ -2,7 +2,7 @@ export interface ImenuKeys {
   title: string;
   icon: object;
 }
-export interface Igrade {
+interface Igrade {
   romanNumber: string;
   gradeName: string;
 }

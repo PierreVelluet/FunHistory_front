@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
 import Image from "next/image";
-import { Tooltip, Progress, Dropdown, Menu } from "antd";
+import { Tooltip, Progress, Dropdown } from "antd";
 import {
   PlusCircleFilled,
   QuestionCircleOutlined,
@@ -9,57 +8,26 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 
+// import { ImenuKeys } from "../../../../interfaces/layout_interfaces"; //works
 import { ImenuKeys, Igrade } from "interfaces/layout_interfaces.js";
 
 import classes from "./ProfileCard.module.less";
 import cx from "classnames";
 
-const grades: Readonly<Igrade>[] = [
-  {
-    romanNumber: "I",
-    gradeName: "Apprentice",
-  },
-  {
-    romanNumber: "II",
-    gradeName: "Confirmed",
-  },
-  {
-    romanNumber: "II",
-    gradeName: "Expert",
-  },
-  {
-    romanNumber: "IV",
-    gradeName: "Master",
-  },
-];
+interface Igrade {
+  romanNumber: string;
+  gradeName: string;
+}
 
-const settingMenu = (): JSX.Element => {
+const settingMenu = () => {
   const items: Readonly<ImenuKeys>[] = [
     { title: "Settings", icon: <SettingFilled /> },
     { title: "Logout", icon: <LogoutOutlined /> },
   ];
-
-  return (
-    <Menu className={classes.menuDropdown}>
-      {items?.map((el: ImenuKeys) => {
-        return (
-          <Menu.Item key={el.title}>
-            <a target="_blank" rel="noopener noreferrer" href="">
-              <div className="d-flex align-items-center">
-                {el?.icon}
-                <p className={classes.settingMenuText}>{el?.title} </p>
-              </div>
-            </a>
-          </Menu.Item>
-        );
-      })}
-    </Menu>
-  );
 };
 
 const ProfileCard = () => {
   const [gearSpinning, setGearSpinning] = useState(false);
-  const [userGrade, setUserGrade] = useState<number>(0);
 
   return (
     <div className={classes.openProfile}>

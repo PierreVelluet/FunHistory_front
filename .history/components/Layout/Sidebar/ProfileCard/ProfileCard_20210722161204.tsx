@@ -33,7 +33,7 @@ const grades: Readonly<Igrade>[] = [
   },
 ];
 
-const settingMenu = (): JSX.Element => {
+const settingMenu = (): FunctionCompo => {
   const items: Readonly<ImenuKeys>[] = [
     { title: "Settings", icon: <SettingFilled /> },
     { title: "Logout", icon: <LogoutOutlined /> },

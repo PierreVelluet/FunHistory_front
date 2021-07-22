@@ -1,3 +1,10 @@
+.sidebar {
+  position: fixed;
+  height: 100vh;
+  width: 270px!important;
+  background-color: @secondary-color!important;
+}
+
 .openProfile {
   display: flex;
   flex-direction: column;
@@ -12,6 +19,7 @@
   width: 70px;
   border: 1px solid @thirdary-color!important;
   border-radius: 50%;
+  
 }
 
 .avatarImage {
@@ -49,7 +57,7 @@
 }
 
 .menuDropdown {
-  color: black !important;
+  color: black!important;
   background-color: @primary-color!important;
 }
 
@@ -59,20 +67,28 @@
 }
 
 .romanInt {
-  font-family: "STIX Two Math", serif;
+  font-family: 'STIX Two Math', serif;
   color: black;
-  width: 20px !important;
-  text-decoration: italic;
+  width: 20px!important;
+  text-decoration: italic ;
 }
 
 .romanText {
-  font-family: "STIX Two Math", serif;
-  text-decoration: italic;
+  font-family: 'STIX Two Math', serif;
+  text-decoration: italic ;
 }
 
-.settingMenuText {
-  color: black !important;
-  margin-left: 10px !important;
+.navIcon {
+  height: 22px;
+}
+
+.dividerContainer {
+  padding: 10px;
+}
+
+.divider {
+  border-color: @thirdary-color!important;
+  margin: 0px;
 }
 
 .progressContainer {
@@ -80,4 +96,18 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.settingMenuText {
+  color: black!important;
+  margin-left: 10px!important;
+  
+}
+
+.menuItem {
+  color: @thirdary-color!important;
+  &:hover {
+    color:@primary-color!important;
+  }
+  
 }

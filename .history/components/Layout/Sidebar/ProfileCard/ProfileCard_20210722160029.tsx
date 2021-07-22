@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-
 import Image from "next/image";
-import { Tooltip, Progress, Dropdown, Menu } from "antd";
+import { Tooltip, Progress, Dropdown } from "antd";
 import {
   PlusCircleFilled,
   QuestionCircleOutlined,
@@ -9,6 +8,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 
+// import { ImenuKeys } from "../../../../interfaces/layout_interfaces"; //works
 import { ImenuKeys, Igrade } from "interfaces/layout_interfaces.js";
 
 import classes from "./ProfileCard.module.less";
@@ -33,7 +33,7 @@ const grades: Readonly<Igrade>[] = [
   },
 ];
 
-const settingMenu = (): JSX.Element => {
+const settingMenu = () => {
   const items: Readonly<ImenuKeys>[] = [
     { title: "Settings", icon: <SettingFilled /> },
     { title: "Logout", icon: <LogoutOutlined /> },

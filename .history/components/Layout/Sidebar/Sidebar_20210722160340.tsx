@@ -9,7 +9,7 @@ import { ImenuKeys } from "interfaces/layout_interfaces";
 import classes from "./Sidebar.module.less";
 import ProfileCard from "./ProfileCard/ProfileCard";
 
-const navbarMenu = (): JSX.Element => {
+const navbarMenu = () => {
   const items: Readonly<ImenuKeys>[] = [
     { title: "Discover a country", icon: faGlobeAsia },
     { title: "Who am I?", icon: faAddressCard },

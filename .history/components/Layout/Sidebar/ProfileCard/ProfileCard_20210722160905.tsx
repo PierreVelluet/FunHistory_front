@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import Image from "next/image";
 import { Tooltip, Progress, Dropdown, Menu } from "antd";
 import {
@@ -33,7 +32,7 @@ const grades: Readonly<Igrade>[] = [
   },
 ];
 
-const settingMenu = (): JSX.Element => {
+const settingMenu = () => {
   const items: Readonly<ImenuKeys>[] = [
     { title: "Settings", icon: <SettingFilled /> },
     { title: "Logout", icon: <LogoutOutlined /> },
