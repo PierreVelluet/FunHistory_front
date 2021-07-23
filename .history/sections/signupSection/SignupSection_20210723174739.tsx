@@ -11,9 +11,8 @@ import classes from "./SignupSection.module.scss";
 
 const SignupSection = () => {
   const onFinish = (values: any) => {
-    console.log(values)
     const formdata: object = {
-      name: values?.username,
+      name: 
       email: values.email,
       password: values.password
     };

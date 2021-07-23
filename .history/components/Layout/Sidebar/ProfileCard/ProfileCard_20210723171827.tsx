@@ -105,7 +105,7 @@ const ProfileCard = () => {
               <div className="d-flex justify-content-center flex-column">
                 {grades?.map((el: Igrade) => {
                   return (
-                    <div key={el?.romanNumber} className="d-flex">
+                    <div key= className="d-flex">
                       <div className={classes.romanInt}>{el?.romanNumber}</div>{" "}
                       <p className={classes.romanText}>{el?.gradeName}</p>{" "}
                     </div>

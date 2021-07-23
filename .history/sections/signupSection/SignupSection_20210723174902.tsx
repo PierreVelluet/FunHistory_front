@@ -13,7 +13,7 @@ const SignupSection = () => {
   const onFinish = (values: any) => {
     console.log(values)
     const formdata: object = {
-      name: values?.username,
+      name: values?.usern,
       email: values.email,
       password: values.password
     };
