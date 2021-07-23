@@ -17,7 +17,7 @@ const SignupSection = () => {
     };
     console.log("Form: ", formdata);
     axios
-      .post("http://localhost:8010/proxy/api/auth/register_login", formdata, {withCredentials: true})
+      .post("http://localhost:8010/proxy/api/auth/", formdata, {withCredentials: true})
       .then((res) => {
         console.log(res)
         if (res?.data?.success){
