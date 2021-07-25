@@ -31,7 +31,7 @@ const grades: Readonly<Igrade>[] = [
     romanNumber: "IV",
     gradeName: "Master",
   },
-];
+];m m
 
 const settingMenu = (): JSX.Element => {
   const items: Readonly<ImenuKeys>[] = [
@@ -58,7 +58,7 @@ const settingMenu = (): JSX.Element => {
 };
 
 const gradeCalculator = (gamesCompleted:number) => {
-  
+
 }
 
 const ProfileCard = (props: any) => {
