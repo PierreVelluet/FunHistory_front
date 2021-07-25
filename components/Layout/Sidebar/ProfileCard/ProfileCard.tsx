@@ -9,7 +9,7 @@ import {
   LogoutOutlined,
 } from "@ant-design/icons";
 
-import { ImenuKeys, Igrade } from "interfaces/layout_interfaces.js";
+import { ImenuKeys, Igrade, Iuser } from "interfaces/layout_interfaces.js";
 
 import classes from "./ProfileCard.module.less";
 import cx from "classnames";
@@ -57,7 +57,12 @@ const settingMenu = (): JSX.Element => {
   );
 };
 
-const ProfileCard = () => {
+const gradeCalculator = (gamesCompleted:number) => {
+  
+}
+
+const ProfileCard = (props: any) => {
+  const { user }: { user: Iuser } = props;
   const [gearSpinning, setGearSpinning] = useState(false);
   const [userGrade, setUserGrade] = useState<number>(0);
 
@@ -72,7 +77,7 @@ const ProfileCard = () => {
         <div className={cx("d-flex")}>
           <div className={classes.avatar}>
             <Image
-              src="/Pierre_pro.jpg"
+              src={user?.imagePath ?? "/Pierre_pro.jpg"}
               layout="fill"
               objectFit="cover"
               alt="profile picture"
@@ -81,9 +86,9 @@ const ProfileCard = () => {
             />
           </div>
           <div className={classes.informationContainer}>
-            <p>Pierre Velluet</p>
-            <p>European</p>
-            <p>velluetp@gmail.com</p>
+            <p>{user?.name ?? "Unknown"}</p>
+            <p>{`Completed: ${user?.completed ?? 0}`}</p>
+            <p>{user?.email ?? ""}</p>
           </div>
           <Dropdown overlay={settingMenu()} placement="bottomRight" arrow>
             <PlusCircleFilled

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Menu } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,6 +8,7 @@ import { ImenuKeys } from "interfaces/layout_interfaces";
 
 import classes from "./Sidebar.module.less";
 import ProfileCard from "./ProfileCard/ProfileCard";
+import { Iuser } from "interfaces/layout_interfaces.js";
 
 const navbarMenu = (): JSX.Element => {
   const items: Readonly<ImenuKeys>[] = [
@@ -36,6 +37,15 @@ const navbarMenu = (): JSX.Element => {
 
 const SideBar = () => {
   const [toggleCollapsed, setToggleColapsed] = useState(false);
+  const [user, setUser] = useState<Iuser | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      //@ts-ignore
+      const newUser: Iuser = JSON.parse(localStorage.getItem("user"));
+      setUser(newUser);
+    }
+  }, []);
 
   return (
     <Menu
@@ -45,7 +55,7 @@ const SideBar = () => {
       mode="inline"
       inlineCollapsed={toggleCollapsed}
     >
-      <ProfileCard />
+      {user ? <ProfileCard user={user}/> : <div>Hello</div>}
       {navbarMenu()}
     </Menu>
   );

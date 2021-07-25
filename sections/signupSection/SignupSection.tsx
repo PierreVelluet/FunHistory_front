@@ -4,29 +4,29 @@ import Image from "next/image";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import axios from "axios";
-import Router from 'next/router'
-
+import Router from "next/router";
 
 import classes from "./SignupSection.module.scss";
 
 const SignupSection = () => {
   const onFinish = (values: any) => {
-    console.log(values)
     const formdata: object = {
       name: values?.username,
       email: values.email,
-      password: values.password
+      password: values.password,
     };
-    console.log("Form: ", formdata);
     axios
-      .post("http://localhost:8010/proxy/api/auth/register_login", formdata, {withCredentials: true})
+      .post("http://localhost:8010/proxy/api/auth/register_login", formdata, {
+        withCredentials: true,
+      })
       .then((res) => {
-        console.log(res)
-        if (res?.data?.success){
-          Router.push('/');
-      }
-      } 
-      )};
+        console.log(res?.data);
+        localStorage.setItem("user", JSON.stringify(res?.data?.user));
+        if (res?.data?.user) {
+          Router.push("/");
+        }
+      });
+  };
 
   return (
     <Card className={classes.card}>
