@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import axios from "axios";
 
-export default function Home(props:any) {
+export default function Home(props) {
   return (
     <div className={styles.container}>
       <Head>

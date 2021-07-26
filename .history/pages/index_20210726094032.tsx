@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import axios from "axios";
 
-export default function Home(props:any) {
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -45,6 +45,6 @@ export async function getStaticProps() {
     console.log("res is:", res)
   });
   return {
-    props: {}, // will be passed to the page component as props
+    props: {user}, // will be passed to the page component as props
   }
 }

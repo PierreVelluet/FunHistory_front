@@ -1,8 +1,8 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import axios from "axios";
 
-export default function Home(props:any) {
+export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +20,7 @@ export default function Home(props:any) {
 
       <footer className={styles.footer}>
         <a
-          href=""
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -33,17 +33,7 @@ export default function Home(props:any) {
   )
 }
 
-export async function getStaticProps() {
-
-  let user;
-  axios
-  .post("http://localhost:8010/proxy/api/auth/isAuthenticated", {
-    withCredentials: true,
-  })
-  .then((res) => {
-    user = res
-    console.log("res is:", res)
-  });
+export async function getStaticProps(context) {
   return {
     props: {}, // will be passed to the page component as props
   }
