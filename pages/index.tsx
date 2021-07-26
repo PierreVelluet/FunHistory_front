@@ -3,6 +3,12 @@ import styles from '../styles/Home.module.css'
 import axios from "axios";
 
 export default function Home(props:any) {
+
+const test = () => {
+  axios.get('http://localhost:8010/proxy/api/countries/Japan')
+  .then((res) => console.log(res.data));
+}
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +19,7 @@ export default function Home(props:any) {
 
       <main className={styles.main}>
         Hello
+        <button onClick={() => test()}>TEST</button>
       </main>
       <div style={{height: "5500px"}}>
 
@@ -33,18 +40,11 @@ export default function Home(props:any) {
   )
 }
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
 
-  let user;
-  axios
-  .post("http://localhost:8010/proxy/api/auth/isAuthenticated", {
-    withCredentials: true,
-  })
-  .then((res) => {
-    user = res
-    console.log("res is:", res)
-  });
-  return {
-    props: {}, // will be passed to the page component as props
-  }
-}
+//   let user;
+//   axios.get('http://localhost:8010/proxy/api/auth/isAuthenticated', {withCredentials: true});
+//   return {
+//     props: {}, // will be passed to the page component as props
+//   }
+// }
