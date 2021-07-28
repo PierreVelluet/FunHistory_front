@@ -9,7 +9,7 @@ const Getcountry = () => {
   .then((res) => console.log(res.data));
 }
 const CreateCountry = () => {
-  axios.post('http://localhost:8010/proxy/api/countries/create', {name: 'France'})
+  axios.post('http://localhost:8010/proxy/api/countries/create', )
   .then((res) => console.log(res.data));
 }
 const UpdateCountry = () => {

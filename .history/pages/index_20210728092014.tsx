@@ -8,15 +8,15 @@ const Getcountry = () => {
   axios.get('http://localhost:8010/proxy/api/countries/Japan')
   .then((res) => console.log(res.data));
 }
-const CreateCountry = () => {
-  axios.post('http://localhost:8010/proxy/api/countries/create', {name: 'France'})
-  .then((res) => console.log(res.data));
-}
-const UpdateCountry = () => {
+const Getcountry = () => {
   axios.get('http://localhost:8010/proxy/api/countries/Japan')
   .then((res) => console.log(res.data));
 }
-const DeleteCountry = () => {
+const Getcountry = () => {
+  axios.get('http://localhost:8010/proxy/api/countries/Japan')
+  .then((res) => console.log(res.data));
+}
+const Getcountry = () => {
   axios.get('http://localhost:8010/proxy/api/countries/Japan')
   .then((res) => console.log(res.data));
 }

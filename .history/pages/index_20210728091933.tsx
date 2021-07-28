@@ -4,19 +4,7 @@ import axios from "axios";
 
 export default function Home(props:any) {
 
-const Getcountry = () => {
-  axios.get('http://localhost:8010/proxy/api/countries/Japan')
-  .then((res) => console.log(res.data));
-}
-const CreateCountry = () => {
-  axios.post('http://localhost:8010/proxy/api/countries/create', {name: 'France'})
-  .then((res) => console.log(res.data));
-}
-const UpdateCountry = () => {
-  axios.get('http://localhost:8010/proxy/api/countries/Japan')
-  .then((res) => console.log(res.data));
-}
-const DeleteCountry = () => {
+const test = () => {
   axios.get('http://localhost:8010/proxy/api/countries/Japan')
   .then((res) => console.log(res.data));
 }
@@ -31,10 +19,8 @@ const DeleteCountry = () => {
 
       <main className={styles.main}>
         Hello
-        <button onClick={() => Getcountry()} style={{color: "black"}}>Getcountry</button>
-        <button onClick={() => CreateCountry()} style={{color: "black"}}>CreateCountry</button>
-        <button onClick={() => UpdateCountry()} style={{color: "black"}}>UpdateCountry</button>
-        <button onClick={() => DeleteCountry()} style={{color: "black"}}>DeleteCountry</button>
+        <button onClick={() => test()} style={{color: "black"}}>Getcountry</button>
+        <button onClick={() => test()} style={{color: "black"}}>Getcountry</button>
       </main>
       <div style={{height: "5500px"}}>
 
