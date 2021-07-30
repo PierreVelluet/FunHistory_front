@@ -2,15 +2,24 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import axios from "axios";
 
-import { ICountry } from 'interfaces/general_interfaces';
-
 export default function Home(props:any) {
 
-  const data:ICountry = {
-    name: "Pologne",
-    capital: "Bratislava",
+  // name: req.body.name ?? "",
+  //     capital: req.body.capital ?? "",
+  //     language: req.body.language ?? "",
+  //     government: req.body.government ?? "",
+  //     leader: req.body.leader ?? "",
+  //     area: req.body.area ?? "",
+  //     population: req.body.population ?? "",
+  //     timeZone: req.body.timeZone ?? "",
+  //     quiz: req.body.quiz ?? "",
+  //     bgImage: req.body.bgImage ?? "",
+
+  const data = {
+    capital: "Tokyo",
     language: "Japanese",
     government: "constitutional monarchy",
+    leader: "Yoshihide Suga",
     area: 377975,
     population: 125360000,
     timeZone: "UTC+09:00",
@@ -24,7 +33,8 @@ const Getcountry = () => {
 }
 const CreateCountry = () => {
   axios.post('http://localhost:8010/proxy/api/countries', data)
-  .then((res) => console.log(res.data))
+  .then((res) => console.log(res.data));
+  .err
 }
 const UpdateCountry = () => {
   axios.get('http://localhost:8010/proxy/api/countries/Japan')

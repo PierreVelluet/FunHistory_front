@@ -6,7 +6,7 @@ import { ICountry } from 'interfaces/general_interfaces';
 
 export default function Home(props:any) {
 
-  const data:ICountry = {
+  const data = {
     name: "Pologne",
     capital: "Bratislava",
     language: "Japanese",

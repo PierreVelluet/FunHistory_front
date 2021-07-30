@@ -8,7 +8,7 @@ export default function Home(props:any) {
 
   const data:ICountry = {
     name: "Pologne",
-    capital: "Bratislava",
+    capital: 1,
     language: "Japanese",
     government: "constitutional monarchy",
     area: 377975,
