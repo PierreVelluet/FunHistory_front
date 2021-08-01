@@ -55,7 +55,7 @@ const SideBar = () => {
       mode="inline"
       inlineCollapsed={toggleCollapsed}
     >
-      {user ? <ProfileCard user={user}/> : <div>Hello</div>}
+      <ProfileCard user={user}/>
       {navbarMenu()}
     </Menu>
   );
