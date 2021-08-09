@@ -9,6 +9,5 @@ export interface ICountry {
   area?: number;
   population?: number;
   timeZone?: string;
-  quiz?: object;
-  bgImage?: string;
+  flagImage?: string;
 }
