@@ -10,7 +10,7 @@ import classes from "./index.module.less";
 import CountryChooser from "sections/CountryChooser/CountryChooser";
 
 export default function Home(props: any) {
-  const data: [ICountry] = props.data.data;
+  const data: [ICountry] = props.data;
 
   return (
     <div className={classes.container}>
@@ -20,14 +20,17 @@ export default function Home(props: any) {
         <link rel="icon" href="/ape.ico" />
         <style>{dom.css()}</style>
       </Head>
-      <CountryChooser countries={data} />
+
+      {/* <Card className={classes.mainCard}> */}
+        <CountryChooser countries={data}/>
+      {/* </Card> */}
     </div>
   );
 }
 
 export async function getStaticProps() {
   const data = await axios
-    .get<string>(`${process.env.NEXT_PUBLIC_BACKEND}/countries`)
+    .get<string>(`${NEXT_PUBLIC_BACKEND}/countries`)
     .then((response: any) => response.data);
 
   return {

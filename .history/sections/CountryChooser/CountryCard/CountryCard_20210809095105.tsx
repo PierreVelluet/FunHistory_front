@@ -27,7 +27,7 @@ const CountryCard = (props: any) => {
         <Image
           src={`${country?.flagImage}`}
           layout="fill"
-          objectFit="fill"
+          objectFit=""
           alt={`${country?.name} flag`}
           unoptimized={process.env.NODE_ENV === "development"}
           className={classes.flagImage}

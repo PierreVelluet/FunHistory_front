@@ -10,8 +10,9 @@ import classes from "./index.module.less";
 import CountryChooser from "sections/CountryChooser/CountryChooser";
 
 export default function Home(props: any) {
-  const data: [ICountry] = props.data.data;
+  const data: [ICountry] = props.data;
 
+  console.log(data);
   return (
     <div className={classes.container}>
       <Head>

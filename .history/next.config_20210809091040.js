@@ -6,7 +6,7 @@ const withAntdLess = require("next-plugin-antd-less");
 
 module.exports = {
   NODE_ENV: process.env.NODE_ENV,
-  NEXT_PUBLIC_BACKEND: process.env.NEXT_PUBLIC_BACKEND
+  NEXT_PUBLIC_BACKEND: process.env.
 };
 
 module.exports = withAntdLess({

@@ -9,6 +9,7 @@ import classes from "./CountryChooser.module.less";
 
 const CountryChooser = (props: any) => {
   const countries: [ICountry] = props.countries;
+  console.log(countries)
 
   return (
     <div className={classes.carousel}>

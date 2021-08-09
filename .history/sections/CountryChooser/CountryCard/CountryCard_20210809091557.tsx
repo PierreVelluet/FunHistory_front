@@ -10,14 +10,12 @@ import classes from "./CountryCard.module.less";
 const CountryCard = (props: any) => {
   const country: any = props.country;
 
-  
-  let informations = {...country};
+  let informations = country;
   delete informations["__v"];
   delete informations["_id"];
   delete informations["flagImage"];
   informations = Object.entries(informations);
-  
-  console.log("country flag is", country?.flagImage)
+
   return (
     <Card
       className={classes.countryCard}
@@ -25,9 +23,9 @@ const CountryCard = (props: any) => {
     >
       <div className={classes.leftHalf}>
         <Image
-          src={`${country?.flagImage}`}
+          src={"/japan_flag.png"}
           layout="fill"
-          objectFit="fill"
+          objectFit="cover"
           alt={`${country?.name} flag`}
           unoptimized={process.env.NODE_ENV === "development"}
           className={classes.flagImage}
@@ -35,7 +33,7 @@ const CountryCard = (props: any) => {
       </div>
       <div className={classes.rightHalf}>
         {informations?.map((el: [string, string]) => {
-          return <InformationItems key={el?.[0]} infos={el} />;
+          return <InformationItems infos={el?.} />;
         })}
       </div>
     </Card>

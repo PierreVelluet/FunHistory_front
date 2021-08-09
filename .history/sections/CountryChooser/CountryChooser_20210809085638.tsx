@@ -14,7 +14,7 @@ const CountryChooser = (props: any) => {
     <div className={classes.carousel}>
       <Carousel effect="fade" dotPosition="right">
         {countries?.map((country: ICountry) => {
-          return <CountryCard key={country?.name} country={country} />;
+          return <div><CountryCard key={country?.name} country={country} /></div>;
         })}
       </Carousel>
     </div>

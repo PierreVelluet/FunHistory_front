@@ -10,8 +10,9 @@ import classes from "./index.module.less";
 import CountryChooser from "sections/CountryChooser/CountryChooser";
 
 export default function Home(props: any) {
-  const data: [ICountry] = props.data.data;
+  const data: [ICountry] = props.data;
 
+  console.log(process.env.NEXT)
   return (
     <div className={classes.container}>
       <Head>
@@ -20,7 +21,10 @@ export default function Home(props: any) {
         <link rel="icon" href="/ape.ico" />
         <style>{dom.css()}</style>
       </Head>
-      <CountryChooser countries={data} />
+
+      {/* <Card className={classes.mainCard}> */}
+        <CountryChooser countries={data}/>
+      {/* </Card> */}
     </div>
   );
 }

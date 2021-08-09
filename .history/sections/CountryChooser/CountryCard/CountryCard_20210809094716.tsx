@@ -17,7 +17,7 @@ const CountryCard = (props: any) => {
   delete informations["flagImage"];
   informations = Object.entries(informations);
   
-  console.log("country flag is", country?.flagImage)
+  console.log("country is", country)
   return (
     <Card
       className={classes.countryCard}
@@ -27,7 +27,7 @@ const CountryCard = (props: any) => {
         <Image
           src={`${country?.flagImage}`}
           layout="fill"
-          objectFit="fill"
+          objectFit="cover"
           alt={`${country?.name} flag`}
           unoptimized={process.env.NODE_ENV === "development"}
           className={classes.flagImage}
