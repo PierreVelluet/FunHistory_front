@@ -5,19 +5,17 @@ import { Carousel } from "antd";
 import { ICountry } from "interfaces/general_interfaces";
 import CountryCard from "./CountryCard/CountryCard";
 
-import classes from "./CountryChooser.module.less";
+import classes from "./CountryCarousel.module.less";
 
 const CountryChooser = (props: any) => {
   const countries: [ICountry] = props.countries;
 
   return (
-    <div className={classes.carousel}>
-      <Carousel effect="fade" dotPosition="right">
-        {countries?.map((country: ICountry) => {
-          return <CountryCard key={country?.name} country={country} />;
-        })}
-      </Carousel>
-    </div>
+    <Carousel dotPosition="right" className={classes.carousel}>
+      {countries?.map((country: ICountry) => {
+        return <CountryCard key={country?.name} country={country} />;
+      })}
+    </Carousel>
   );
 };
 

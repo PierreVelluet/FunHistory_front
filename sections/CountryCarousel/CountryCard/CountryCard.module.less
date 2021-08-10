@@ -1,0 +1,38 @@
+.countryCard {
+  height: 300px !important;
+  display: flex;
+  background-color: @secondary-color;
+}
+
+.leftHalf {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+}
+
+.subFlagContainer,
+.flagContainer {
+  flex: 1;
+  height: 50% !important;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.flagContainer {
+  border: 1px solid @primary-color;
+}
+
+.subFlagContainer {
+  border-right: 1px solid @primary-color;
+  border-right-style: dotted;
+}
+
+.rightHalf {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

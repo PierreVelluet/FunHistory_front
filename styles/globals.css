@@ -47,3 +47,18 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.ant-carousel-vertical .slick-dots-right {
+  right: 16px!important;
+}
+
+.ant-carousel-vertical .slick-dots li button {
+  background-color: #C19434!important;
+  width: 7px!important;
+  height: 20px!important;
+}
+
+.ant-carousel-vertical .slick-dots li.slick-active button {
+  width: 3px;
+  height: 24px;
+}
