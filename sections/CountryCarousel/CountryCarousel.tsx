@@ -11,11 +11,14 @@ const CountryChooser = (props: any) => {
   const countries: [ICountry] = props.countries;
 
   return (
-    <Carousel dotPosition="right" className={classes.carousel}>
+    <>
+    <p className={classes.carouselTitle}>Wanna discover Japan ?</p>
+    <Carousel dots={false} arrows dotPosition="bottom" className={classes.carousel}>
       {countries?.map((country: ICountry) => {
         return <CountryCard key={country?.name} country={country} />;
       })}
     </Carousel>
+    </>
   );
 };
 
