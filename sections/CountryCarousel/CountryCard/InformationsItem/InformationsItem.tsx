@@ -19,6 +19,7 @@ import classes from "./InformationsItem.module.less";
 
 const InformationItems = (props: any) => {
   const infos: string[] = props.infos;
+  const { toolTipPlacement } = props;
 
   const iconChooser: any = (label: string) => {
     switch (label) {
@@ -47,8 +48,8 @@ const InformationItems = (props: any) => {
     <div className={classes.infoItem}>
       <Tooltip
         title={capitalize(infos?.[0])}
-        placement="left"
-        color={"#C19434"}
+        placement={toolTipPlacement}
+        color={"#045daf"}
         key={infos?.[0]}
       >
         <div className={classes.iconContainer}>{iconChooser(infos[0])}</div>

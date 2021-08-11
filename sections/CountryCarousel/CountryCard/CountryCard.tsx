@@ -10,11 +10,29 @@ import classes from "./CountryCard.module.less";
 const CountryCard = (props: any) => {
   const country: any = props.country;
 
-  let informations = { ...country };
-  delete informations["__v"];
-  delete informations["_id"];
-  delete informations["flagImage"];
-  informations = Object.entries(informations);
+  // Filtering the only values we want in "rest".
+  let {
+    __v,
+    __id,
+    flagImage,
+    ...rest
+  }: { __v: object; __id: object; flagImage: object; informations: object[] } =
+    country;
+  const informations: string[][] = Object.entries(rest);
+
+  let sortCountryInformations = (
+    desiredInformations: string[],
+    informations: string[][]
+  ): string[][] => {
+    const result: string[][] = [];
+
+    desiredInformations?.map((desiredString: string) => {
+      informations?.map((allInfoElement: string[]) => {
+        if (desiredString === allInfoElement?.[0]) result.push(allInfoElement);
+      });
+    });
+    return result;
+  };
 
   return (
     <Card
@@ -33,14 +51,17 @@ const CountryCard = (props: any) => {
           />
         </div>
         <div className={classes.subFlagContainer}>
-        {informations?.slice(0,4).map((el: [string, string]) => {
-          return <InformationItems key={el?.[0]} infos={el} />;
-        })}
+          {sortCountryInformations(
+            ["name", "capital", "leader", "language"],
+            informations
+          ).map((el: string[]) => {
+            return <InformationItems toolTipPlacement={"top"} key={el?.[0]} infos={el} />;
+          })}
         </div>
       </div>
       <div className={classes.rightHalf}>
-        {informations?.map((el: [string, string]) => {
-          return <InformationItems key={el?.[0]} infos={el} />;
+        {informations?.map((el: string[]) => {
+          return <InformationItems toolTipPlacement={"left"} key={el?.[0]} infos={el} />;
         })}
       </div>
     </Card>

@@ -119,7 +119,7 @@ const ProfileCard = (props: any) => {
               </div>
             }
             placement="right"
-            color={"#C19434"}
+            color={"#045daf"}
             key={"settings"}
           >
             <QuestionCircleOutlined className={classes.infoGradeIcon} />

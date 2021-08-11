@@ -19,8 +19,8 @@ h1, h2, h3, h4, h5 {
 }
 
 #mainMenu .ant-menu-item-selected {
-  background-color: #34421E !important;
-  color: #C19434!important;
+  background-color: #045daf !important;
+  color: #F1F1EF!important;
 }
 
 
@@ -30,7 +30,7 @@ a {
 
 
 #mainMenu .ant-menu-item-selected:hover {
-  color: #C19434!important;
+  color: #F1F1EF!important;
 }
 
 p {
@@ -53,7 +53,7 @@ a {
 }
 
 .ant-carousel-vertical .slick-dots li button {
-  background-color: #C19434!important;
+  background-color: #045daf!important;
   width: 7px!important;
   height: 20px!important;
 }
@@ -76,9 +76,9 @@ a {
   right: 20px;
   /* width: 100px; */
   font-size: 25px;
-  color: #34421E;
-  background-color: #C19434;
-  border: 2px solid #34421E;
+  color: #045daf;
+  background-color: #045daf;
+  border: 2px solid #045daf;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -99,9 +99,9 @@ right: 0px;
 bottom: 10px;
 /* width: 100px; */
 font-size: 25px;
-color: #34421E;
-background-color: #C19434;
-border: 2px solid #34421E;
+color: #045daf;
+background-color: #045daf;
+border: 2px solid #045daf;
 display: flex;
 justify-content: center;
 align-items: center;
