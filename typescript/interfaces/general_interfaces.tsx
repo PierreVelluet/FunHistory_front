@@ -1,12 +1,16 @@
 export interface ICountry {
-  name: string;
-  capital?: string;
-  language?: string;
-  completed?: number;
-  government?: string;
-  leader?: string;
-  area?: number;
-  population?: number;
-  timeZone?: string;
-  flagImage?: string;
+  name: String,
+  "native country name": String;
+  greeting: String;
+  capital: String;
+  language: String;
+  government: String;
+  leader: String;
+  area: Number;
+  population: Number;
+  density: Number;
+  timeZone: String;
+  establishment: String;
+  "gross domestic product per capita": Number;
+  flagImage: String;
 }

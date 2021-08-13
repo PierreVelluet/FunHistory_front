@@ -34,6 +34,7 @@ const CountryCard = (props: any) => {
     return result;
   };
 
+  console.log(informations);
   return (
     <Card
       className={classes.countryCard}
@@ -52,16 +53,41 @@ const CountryCard = (props: any) => {
         </div>
         <div className={classes.subFlagContainer}>
           {sortCountryInformations(
-            ["name", "capital", "leader", "language"],
+            ["name", "native country name", "capital", "language"],
             informations
           ).map((el: string[]) => {
-            return <InformationItems toolTipPlacement={"top"} key={el?.[0]} infos={el} />;
+            return (
+              <InformationItems
+                toolTipPlacement={"top"}
+                key={el?.[0]}
+                infos={el}
+              />
+            );
           })}
         </div>
       </div>
       <div className={classes.rightHalf}>
-        {informations?.map((el: string[]) => {
-          return <InformationItems toolTipPlacement={"left"} key={el?.[0]} infos={el} />;
+        {sortCountryInformations(
+          [
+            "government",
+            "leader",
+            "area",
+            "population",
+            "density",
+            "gross domestic product per capita",
+            "timezone",
+            "establishment",
+            "greeting",
+          ],
+          informations
+        ).map((el: string[]) => {
+          return (
+            <InformationItems
+              toolTipPlacement={"top"}
+              key={el?.[0]}
+              infos={el}
+            />
+          );
         })}
       </div>
     </Card>

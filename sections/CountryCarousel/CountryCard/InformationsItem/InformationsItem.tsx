@@ -11,6 +11,11 @@ import {
   faChartArea,
   faUsers,
   faClock,
+  faHandshake,
+  faHistory,
+  faSignature,
+  faLayerGroup,
+  faCoins,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { capitalize } from "utils/functions";
@@ -20,6 +25,7 @@ import classes from "./InformationsItem.module.less";
 const InformationItems = (props: any) => {
   const infos: string[] = props.infos;
   const { toolTipPlacement } = props;
+  let unit = "";
 
   const iconChooser: any = (label: string) => {
     switch (label) {
@@ -34,11 +40,25 @@ const InformationItems = (props: any) => {
       case "government":
         return <FontAwesomeIcon icon={faLandmark} className={classes.icon} />;
       case "area":
+        unit = " km²"
         return <FontAwesomeIcon icon={faChartArea} className={classes.icon} />;
       case "population":
+        unit = " people"
         return <FontAwesomeIcon icon={faUsers} className={classes.icon} />;
       case "timezone":
         return <FontAwesomeIcon icon={faClock} className={classes.icon} />;
+      case "density":
+        unit = " people / km²"
+        return <FontAwesomeIcon icon={faLayerGroup} className={classes.icon} />;
+      case "greeting":
+        return <FontAwesomeIcon icon={faHandshake} className={classes.icon} />;
+      case "gross domestic product per capita":
+        unit= " $"
+        return <FontAwesomeIcon icon={faCoins} className={classes.icon} />;
+      case "establishment":
+        return <FontAwesomeIcon icon={faHistory} className={classes.icon} />;
+      case "native country name":
+        return <FontAwesomeIcon icon={faSignature} className={classes.icon} />;
       default:
         return <FontAwesomeIcon icon={faClock} className={classes.icon} />;
     }
@@ -54,7 +74,7 @@ const InformationItems = (props: any) => {
       >
         <div className={classes.iconContainer}>{iconChooser(infos[0])}</div>
       </Tooltip>
-      <p>{capitalize(infos?.[1])}</p>
+      <p>{`${capitalize(infos?.[1])}${unit}`}</p>
     </div>
   );
 };
