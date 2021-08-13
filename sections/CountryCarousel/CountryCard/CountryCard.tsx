@@ -34,7 +34,6 @@ const CountryCard = (props: any) => {
     return result;
   };
 
-  console.log(informations);
   return (
     <Card
       className={classes.countryCard}

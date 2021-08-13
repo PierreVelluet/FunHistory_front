@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 
 import { Carousel } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,7 @@ import {
 
 import { ICountry } from "interfaces/general_interfaces";
 import CountryCard from "./CountryCard/CountryCard";
-import Typist from 'react-typist';
+import Typist from "react-typist";
 
 import classes from "./CountryCarousel.module.less";
 
@@ -35,7 +35,7 @@ const SamplePrevArrow = (props: any) => {
       className={className}
       style={{
         ...style,
-        marginLeft: "-35px"
+        marginLeft: "-35px",
       }}
       onClick={onClick}
     >
@@ -52,11 +52,18 @@ const settings = {
 const CountryChooser = (props: any) => {
   const countries: [ICountry] = props.countries;
 
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  console.log(currentSlideIndex)
+  console.log(countries)
+
   return (
     <>
-        
-        <Typist><span  className={classes.carouselTitle}>Wanna discover Japan ?</span></Typist>
+      <Typist key={currentSlideIndex}>
+        <span className={classes.carouselTitle}>{countries?.[currentSlideIndex]?.name} </span>
+      </Typist>
       <Carousel
+        afterChange={(current:any) => setCurrentSlideIndex(current)}
         dots={false}
         arrows
         {...settings}
