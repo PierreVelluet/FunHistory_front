@@ -63,50 +63,11 @@ a {
   height: 24px;
 }
 
-.slick-arrow.slick-prev {
-  font-size: 10px;
-  
-}
-
-.ant-carousel .slick-prev::before {
-  content: '<';
-  display: block;
-  position: relative;
-  bottom: 10px;
-  right: 20px;
-  /* width: 100px; */
-  font-size: 25px;
-  color: #045daf;
-  background-color: #045daf;
-  border: 2px solid #045daf;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
- 
-}
-.slick-arrow.slick-next {
-font-size: 10px;
-}
 .ant-carousel .slick-next::before {
-content: '>';
-display: block;
-position: relative;
-right: 0px;
-bottom: 10px;
-/* width: 100px; */
-font-size: 25px;
-color: #045daf;
-background-color: #045daf;
-border: 2px solid #045daf;
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 5px;
-border-radius: 50%;
-width: 40px;
-height: 40px;
-}
+      content: '';
+    }
+
+    .ant-carousel .slick-prev::before {
+      content: '';
+    }
+ 
