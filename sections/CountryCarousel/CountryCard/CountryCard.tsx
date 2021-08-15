@@ -57,7 +57,7 @@ const CountryCard = (props: any) => {
           ).map((el: string[]) => {
             return (
               <InformationItems
-                toolTipPlacement={"top"}
+                toolTipPlacement={"left"}
                 key={el?.[0]}
                 infos={el}
               />
@@ -82,7 +82,7 @@ const CountryCard = (props: any) => {
         ).map((el: string[]) => {
           return (
             <InformationItems
-              toolTipPlacement={"top"}
+              toolTipPlacement={"left"}
               key={el?.[0]}
               infos={el}
             />
