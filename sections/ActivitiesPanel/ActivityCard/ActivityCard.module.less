@@ -1,0 +1,25 @@
+@component-box-shadow: rgba(0, 0, 0, 0.35) 5px 10px 20px;
+
+.cardContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cardTitle {
+    font-size: 30px;
+    font-weight: 600;
+    color: @secondary-color!important;
+}
+
+.activityCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 200px;
+    box-shadow: @component-box-shadow;
+    margin: 0px 25px;
+    cursor: pointer;
+}

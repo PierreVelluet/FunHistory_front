@@ -1,16 +1,34 @@
+import React, { useState } from "react";
+
 import Head from "next/head";
 import axios from "axios";
-import { Card } from "antd";
 import { config, dom } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 import { ICountry } from "interfaces/general_interfaces";
 
+import { useGlobalContext } from "../utils/globalState/store";
+
 import classes from "./index.module.less";
-import CountryChooser from "sections/CountryCarousel/CountryCarousel";
+import CountryChooser from "sections/CountryPanel/CountryPanel";
+import ActivitiesPanel from "sections/ActivitiesPanel/ActivitiesPanel";
 
 export default function Home(props: any) {
   const data: [ICountry] = props.data.data;
+  const {store, setLoading}: any = useGlobalContext();
+
+  const panelHandler = (panel: string) => {
+    switch (panel) {
+      case "CountryPanel":
+        return <CountryChooser countries={data} />;
+      case "ActivitiesPanel":
+        return <ActivitiesPanel />;
+      default:
+        return <CountryChooser countries={data} />;
+    }
+  };
+
+  console.log(store)
 
   return (
     <div className={classes.container}>
@@ -20,7 +38,7 @@ export default function Home(props: any) {
         <link rel="icon" href="/funHistoryLogo.png" />
         <style>{dom.css()}</style>
       </Head>
-      <CountryChooser countries={data} />
+      {panelHandler(store?.panel)}
     </div>
   );
 }

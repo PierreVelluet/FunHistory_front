@@ -27,31 +27,6 @@
   opacity: @component-opacity;
 }
 
-.icon {
-  color: @primary-color;
-  font-size: 55px !important;
-  margin-top: -15px;
-  text-shadow: 3px 6px #272634;
-  &:hover {
-    animation: pulse 1s infinite;
-    animation-timing-function: linear;
-    color: lighten(hsl(@primary-color), 5%);
-  }
-  filter: drop-shadow(1px 1px 2px black);
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 .selectBtn {
   width: @component-width;
   opacity: @component-opacity;
@@ -70,6 +45,10 @@
   animation: shake 0.8s infinite;
   animation-timing-function: linear;
   background-color: lighten(hsl(@secondary-color), 50%);
+}
+
+.btnDisabled {
+  background-color: darken(hsl(@thirdary-color), 20%)!important;
 }
 
 @keyframes shake {
