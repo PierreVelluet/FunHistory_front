@@ -3,66 +3,63 @@ import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { IActivity } from "typescript/interfaces/general_interfaces";
 
 import ActivityCard from "./ActivityCard/ActivityCard";
+import { executeAfterDelay } from "utils/functions";
+
+import { allActivities } from "utils/hardData";
 
 import classes from "./ActivitiesPanel.module.less";
 import cx from "classnames";
 
 const dummyActivity = <div style={{ width: "200px", margin: "0px 25px" }} />;
 
-const activities: IActivity[] = [
-  {
-    name: "History",
-    backgroundImage: "/history.png",
-    active: true,
-    number: 1,
-  },
-  {
-    name: "Geography",
-    backgroundImage: "/geography.jpeg",
-    active: true,
-    number: 2,
-  },
-  {
-    name: "Politic",
-    backgroundImage: "/politic.png",
-    active: false,
-    number: 3,
-  },
-];
-
 const ActivitiesPanel = () => {
   const [history, setHistory] = useState<object>(dummyActivity);
   const [geography, setGeography] = useState<object>(dummyActivity);
   const [politic, setPolitic] = useState<object>(dummyActivity);
-
   const [activitySelected, setActivitySelected] = useState([
     false,
     false,
     false,
   ]);
   const [fadeActivityCards, setFadeActivityCards] = useState(false);
-
   const isOneActivitySelected = activitySelected?.includes(true);
 
-  const activityCards = activities?.map((el: object, index: number) => {
+  const activities = allActivities?.map((el: IActivity) => {
+    const newActivity: IActivity = el;
+    switch (el?.name) {
+      case "History":
+        newActivity.setter = (value: any) => setHistory(value);
+        break;
+      case "Geography":
+        newActivity.setter = (value: any) => setGeography(value);
+        break;
+      case "Politic":
+        newActivity.setter = (value: any) => setPolitic(value);
+        break;
+    }
+    return newActivity;
+  });
+
+  const activityCard = (el: IActivity, index: number) => {
     return (
       <div
-        onClick={!isOneActivitySelected ? () => selectActivityHandler(index): ()=> {}}
+        onClick={
+          !isOneActivitySelected ? () => selectActivityHandler(index) : () => {}
+        }
         className={cx(
           "animate__animated",
           {
             animate__fadeOut: fadeActivityCards,
           },
           {
-            "animate__animated animate__heartBeat":
-              activitySelected[index],
+            "animate__animated animate__heartBeat": activitySelected[index],
           }
         )}
       >
         <ActivityCard activity={el} />
       </div>
     );
-  });
+  };
 
   const selectActivityHandler = (selectionnedActivity: number) => {
     const newActivitySelectionning = activitySelected?.map(
@@ -76,35 +73,19 @@ const ActivitiesPanel = () => {
     );
     setActivitySelected(newActivitySelectionning);
 
-    setTimeout(function () {
-      setFadeActivityCards(true);
-    }, 2000);
+    executeAfterDelay(setFadeActivityCards(true), 2000);
   };
 
   useEffect(() => {
     let timeout = 500;
-    if (isOneActivitySelected && !fadeActivityCards) {
-      timeout = 0;
-    }
+    // if (isOneActivitySelected && !fadeActivityCards) {
+    //   timeout = 0;
+    // }
 
-    activityCards?.forEach((el: object, index: number) => {
-      switch (index) {
-        case 0:
-          setTimeout(function () {
-            setHistory(el);
-          }, timeout * index);
-          break;
-        case 1:
-          setTimeout(function () {
-            setGeography(el);
-          }, timeout * index);
-          break;
-        case 2:
-          setTimeout(function () {
-            setPolitic(el);
-          }, timeout * index);
-          break;
-      }
+    activities?.map((el: IActivity, index: number) => {
+      executeAfterDelay(function () {
+        el?.setter(activityCard(el, index));
+      }, timeout * index);
     });
   }, [activitySelected, fadeActivityCards]);
 

@@ -27,5 +27,6 @@ export interface IActivity {
   name: string,
   backgroundImage: string,
   active: boolean,
-  number: number
+  number: number,
+  setter?: any
 }
