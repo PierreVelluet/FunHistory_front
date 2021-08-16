@@ -9,16 +9,6 @@ import cx from "classnames";
 
 const dummyActivity = <div style={{ width: "200px", margin: "0px 25px" }} />;
 
-function useFirstRender() {
-  const firstRender = useRef(true);
-
-  useEffect(() => {
-    firstRender.current = false;
-  }, []);
-
-  return firstRender.current;
-}
-
 const activities: IActivity[] = [
   {
     name: "History",
@@ -41,79 +31,82 @@ const activities: IActivity[] = [
 ];
 
 const ActivitiesPanel = () => {
-  const [history, setHistory] = useState(dummyActivity);
-  const [geography, setGeography] = useState(dummyActivity);
-  const [politic, setPolitic] = useState(dummyActivity);
-  const [unselected, setUnselected] = useState([false, false, false]);
+  const [history, setHistory] = useState<object>(dummyActivity);
+  const [geography, setGeography] = useState<object>(dummyActivity);
+  const [politic, setPolitic] = useState<object>(dummyActivity);
 
-  const selectActivityHandler = (activity: number) => {
-    console.log("clicked");
-    const newUnselected = unselected?.map((el: boolean, index: number) => {
-      if (index == activity) {
-        return el;
-      } else {
-        return !el;
+  const [activitySelected, setActivitySelected] = useState([
+    false,
+    false,
+    false,
+  ]);
+  const [fadeActivityCards, setFadeActivityCards] = useState(false);
+
+  const isOneActivitySelected = activitySelected?.includes(true);
+
+  const activityCards = activities?.map((el: object, index: number) => {
+    return (
+      <div
+        onClick={!isOneActivitySelected ? () => selectActivityHandler(index): ()=> {}}
+        className={cx(
+          "animate__animated",
+          {
+            animate__fadeOut: fadeActivityCards,
+          },
+          {
+            "animate__animated animate__heartBeat":
+              activitySelected[index],
+          }
+        )}
+      >
+        <ActivityCard activity={el} />
+      </div>
+    );
+  });
+
+  const selectActivityHandler = (selectionnedActivity: number) => {
+    const newActivitySelectionning = activitySelected?.map(
+      (el: boolean, index: number) => {
+        if (index === selectionnedActivity) {
+          return !el;
+        } else {
+          return el;
+        }
       }
-    });
-    setUnselected(newUnselected);
+    );
+    setActivitySelected(newActivitySelectionning);
+
+    setTimeout(function () {
+      setFadeActivityCards(true);
+    }, 2000);
   };
 
-  const firstUpdate = useRef(true);
-  useLayoutEffect(() => {
-    let timeout = 0;
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      timeout = 500;
+  useEffect(() => {
+    let timeout = 500;
+    if (isOneActivitySelected && !fadeActivityCards) {
+      timeout = 0;
     }
-    timeout = 500;
 
-    setTimeout(function () {
-      setHistory(
-        <div
-          onClick={() => selectActivityHandler(0)}
-          className={cx("animate__animated", {
-            animate__fadeOut: unselected[0],
-          })}
-        >
-          <ActivityCard activity={activities?.[0]} unselected={unselected[0]} />
-        </div>
-      );
-      console.log("yes");
-    }, timeout);
-
-    setTimeout(function () {
-      {
-        setGeography(
-          <div
-            onClick={() => selectActivityHandler(1)}
-            className={cx("animate__animated", {
-              animate__fadeOut: unselected[1],
-            })}
-          >
-            <ActivityCard
-              activity={activities?.[1]}
-              unselected={unselected[1]}
-            />
-          </div>
-        );
+    activityCards?.forEach((el: object, index: number) => {
+      switch (index) {
+        case 0:
+          setTimeout(function () {
+            setHistory(el);
+          }, timeout * index);
+          break;
+        case 1:
+          setTimeout(function () {
+            setGeography(el);
+          }, timeout * index);
+          break;
+        case 2:
+          setTimeout(function () {
+            setPolitic(el);
+          }, timeout * index);
+          break;
       }
-    }, timeout * 2);
-
-    setTimeout(function () {
-      setPolitic(
-        <div
-          onClick={() => selectActivityHandler(2)}
-          className={cx("animate__animated", {
-            animate__fadeOut: unselected[2],
-          })}
-        >
-          <ActivityCard activity={activities?.[2]} unselected={unselected[2]} />
-        </div>
-      );
-    }, timeout * 3);
-  }, [unselected]);
-
-  console.log(unselected);
+    });
+  }, [activitySelected, fadeActivityCards]);
 
   return (
     <div className={classes.activitiesContainer}>

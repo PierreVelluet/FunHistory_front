@@ -35,7 +35,7 @@ const ActivityCard = (props: any) => {
       <Card
         onClick={selectActivity}
         className={cx(classes.activityCard, "animate__animated", {
-          animate__pulse: hoverEffect,
+          // animate__pulse: hoverEffect,
         })}
       >
         <Image
