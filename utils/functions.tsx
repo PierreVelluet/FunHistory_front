@@ -9,7 +9,7 @@ const capitalize = (s: any) => {
 };
 
 const executeAfterDelay = (body: any, timeout: number) => {
-  setTimeout(body, timeout);
+  setTimeout(() => body(), timeout);
 };
 
 export { capitalize, executeAfterDelay };

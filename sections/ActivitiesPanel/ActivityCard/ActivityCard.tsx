@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 import { Card } from "antd";
@@ -11,33 +11,38 @@ import cx from "classnames";
 const ActivityCard = (props: any) => {
   const {
     activity,
-    unselected,
-    setUnselected,
-  }: { activity: IActivity; unselected: boolean[]; setUnselected: any } =
-    props;
+    fadeCards,
+    selectActivityHandler,
+    hearthbeat,
+  }: {
+    activity: IActivity;
+    fadeCards: boolean;
+    selectActivityHandler: any;
+    hearthbeat: boolean;
+  } = props;
 
-  const [hoverEffect, setHoverEffect] = useState(false);
-
-  const selectActivity = () => {
-      
+  const innerOnClickHandler = () => {
+    selectActivityHandler(activity?.number - 1);
   };
 
   return (
     <div
-      onMouseEnter={() => setHoverEffect(true)}
-      onMouseLeave={() => setHoverEffect(false)}
+      onClick={innerOnClickHandler}
       className={cx(
         classes.cardContainer,
+        
         "animate__animated animate__bounceInDown",
+        {
+          animate__bounceOutRight: fadeCards,
+        },
+        {
+            "animate__animated animate__rubberBand": hearthbeat,
+        },
+        
       )}
     >
       <p className={classes.cardTitle}> {activity?.name}</p>
-      <Card
-        onClick={selectActivity}
-        className={cx(classes.activityCard, "animate__animated", {
-          // animate__pulse: hoverEffect,
-        })}
-      >
+      <Card className={classes.activityCard}>
         <Image
           src={activity?.backgroundImage ?? "/"}
           layout="fill"
