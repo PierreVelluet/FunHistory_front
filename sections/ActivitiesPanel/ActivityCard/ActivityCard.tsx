@@ -5,21 +5,25 @@ import { Card } from "antd";
 
 import { IActivity } from "typescript/interfaces/general_interfaces";
 
+import { animations } from "utils/hardData";
+
 import classes from "./ActivityCard.module.less";
 import cx from "classnames";
 
 const ActivityCard = (props: any) => {
   const {
     activity,
-    fadeCards,
     selectActivityHandler,
-    hearthbeat,
+    out,
+    attention,
   }: {
     activity: IActivity;
-    fadeCards: boolean;
+    out: boolean;
     selectActivityHandler: any;
-    hearthbeat: boolean;
+    attention: boolean;
   } = props;
+
+  const activityNumber = activity.number;
 
   const innerOnClickHandler = () => {
     selectActivityHandler(activity?.number - 1);
@@ -30,13 +34,15 @@ const ActivityCard = (props: any) => {
       onClick={innerOnClickHandler}
       className={cx(
         classes.cardContainer,
-        
-        "animate__animated animate__bounceInDown",
+        animations.inDown,
+         //@ts-ignore
+        `${animations[`delay${activityNumber - 1}`]}`,
         {
-          animate__bounceOutRight: fadeCards,
+            [animations.attention]: attention
         },
         {
-            "animate__animated animate__rubberBand": hearthbeat,
+          //@ts-ignore
+          [`${animations.outRight} ${animations[`delay${activityNumber}`]}`]: out,
         },
         
       )}

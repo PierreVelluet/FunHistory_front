@@ -24,4 +24,16 @@ const allActivities: IActivity[] = [
   },
 ];
 
-export { allActivities };
+const animations = {
+  outRight: "animate__animated animate__bounceOutRight",
+  inDown: "animate__animated animate__bounceInDown",
+  attention: "animate__animated animate__rubberBand",
+  delay1: "animate__delay-1s",
+  delay2: "animate__delay-2s",
+  delay3: "animate__delay-3s",
+  delay4: "animate__delay-4s",
+  delay5: "animate__delay-5s",
+  
+};
+
+export { allActivities, animations };

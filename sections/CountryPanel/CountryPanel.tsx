@@ -58,14 +58,14 @@ const CountryChooser = (props: any) => {
     setAnimation1(true);
     setTimeout(function () {
       setAnimation2(true);
-    }, 500);
+    }, 0);
     setTimeout(function () {
       setAnimation3(true);
-    }, 1000);
+    }, 0);
     setTimeout(function () {
       setPanel("ActivitiesPanel");
       setLoading(false);
-    }, 1500);
+    }, 0);
   };
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const CountryChooser = (props: any) => {
       <div
         className={cx(
           classes.carouselTitleContainer,
-          "mb-3 animate__animated",
+          "mb-3 animate__animated animate__bounceInDown animate__delay-2s",
           { animate__bounceOutRight: animation1 }
         )}
       >
@@ -92,7 +92,7 @@ const CountryChooser = (props: any) => {
         arrows
         {...arrowSettings}
         dotPosition="bottom"
-        className={cx(classes.carousel, "animate__animated", {
+        className={cx(classes.carousel, "animate__animated animate__bounceInDown animate__delay-1s", {
           animate__bounceOutRight: animation2,
         })}
       >
@@ -109,7 +109,7 @@ const CountryChooser = (props: any) => {
         className={cx(
           classes.selectBtn,
           "mt-3",
-          "animate__animated",
+          "animate__animated animate__bounceInDown",
           {
             animate__bounceOutRight: animation3,
           },

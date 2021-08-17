@@ -1,42 +1,43 @@
-@import url('https://fonts.googleapis.com/css2?family=Eczar&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Eczar&family=Fira+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Eczar&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Eczar&family=Fira+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap");
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'STIX Two Math', serif!important;
-  color: #F1F1EF!important;
-  background-color: #f2f2f2!important;
-  
+  font-family: "STIX Two Math", serif !important;
+  color: #f1f1ef !important;
+  background-color: #f2f2f2 !important;
 }
 
-h1, h2, h3, h4, h5 {
-  padding: 0!important;
-  margin: 0!important;
-  color: #F1F1EF!important;
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding: 0 !important;
+  margin: 0 !important;
+  color: #f1f1ef !important;
 }
 
 #mainMenu .ant-menu-item-selected {
   background-color: #045daf !important;
-  color: #F1F1EF!important;
+  color: #f1f1ef !important;
 }
-
 
 a {
-  text-decoration: none!important;
+  text-decoration: none !important;
 }
 
-
 #mainMenu .ant-menu-item-selected:hover {
-  color: #F1F1EF!important;
+  color: #f1f1ef !important;
 }
 
 p {
   padding: 0;
-  margin: 0!important;
-  color: #F1F1EF!important;
+  margin: 0 !important;
+  color: #f1f1ef !important;
 }
 
 a {
@@ -49,13 +50,13 @@ a {
 }
 
 .ant-carousel-vertical .slick-dots-right {
-  right: 16px!important;
+  right: 16px !important;
 }
 
 .ant-carousel-vertical .slick-dots li button {
-  background-color: #045daf!important;
-  width: 7px!important;
-  height: 20px!important;
+  background-color: #045daf !important;
+  width: 7px !important;
+  height: 20px !important;
 }
 
 .ant-carousel-vertical .slick-dots li.slick-active button {
@@ -64,10 +65,13 @@ a {
 }
 
 .ant-carousel .slick-next::before {
-      content: '';
-    }
+  content: "";
+}
 
-    .ant-carousel .slick-prev::before {
-      content: '';
-    }
- 
+.ant-carousel .slick-prev::before {
+  content: "";
+}
+
+:root {
+  --animate-delay: 0.5s!important;
+}
