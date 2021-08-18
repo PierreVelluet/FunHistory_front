@@ -18,7 +18,7 @@ import {
   faCoins,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { capitalize } from "utils/functions";
+import { capitalize } from "utils/functions/functions";
 
 import classes from "./InformationsItem.module.less";
 

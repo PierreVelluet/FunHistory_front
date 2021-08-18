@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { Carousel, Button, Card } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faScroll } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import Typist from "react-typist";
 
 import CountryCard from "./CountryCard/CountryCard";
@@ -45,23 +44,13 @@ const CountryChooser = (props: any) => {
       num: store?.numberOfQuestions,
     };
 
-    getRandomQuestionsFromCountry(params).then((data) => console.log(data))
-
-    // try {
-    //   await axios
-    //     .post<string>(
-    //       `${process.env.NEXT_PUBLIC_BACKEND}/questions/random`,
-    //       params
-    //     )
-    //     .then((response: any) => setQuestions(response?.data))
-    //     .then(() => {
-    //       setTimeout(() => {
-    //         setPanel("ActivitiesPanel");
-    //       }, 1000);
-    //     });
-    // } catch (err) {
-    //   if (err) console.log(err);
-    // }
+    getRandomQuestionsFromCountry(params)
+      .then((response) => setQuestions(response?.data))
+      .then(() => {
+        setTimeout(() => {
+          setPanel("ActivitiesPanel");
+        }, 1000);
+      });
   };
 
   const innerStyles = {
@@ -70,7 +59,7 @@ const CountryChooser = (props: any) => {
       "mb-3",
       animations.inDown,
       animations.delay2,
-      { [animations.outRight]: out },
+      { [animations.outDown]: out },
     ],
     carousel: [
       classes.carousel,
@@ -78,7 +67,7 @@ const CountryChooser = (props: any) => {
       animations.delay1,
       ,
       {
-        [animations.outRight]: out,
+        [animations.outDown]: out,
       },
     ],
     selectBtn: [
@@ -86,7 +75,7 @@ const CountryChooser = (props: any) => {
       "mt-3",
       animations.inDown,
       {
-        [animations.outRight]: out,
+        [animations.outDown]: out,
       },
 
       { [classes.btnDisabled]: store?.loading },
@@ -100,12 +89,6 @@ const CountryChooser = (props: any) => {
       setLoading(false);
     }, 2500);
   }, []);
-
-  useEffect(() => {
-    if (giggle) {
-      // setGiggle(false);
-    }
-  }, [giggle]);
 
   return (
     <>

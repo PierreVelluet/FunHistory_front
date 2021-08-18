@@ -6,21 +6,24 @@ const activities: IActivity[] = [
     backgroundImage: "/history.png",
     active: true,
     number: 1,
-    setter: null,
   },
   {
     name: "Geography",
     backgroundImage: "/geography.jpeg",
     active: true,
     number: 2,
-    setter: null,
   },
   {
     name: "Politic",
     backgroundImage: "/politic.png",
     active: false,
     number: 3,
-    setter: null,
+  },
+  {
+    name: "Culture",
+    backgroundImage: "/culture.png",
+    active: false,
+    number: 4,
   },
 ];
 

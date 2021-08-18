@@ -9,31 +9,36 @@ import { useGlobalContext } from "utils/globalState/store";
 import classes from "./ActivitiesPanel.module.less";
 
 const ActivitiesPanel = () => {
+  const { store, setLoading, setSelectedCountry, setQuestions, setPanel }: any =
+    useGlobalContext();
   const [attention, setAttention] = useState<boolean[]>(
     Array(activities.length).fill(false)
   );
-  const { store, setLoading, setSelectedCountry, setQuestions, setPanel }: any =
-  useGlobalContext();
+  const [out, setOut] = useState<boolean[]>(
+    Array(activities.length).fill(false)
+  );
 
-  const [out, setOut] = useState<boolean[]>( Array(activities.length).fill(false));
-
-  const selectActivityHandler = (selectionnedActivity: number) => {
+  const setAnimationsStates = (selectionnedActivity: number) => {
     const newAttention = attention?.map((el: boolean, index: number) => {
       return index === selectionnedActivity ? !el : el;
     });
     const newOut = out?.map((el: boolean, index: number) => {
       return index === selectionnedActivity ? el : !el;
     });
+    return { newAttention, newOut };
+  };
+  
+  const selectActivityHandler = (selectionnedActivity: number) => {
+    const { newAttention, newOut } = setAnimationsStates(selectionnedActivity);
     setAttention(newAttention);
     setOut(newOut);
   };
 
-  useEffect(()=> {
-    setTimeout(()=> {
+  useEffect(() => {
+    setTimeout(() => {
       setLoading(false);
-    }, 2500)
-    
-  }, [])
+    }, 2500);
+  }, []);
 
   return (
     <div className={classes.activitiesContainer}>

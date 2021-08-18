@@ -38,13 +38,13 @@ const ActivityCard = (props: any) => {
       { [classes.loadingState]: store?.loading },
       {
         // @ts-ignore
-        [`${animations.fadeOutRight} ${animations.delay2}`]: out,
+        [`${animations.fadeOutDown} ${animations.delay2}`]: out,
       },
     ],
     subcontainer: [
       {
         // @ts-ignore
-        [`${animations.outRight} ${animations.delay4}`]: selected,
+        [`${animations.outDown} ${animations.delay4}`]: selected,
       },
     ],
     title: [

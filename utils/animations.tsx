@@ -1,9 +1,11 @@
 const animations = {
   outRight: "animate__animated animate__bounceOutRight",
+  outDown: "animate__animated animate__bounceOutDown",
   inDown: "animate__animated animate__bounceInDown",
   fadeInDown: "animate__animated animate__fadeInDown",
   fadeOut: "animate__animated animate__fadeOut",
   fadeOutRight: "animate__animated animate__fadeOutRight",
+  fadeOutDown: "animate__animated animate__fadeOutDown",
   attention: "animate__animated animate__rubberBand",
   hinge: "animate__animated animate__hinge",
   delay1: "animate__delay-1s",
