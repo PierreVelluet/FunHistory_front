@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import { IActivity } from "typescript/interfaces/general_interfaces";
-
 import ActivityCard from "./ActivityCard/ActivityCard";
 
+import { IActivity } from "typescript/interfaces/general_interfaces";
 import { activities } from "utils/activities";
-import { useGlobalContext } from "../../utils/globalState/store";
+import { useGlobalContext } from "utils/globalState/store";
 
 import classes from "./ActivitiesPanel.module.less";
 
@@ -30,7 +29,10 @@ const ActivitiesPanel = () => {
   };
 
   useEffect(()=> {
-    setLoading(false);
+    setTimeout(()=> {
+      setLoading(false);
+    }, 2500)
+    
   }, [])
 
   return (

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Carousel, Button, Card } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { faScroll } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Typist from "react-typist";
 
@@ -10,11 +10,10 @@ import CountryCard from "./CountryCard/CountryCard";
 import arrowSettings from "./CountryPanelArrows/CountryPanelArrows";
 
 import { ICountry } from "interfaces/general_interfaces";
-
-import { useGlobalContext } from "../../utils/globalState/store";
+import { useGlobalContext } from "utils/globalState/store";
+import { getRandomQuestionsFromCountry } from "utils/functions/fetchFunctions";
 import { animations } from "utils/animations";
 
-import "animate.css";
 import classes from "./CountryPanel.module.less";
 import cx from "classnames";
 
@@ -28,11 +27,13 @@ const CountryChooser = (props: any) => {
 
   const countryChange = (current: number) => {
     setSelectedCountry(countries?.[current]?.name);
-    setGiggle((prevState) => !prevState);
+    setLoading(true);
+    setGiggle(true);
 
-    setTimeout(function () {
-      setGiggle((prevState) => !prevState);
-    }, 3000);
+    setTimeout(() => {
+      setGiggle(false);
+      setLoading(false);
+    }, 1000);
   };
 
   const selectCountryHandler = async () => {
@@ -44,21 +45,23 @@ const CountryChooser = (props: any) => {
       num: store?.numberOfQuestions,
     };
 
-    try {
-      await axios
-        .post<string>(
-          `${process.env.NEXT_PUBLIC_BACKEND}/questions/random`,
-          params
-        )
-        .then((response: any) => setQuestions(response?.data))
-        .then(() => {
-          setTimeout(() => {
-            setPanel("ActivitiesPanel");
-          }, 1000);
-        });
-    } catch (err) {
-      if (err) console.log(err);
-    }
+    getRandomQuestionsFromCountry(params).then((data) => console.log(data))
+
+    // try {
+    //   await axios
+    //     .post<string>(
+    //       `${process.env.NEXT_PUBLIC_BACKEND}/questions/random`,
+    //       params
+    //     )
+    //     .then((response: any) => setQuestions(response?.data))
+    //     .then(() => {
+    //       setTimeout(() => {
+    //         setPanel("ActivitiesPanel");
+    //       }, 1000);
+    //     });
+    // } catch (err) {
+    //   if (err) console.log(err);
+    // }
   };
 
   const innerStyles = {
@@ -67,7 +70,7 @@ const CountryChooser = (props: any) => {
       "mb-3",
       animations.inDown,
       animations.delay2,
-      { animate__bounceOutRight: out },
+      { [animations.outRight]: out },
     ],
     carousel: [
       classes.carousel,
@@ -75,7 +78,7 @@ const CountryChooser = (props: any) => {
       animations.delay1,
       ,
       {
-        animate__bounceOutRight: out,
+        [animations.outRight]: out,
       },
     ],
     selectBtn: [
@@ -83,16 +86,26 @@ const CountryChooser = (props: any) => {
       "mt-3",
       animations.inDown,
       {
-        animate__bounceOutRight: out,
+        [animations.outRight]: out,
       },
-      { [classes.giggle]: giggle },
+
       { [classes.btnDisabled]: store?.loading },
     ],
+    selectBtnWrapper: [{ [animations.attention]: giggle }],
   };
 
   useEffect(() => {
     setSelectedCountry(countries?.[0]?.name);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2500);
   }, []);
+
+  useEffect(() => {
+    if (giggle) {
+      // setGiggle(false);
+    }
+  }, [giggle]);
 
   return (
     <>
@@ -104,26 +117,25 @@ const CountryChooser = (props: any) => {
       <Carousel
         className={cx(...innerStyles.carousel)}
         effect="fade"
+        beforeChange={() => {}}
         afterChange={(current: any) => countryChange(current)}
         dots={false}
         arrows
         {...arrowSettings}
-        dotPosition="bottom"
       >
         {countries?.map((country: ICountry) => {
           return <CountryCard key={country?.name} country={country} />;
         })}
       </Carousel>
-      <Button
-        className={cx(...innerStyles.selectBtn)}
-        onClick={selectCountryHandler}
-        disabled={store?.loading}
-        icon={
-          <FontAwesomeIcon icon={faPlayCircle} className={classes.btnIcon} />
-        }
-        type="primary"
-        size={"large"}
-      >{`Dive into history !`}</Button>
+      <div className={cx(...innerStyles.selectBtnWrapper)}>
+        <Button
+          className={cx(...innerStyles.selectBtn)}
+          onClick={!store?.loading ? selectCountryHandler : () => {}}
+          icon={<FontAwesomeIcon icon={faScroll} className={classes.btnIcon} />}
+          type="primary"
+          size={"large"}
+        >{`Test your knowledge !`}</Button>
+      </div>
     </>
   );
 };

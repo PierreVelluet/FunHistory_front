@@ -4,7 +4,7 @@ import Reducer from "./reducer";
 import { IGlobalState } from "typescript/interfaces/general_interfaces";
 
 const initialState: IGlobalState = {
-  loading: false,
+  loading: true,
   country: "",
   numberOfQuestions: 10,
   panel: "CountryPanel",

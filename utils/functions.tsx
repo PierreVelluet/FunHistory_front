@@ -8,8 +8,4 @@ const capitalize = (s: any) => {
   }
 };
 
-const executeAfterDelay = (body: any, timeout: number) => {
-  setTimeout(() => body(), timeout);
-};
-
-export { capitalize, executeAfterDelay };
+export { capitalize };
