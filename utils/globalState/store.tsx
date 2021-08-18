@@ -7,7 +7,7 @@ const initialState: IGlobalState = {
   loading: false,
   country: "",
   numberOfQuestions: 10,
-  panel: "ActivitiesPanel",
+  panel: "CountryPanel",
   questions: {}
 };
 

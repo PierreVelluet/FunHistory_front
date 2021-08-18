@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { IActivity } from "typescript/interfaces/general_interfaces";
 
 import ActivityCard from "./ActivityCard/ActivityCard";
 
 import { activities } from "utils/activities";
+import { useGlobalContext } from "../../utils/globalState/store";
 
 import classes from "./ActivitiesPanel.module.less";
 
@@ -12,6 +13,9 @@ const ActivitiesPanel = () => {
   const [attention, setAttention] = useState<boolean[]>(
     Array(activities.length).fill(false)
   );
+  const { store, setLoading, setSelectedCountry, setQuestions, setPanel }: any =
+  useGlobalContext();
+
   const [out, setOut] = useState<boolean[]>( Array(activities.length).fill(false));
 
   const selectActivityHandler = (selectionnedActivity: number) => {
@@ -24,6 +28,10 @@ const ActivitiesPanel = () => {
     setAttention(newAttention);
     setOut(newOut);
   };
+
+  useEffect(()=> {
+    setLoading(false);
+  }, [])
 
   return (
     <div className={classes.activitiesContainer}>

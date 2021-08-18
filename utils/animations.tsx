@@ -3,6 +3,7 @@ const animations = {
   inDown: "animate__animated animate__bounceInDown",
   fadeInDown: "animate__animated animate__fadeInDown",
   fadeOut: "animate__animated animate__fadeOut",
+  fadeOutRight: "animate__animated animate__fadeOutRight",
   attention: "animate__animated animate__rubberBand",
   hinge: "animate__animated animate__hinge",
   delay1: "animate__delay-1s",
