@@ -77,7 +77,7 @@ const ProfileCard = (props: any) => {
         <div className={cx("d-flex")}>
           <div className={classes.avatar}>
             <Image
-              src={user?.imagePath ?? "/Pierre_pro.jpg"}
+              src={user?.imagePath ?? "/japan_flag.png"}
               layout="fill"
               objectFit="cover"
               alt="profile picture"

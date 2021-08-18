@@ -30,6 +30,7 @@ const ActivitiesPanel = () => {
       {activities?.map((el: IActivity, index: number) => {
         return (
           <ActivityCard
+            key={el?.name}
             activity={el}
             selectActivityHandler={selectActivityHandler}
             out={out[index]}

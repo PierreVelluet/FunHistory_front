@@ -1,10 +1,15 @@
 @component-box-shadow: rgba(0, 0, 0, 0.55) 5px 10px 20px;
 
-.cardContainer {
+.cardContainer,
+.subcontainer {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+.loadingState {
+    cursor: default!important;
 }
 
 .cardTitle {
@@ -27,4 +32,21 @@
     &:hover {
         filter: brightness(110%);
     }
+}
+
+.activityCard.disabled {
+    &:hover {
+        filter: none!important;
+    }
+}
+
+.selectedActivityCard {
+    filter: brightness(110%)!important;
+}
+
+.unselectedActivityCard {
+    &:hover {
+        filter: brightness(90%)!important;
+    }
+   
 }
