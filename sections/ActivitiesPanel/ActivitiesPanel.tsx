@@ -1,36 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { IActivity } from "typescript/interfaces/general_interfaces";
 
 import ActivityCard from "./ActivityCard/ActivityCard";
 
-import { allActivities } from "utils/hardData";
+import { activities } from "utils/activities";
 
 import classes from "./ActivitiesPanel.module.less";
-import cx from "classnames";
 
 const ActivitiesPanel = () => {
   const [attention, setAttention] = useState<boolean[]>(
-    Array(allActivities.length).fill(false)
+    Array(activities.length).fill(false)
   );
-  const [out, setOut] = useState<boolean>(false);
+  const [out, setOut] = useState<boolean[]>( Array(activities.length).fill(false));
 
   const selectActivityHandler = (selectionnedActivity: number) => {
     const newAttention = attention?.map((el: boolean, index: number) => {
       return index === selectionnedActivity ? !el : el;
     });
+    const newOut = out?.map((el: boolean, index: number) => {
+      return index === selectionnedActivity ? el : !el;
+    });
     setAttention(newAttention);
-    setOut(true);
+    setOut(newOut);
   };
 
   return (
     <div className={classes.activitiesContainer}>
-      {allActivities?.map((el: IActivity, index: number) => {
+      {activities?.map((el: IActivity, index: number) => {
         return (
           <ActivityCard
             activity={el}
-            out={out}
             selectActivityHandler={selectActivityHandler}
+            out={out[index]}
             attention={attention[index]}
           />
         );

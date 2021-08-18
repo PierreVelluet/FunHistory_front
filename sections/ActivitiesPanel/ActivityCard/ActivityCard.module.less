@@ -1,4 +1,4 @@
-@component-box-shadow: rgba(0, 0, 0, 0.35) 5px 10px 20px;
+@component-box-shadow: rgba(0, 0, 0, 0.55) 5px 10px 20px;
 
 .cardContainer {
     display: flex;
@@ -22,4 +22,9 @@
     box-shadow: @component-box-shadow;
     margin: 0px 25px;
     cursor: pointer;
+    border: 1px solid @secondary-color;
+    filter: brightness(90%);
+    &:hover {
+        filter: brightness(110%);
+    }
 }
