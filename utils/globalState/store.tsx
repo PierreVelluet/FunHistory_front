@@ -5,10 +5,12 @@ import { IGlobalState } from "typescript/interfaces/general_interfaces";
 
 const initialState: IGlobalState = {
   loading: true,
-  country: "",
+  country: "Japan",
   numberOfQuestions: 10,
-  panel: "QuizzPanel",
-  questions: {}
+  currentQuestionNumber: 0,
+  panel: "ActivitiesPanel",
+  activity: "",
+  questions: {},
 };
 
 const Store = ({ children }: { children: any }) => {
@@ -34,9 +36,19 @@ const Store = ({ children }: { children: any }) => {
       type: "SET_PANEL",
       payload: string,
     });
-    const setQuestions = (object: object) =>
+  const setActivity = (string: string) =>
+    dispatch({
+      type: "SET_ACTIVITY",
+      payload: string,
+    });
+  const setQuestions = (object: number) =>
     dispatch({
       type: "SET_QUESTIONS",
+      payload: object,
+    });
+    const setCurrentQuestionNumber = (object: object) =>
+    dispatch({
+      type: "SET_CURRENT_QUESTION_NUMBER",
       payload: object,
     });
 
@@ -49,7 +61,9 @@ const Store = ({ children }: { children: any }) => {
         setSelectedCountry,
         setNumberOfQuestions,
         setPanel,
-        setQuestions
+        setActivity,
+        setQuestions,
+        setCurrentQuestionNumber
       }}
     >
       {children}

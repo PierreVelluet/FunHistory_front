@@ -9,7 +9,7 @@ import { useGlobalContext } from "utils/globalState/store";
 import classes from "./ActivitiesPanel.module.less";
 
 const ActivitiesPanel = () => {
-  const { store, setLoading, setSelectedCountry, setQuestions, setPanel }: any =
+  const { store, setLoading, setActivity, setPanel }: any =
     useGlobalContext();
   const [attention, setAttention] = useState<boolean[]>(
     Array(activities.length).fill(false)
@@ -20,10 +20,10 @@ const ActivitiesPanel = () => {
 
   const setAnimationsStates = (selectionnedActivity: number) => {
     const newAttention = attention?.map((el: boolean, index: number) => {
-      return index === selectionnedActivity ? !el : el;
+      return index === selectionnedActivity - 1? !el : el;
     });
     const newOut = out?.map((el: boolean, index: number) => {
-      return index === selectionnedActivity ? el : !el;
+      return index === selectionnedActivity - 1? el : !el;
     });
     return { newAttention, newOut };
   };
@@ -32,6 +32,7 @@ const ActivitiesPanel = () => {
     const { newAttention, newOut } = setAnimationsStates(selectionnedActivity);
     setAttention(newAttention);
     setOut(newOut);
+    setActivity(activities[selectionnedActivity - 1].name);
     setTimeout(() => { setPanel("QuizzPanel")}, 3000)
   };
 

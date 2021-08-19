@@ -1,8 +1,26 @@
-
 @import (reference) "../../styles/variables.less";
 
 .card {
-    width: 900px;
-    height: 500px;
-    background-color: @primary;
+  width: 900px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.mainContainer {
+  display: flex;
+}
+
+.answersContainer,
+.questionContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+}
+
+.correctAnswerContainer {
+
 }

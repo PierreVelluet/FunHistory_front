@@ -10,7 +10,6 @@ import arrowSettings from "./CountryPanelArrows/CountryPanelArrows";
 
 import { ICountry } from "interfaces/general_interfaces";
 import { useGlobalContext } from "utils/globalState/store";
-import { getRandomQuestionsFromCountry } from "utils/functions/fetchFunctions";
 import { animations } from "utils/animations";
 
 import classes from "./CountryPanel.module.less";
@@ -39,18 +38,9 @@ const CountryChooser = (props: any) => {
     setLoading(true);
     setOut(true);
 
-    const params: object = {
-      country: store?.country,
-      num: store?.numberOfQuestions,
-    };
-
-    getRandomQuestionsFromCountry(params)
-      .then((response) => setQuestions(response?.data))
-      .then(() => {
-        setTimeout(() => {
-          setPanel("ActivitiesPanel");
-        }, 1000);
-      });
+      setTimeout(() => {
+        setPanel("ActivitiesPanel");
+      }, 1500);
   };
 
   const innerStyles = {

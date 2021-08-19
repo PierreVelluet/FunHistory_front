@@ -1,0 +1,34 @@
+@import (reference) "../../../styles/variables.less";
+
+.answerContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 25px;
+    border: 1px solid @secondary;
+    box-shadow: @classic-shadow;
+    width: 400px;
+    &:hover {
+        cursor: pointer;
+        background-color: @thirdary;
+    }
+    &:active {
+        background-color: darken(@thirdary, 25%);
+    }
+}
+
+.answerNumber,
+.answerText {
+    font-size: 20px;
+    color: black!important;
+    font-weight: 600;
+}
+
+.answerNumber {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid @secondary;
+    width: 35px;
+    margin-right: 10px;
+}

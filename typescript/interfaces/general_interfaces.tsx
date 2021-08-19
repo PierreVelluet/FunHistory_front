@@ -20,7 +20,14 @@ export interface IGlobalState {
   country: string;
   numberOfQuestions: number;
   panel: string;
+  activity: string;
   questions: object;
+  currentQuestionNumber: number;
+}
+
+export interface IFetchResult {
+  success: boolean;
+  results: IQuestion[]
 }
 
 export interface IActivity {
@@ -30,7 +37,7 @@ export interface IActivity {
   number: number;
 }
 
-interface IAnswer {
+export interface IAnswer {
   answer: string;
   answerNumber: number;
   correct: boolean;

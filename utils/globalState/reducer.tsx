@@ -20,11 +20,21 @@ const Reducer = (state: object, action: any) => {
         ...state,
         panel: action.payload,
       };
+    case "SET_ACTIVITY":
+      return {
+        ...state,
+        activity: action.payload,
+      };
+      case "SET_CURRENT_QUESTION_NUMBER":
+        return {
+          ...state,
+          currentQuestionNumber: action.payload,
+        };
     case "SET_QUESTIONS":
-    return {
+      return {
         ...state,
         questions: action.payload,
-    };
+      };
     default:
       return state;
   }

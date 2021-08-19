@@ -61,7 +61,7 @@ const ActivityCard = (props: any) => {
     if (store?.loading) return;
 
     setLoading(true);
-    selectActivityHandler(activity?.number - 1);
+    selectActivityHandler(activity?.number);
     setSelected(true);
   };
 
