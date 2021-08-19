@@ -20,12 +20,29 @@ export interface IGlobalState {
   country: string;
   numberOfQuestions: number;
   panel: string;
-  questions: object
+  questions: object;
 }
 
 export interface IActivity {
-  name: string,
-  backgroundImage: string,
-  active: boolean,
-  number: number,
+  name: string;
+  backgroundImage: string;
+  active: boolean;
+  number: number;
+}
+
+interface IAnswer {
+  answer: string;
+  answerNumber: number;
+  correct: boolean;
+}
+
+export interface IQuestion {
+  country: string;
+  question: string;
+  answers: IAnswer[];
+  type: string;
+  correctAnswerImage: string;
+  explanation: string;
+  ressourceLink: string;
+  category: string;
 }

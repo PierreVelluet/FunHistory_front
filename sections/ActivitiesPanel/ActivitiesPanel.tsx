@@ -32,6 +32,7 @@ const ActivitiesPanel = () => {
     const { newAttention, newOut } = setAnimationsStates(selectionnedActivity);
     setAttention(newAttention);
     setOut(newOut);
+    setTimeout(() => { setPanel("QuizzPanel")}, 3000)
   };
 
   useEffect(() => {

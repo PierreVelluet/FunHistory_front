@@ -1,17 +1,18 @@
+@import (reference) "../../styles/variables.less";
+
 @component-width: 600px;
 @component-opacity: 0.95;
-@component-box-shadow: rgba(0, 0, 0, 0.35) 5px 10px 20px;
 
 .carouselTitleContainer {
     width: @component-width;
-    box-shadow: @component-box-shadow;
+    box-shadow: @classic-shadow;
     opacity: @component-opacity;
-    background-color: @thirdary-color;
+    background-color: @thirdary;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 2px;
-    border: 1px solid @primary-color;
+    border: 1px solid @primary;
     
 }
 
@@ -24,14 +25,14 @@
 .carousel {
   width: @component-width;
   height: 300px;
-  box-shadow: @component-box-shadow;
+  box-shadow: @classic-shadow;
   opacity: @component-opacity;
 }
 
 .selectBtn {
   width: @component-width;
   opacity: @component-opacity;
-  box-shadow: @component-box-shadow;
+  box-shadow: @classic-shadow;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,11 +46,11 @@
 .giggle {
   animation: shake 0.8s infinite;
   animation-timing-function: linear;
-  background-color: lighten(hsl(@secondary-color), 50%);
+  background-color: lighten(hsl(@secondary), 50%);
 }
 
 .btnDisabled {
-  background-color: darken(hsl(@thirdary-color), 20%)!important;
+  background-color: darken(hsl(@thirdary), 20%)!important;
 }
 
 @keyframes shake {

@@ -7,12 +7,14 @@ import classes from "./QuizzPanel.module.less";
 import cx from "classnames";
 
 const QuizzPanel = () => {
+  return (
+    <Card
+      bodyStyle={{ padding: "0", width: "100%", display: "flex" }}
+      className={cx(classes.card, animations.inDown)}
+    >
+      Hello
+    </Card>
+  );
+};
 
-    return (
-        <Card bodyStyle={{ padding: "0", width: "100%", display: "flex" }} className={cx(classes.card)}>
-            Hello
-        </Card>
-    )
-}
-
-export default QuizzPanel
+export default QuizzPanel;

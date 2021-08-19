@@ -1,52 +1,51 @@
-@component-box-shadow: rgba(0, 0, 0, 0.55) 5px 10px 20px;
+@import (reference) "../../../styles/variables.less";
 
 .cardContainer,
 .subcontainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .loadingState {
-    cursor: default!important;
+  cursor: default !important;
 }
 
 .cardTitle {
-    font-size: 30px;
-    font-weight: 600;
-    color: @secondary-color!important;
+  font-size: 30px;
+  font-weight: 600;
+  color: @secondary!important;
 }
 
 .activityCard {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 200px;
-    width: 200px;
-    box-shadow: @component-box-shadow;
-    margin: 0px 25px;
-    cursor: pointer;
-    border: 1px solid @secondary-color;
-    filter: brightness(90%);
-    &:hover {
-        filter: brightness(110%);
-    }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  box-shadow: @classic-shadow;
+  margin: 0px 25px;
+  cursor: pointer;
+  border: 1px solid @secondary;
+  filter: brightness(90%);
+  &:hover {
+    filter: brightness(110%);
+  }
 }
 
 .activityCard.disabled {
-    &:hover {
-        filter: none!important;
-    }
+  &:hover {
+    filter: none !important;
+  }
 }
 
 .selectedActivityCard {
-    filter: brightness(110%)!important;
+  filter: brightness(110%) !important;
 }
 
 .unselectedActivityCard {
-    &:hover {
-        filter: brightness(90%)!important;
-    }
-   
+  &:hover {
+    filter: brightness(90%) !important;
+  }
 }
