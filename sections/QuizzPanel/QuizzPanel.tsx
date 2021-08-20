@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import Image from "next/image";
+
 import { Card } from "antd";
 import { animations } from "utils/animations";
 import { useGlobalContext } from "utils/globalState/store";
@@ -47,7 +49,7 @@ const QuizzPanel = () => {
 
   return (
     <Card
-      bodyStyle={{ margin: 0, width: "100%" }}
+      bodyStyle={{ margin: 0, padding: 0, width: "100%", height: "100%" }}
       className={cx(classes.card, animations.inDown)}
     >
       <div className={classes.mainContainer}>
@@ -57,7 +59,17 @@ const QuizzPanel = () => {
           })}
         </div>
         <div className={classes.questionContainer}>
-            {currentQuestion?.question}
+          <div className={classes.question}>{currentQuestion?.question}</div>
+        </div>
+        <div className={classes.imgContainer}>
+        <Image
+            src={`/humanEvolution.png`}
+            layout="fill"
+            objectFit="fill"
+            alt={`flag`}
+            unoptimized={process.env.NODE_ENV === "development"}
+            className={classes.flagImage}
+          />
         </div>
       </div>
     </Card>

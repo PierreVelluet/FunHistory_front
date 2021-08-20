@@ -1,26 +1,54 @@
 @import (reference) "../../styles/variables.less";
 
 .card {
-  width: 900px;
-  height: 500px;
+  width: 1200px;
+  height: 700px;
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 1px solid @secondary;
+  box-shadow: @classic-shadow;
 }
 
 .mainContainer {
   display: flex;
+  height: 100%!important;
+  position: relative;
 }
 
 .answersContainer,
 .questionContainer{
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
   flex: 1;
 }
 
-.correctAnswerContainer {
+.answersContainer {
+  background-color: @fourth;
+  align-items: flex-start;
+  padding-left: 25px;
+}
 
+.questionContainer {
+  background-color: @fifth;
+  align-items: flex-end;
+  padding-right: 25px;
+}
+
+.question {
+  width: 370px;
+  font-size: 40px;
+  font-weight: 900;
+  
+}
+
+.imgContainer {
+  position: absolute;
+  z-index: 999;
+  height: 250px;
+  width: 250px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }

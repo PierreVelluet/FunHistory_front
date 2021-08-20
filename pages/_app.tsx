@@ -11,9 +11,9 @@ import "animate.css";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Store>
-      <Layout>
+      {/* <Layout> */}
         <Component {...pageProps} />
-      </Layout>
+      {/* </Layout> */}
     </Store>
   );
 }
