@@ -33,7 +33,7 @@ const ActivitiesPanel = () => {
     setAttention(newAttention);
     setOut(newOut);
     setActivity(activities[selectionnedActivity - 1].name);
-    setTimeout(() => { setPanel("QuizzPanel")}, 3000)
+    setTimeout(() => { setPanel("RulesPanel")}, 3000)
   };
 
   useEffect(() => {

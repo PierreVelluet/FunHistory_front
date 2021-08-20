@@ -8,7 +8,7 @@ const initialState: IGlobalState = {
   country: "Japan",
   numberOfQuestions: 10,
   currentQuestionNumber: 0,
-  panel: "QuizzPanel",
+  panel: "CountryPanel",
   activity: "Culture",
   questions: {},
 };

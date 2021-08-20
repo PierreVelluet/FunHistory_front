@@ -14,10 +14,11 @@ import ActivitiesPanel from "sections/ActivitiesPanel/ActivitiesPanel";
 import QuizzPanel from "sections/QuizzPanel/QuizzPanel";
 
 import classes from "./index.module.less";
+import RulesPanel from "sections/RulesPanel/RulesPanel";
 
 export default function Home(props: any) {
   const data: [ICountry] = props.data.data;
-  const { store, setLoading }: any = useGlobalContext();
+  const { store }: any = useGlobalContext();
 
   const panelHandler = (panel: string) => {
     switch (panel) {
@@ -27,6 +28,8 @@ export default function Home(props: any) {
         return <ActivitiesPanel />;
       case "QuizzPanel":
         return <QuizzPanel />;
+      case "RulesPanel":
+        return <RulesPanel />;
       default:
         return <CountryPanel countries={data} />;
     }

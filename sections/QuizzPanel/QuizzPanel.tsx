@@ -23,6 +23,7 @@ const QuizzPanel = () => {
     setPanel,
   }: any = useGlobalContext();
 
+  const [running, setRunning] = useState<boolean>(false);
   const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(
     null
   );

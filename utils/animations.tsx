@@ -2,6 +2,8 @@ const animations = {
   outRight: "animate__animated animate__bounceOutRight",
   outDown: "animate__animated animate__bounceOutDown",
   inDown: "animate__animated animate__bounceInDown",
+  inLeft: "animate__animated animate__bounceInLeft",
+  inUp: "animate__animated animate__bounceInUp",
   fadeInDown: "animate__animated animate__fadeInDown",
   fadeOut: "animate__animated animate__fadeOut",
   fadeOutRight: "animate__animated animate__fadeOutRight",
