@@ -19,15 +19,17 @@ export interface IGlobalState {
   loading: boolean;
   country: string;
   numberOfQuestions: number;
-  panel: string;
-  activity: string;
+  currentPanel: string;
+  theme: string;
+  continent: string;
   questions: object;
   currentQuestionNumber: number;
+  difficulty: string;
 }
 
 export interface IFetchResult {
   success: boolean;
-  results: IQuestion[]
+  results: IQuestion[];
 }
 
 export interface IActivity {
@@ -52,4 +54,12 @@ export interface IQuestion {
   explanation: string;
   ressourceLink: string;
   category: string;
+}
+
+export interface IDifficulty {
+  name: string;
+  difficultyNumber: number;
+  numberOfquestions: number;
+  timeout: number;
+  backgroundImage: string;
 }

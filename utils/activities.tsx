@@ -3,7 +3,7 @@ import { IActivity } from "typescript/interfaces/general_interfaces";
 const activities: IActivity[] = [
   {
     name: "History",
-    backgroundImage: "/history.png",
+    backgroundImage: "/history.jpeg",
     active: true,
     number: 1,
   },
@@ -15,13 +15,13 @@ const activities: IActivity[] = [
   },
   {
     name: "Politic",
-    backgroundImage: "/politic.png",
+    backgroundImage: "/politic.jpeg",
     active: false,
     number: 3,
   },
   {
     name: "Culture",
-    backgroundImage: "/culture.png",
+    backgroundImage: "/culture.jpg",
     active: false,
     number: 4,
   },

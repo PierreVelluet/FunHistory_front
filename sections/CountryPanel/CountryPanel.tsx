@@ -17,7 +17,7 @@ import cx from "classnames";
 
 const CountryChooser = (props: any) => {
   const countries: [ICountry] = props.countries;
-  const { store, setLoading, setSelectedCountry, setQuestions, setPanel }: any =
+  const { store, setLoading, setSelectedCountry, setCurrentPanel }: any =
     useGlobalContext();
 
   const [giggle, setGiggle] = useState<boolean>(false);
@@ -39,7 +39,7 @@ const CountryChooser = (props: any) => {
     setOut(true);
 
       setTimeout(() => {
-        setPanel("ActivitiesPanel");
+        setCurrentPanel("Theme");
       }, 1500);
   };
 

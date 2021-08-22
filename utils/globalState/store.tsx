@@ -8,9 +8,11 @@ const initialState: IGlobalState = {
   country: "Japan",
   numberOfQuestions: 10,
   currentQuestionNumber: 0,
-  panel: "CountryPanel",
-  activity: "Culture",
+  currentPanel: "Continent",
+  theme: "Culture",
+  continent: "Asia",
   questions: {},
+  difficulty: "Moderate",
 };
 
 const Store = ({ children }: { children: any }) => {
@@ -31,14 +33,19 @@ const Store = ({ children }: { children: any }) => {
       type: "SET_NUMBER_OF_QUESTIONS",
       payload: string,
     });
-  const setPanel = (string: string) =>
+  const setCurrentPanel = (string: string) =>
     dispatch({
-      type: "SET_PANEL",
+      type: "SET_CURRENT_PANEL",
       payload: string,
     });
-  const setActivity = (string: string) =>
+    const setContinent = (string: string) =>
     dispatch({
-      type: "SET_ACTIVITY",
+      type: "SET_CONTINENT",
+      payload: string,
+    });
+  const setTheme = (string: string) =>
+    dispatch({
+      type: "SET_THEME",
       payload: string,
     });
   const setQuestions = (object: number) =>
@@ -46,9 +53,14 @@ const Store = ({ children }: { children: any }) => {
       type: "SET_QUESTIONS",
       payload: object,
     });
-    const setCurrentQuestionNumber = (object: object) =>
+  const setCurrentQuestionNumber = (object: object) =>
     dispatch({
       type: "SET_CURRENT_QUESTION_NUMBER",
+      payload: object,
+    });
+  const setDifficulty = (object: string) =>
+    dispatch({
+      type: "SET_DIFFICULTY",
       payload: object,
     });
 
@@ -60,10 +72,12 @@ const Store = ({ children }: { children: any }) => {
         setLoading,
         setSelectedCountry,
         setNumberOfQuestions,
-        setPanel,
-        setActivity,
+        setCurrentPanel,
+        setTheme,
+        setContinent,
         setQuestions,
-        setCurrentQuestionNumber
+        setCurrentQuestionNumber,
+        setDifficulty,
       }}
     >
       {children}

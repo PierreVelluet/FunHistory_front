@@ -1,0 +1,51 @@
+@import (reference) "../../../styles/variables.less";
+
+.cardContainer,
+.subcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loadingState {
+  cursor: default !important;
+}
+
+.cardTitle {
+  font-size: 30px;
+  font-weight: 600;
+  color: @secondary!important;
+}
+
+.difficultyCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  box-shadow: @classic-shadow;
+  margin: 0px 25px;
+  cursor: pointer;
+  border: 1px solid @secondary;
+  filter: brightness(90%);
+  &:hover {
+    filter: brightness(110%);
+  }
+}
+
+.difficultyCard.disabled {
+  &:hover {
+    filter: none !important;
+  }
+}
+
+.selectedDifficultyCard {
+  filter: brightness(110%) !important;
+}
+
+.unselectedDifficultyCard {
+  &:hover {
+    filter: brightness(90%) !important;
+  }
+}

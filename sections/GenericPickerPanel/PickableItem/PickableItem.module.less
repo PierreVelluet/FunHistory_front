@@ -1,0 +1,51 @@
+@import (reference) "../../../styles/variables.less";
+
+.cardContainer,
+.subcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.loadingState {
+  cursor: default !important;
+}
+
+.cardTitle {
+  font-size: 30px;
+  font-weight: 600;
+  color: @secondary!important;
+}
+
+.pickableItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+  box-shadow: @classic-shadow;
+  margin: 0px 25px;
+  cursor: pointer;
+  border: 1px solid @secondary;
+  filter: brightness(90%);
+  &:hover {
+    filter: brightness(110%);
+  }
+}
+
+.pickableItem.disabled {
+  &:hover {
+    filter: none !important;
+  }
+}
+
+.selectedPickableItem {
+  filter: brightness(110%) !important;
+}
+
+.unselectedPickableItem {
+  &:hover {
+    filter: brightness(90%) !important;
+  }
+}

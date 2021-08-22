@@ -15,25 +15,35 @@ const Reducer = (state: object, action: any) => {
         ...state,
         numberOfQuestions: action.payload,
       };
-    case "SET_PANEL":
+    case "SET_CURRENT_PANEL":
       return {
         ...state,
-        panel: action.payload,
+        currentPanel: action.payload,
       };
-    case "SET_ACTIVITY":
+    case "SET_THEME":
       return {
         ...state,
-        activity: action.payload,
+        theme: action.payload,
       };
-      case "SET_CURRENT_QUESTION_NUMBER":
-        return {
-          ...state,
-          currentQuestionNumber: action.payload,
-        };
+    case "SET_CONTINENT":
+      return {
+        ...state,
+        continent: action.payload,
+      };
+    case "SET_CURRENT_QUESTION_NUMBER":
+      return {
+        ...state,
+        currentQuestionNumber: action.payload,
+      };
     case "SET_QUESTIONS":
       return {
         ...state,
         questions: action.payload,
+      };
+    case "SET_DIFFICULTY":
+      return {
+        ...state,
+        difficulty: action.payload,
       };
     default:
       return state;

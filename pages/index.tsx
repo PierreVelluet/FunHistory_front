@@ -14,7 +14,12 @@ import ActivitiesPanel from "sections/ActivitiesPanel/ActivitiesPanel";
 import QuizzPanel from "sections/QuizzPanel/QuizzPanel";
 
 import classes from "./index.module.less";
-import RulesPanel from "sections/RulesPanel/RulesPanel";
+import DifficultyPanel from "sections/DifficultyPanel/DifficultyPanel";
+import GenericPickerPanel from "sections/GenericPickerPanel/GenericPickerPanel";
+import { PickableItemType, ITheme } from "typescript/interfaces/interfaces";
+import { themes } from "utils/themes";
+import { difficulties } from "utils/difficulties";
+import { continents } from "utils/continents";
 
 export default function Home(props: any) {
   const data: [ICountry] = props.data.data;
@@ -24,16 +29,20 @@ export default function Home(props: any) {
     switch (panel) {
       case "CountryPanel":
         return <CountryPanel countries={data} />;
-      case "ActivitiesPanel":
-        return <ActivitiesPanel />;
       case "QuizzPanel":
         return <QuizzPanel />;
-      case "RulesPanel":
-        return <RulesPanel />;
+      case "Theme":
+        return <GenericPickerPanel key={panel} typedItems={themes} />;
+      case "Continent":
+        return <GenericPickerPanel key={panel} typedItems={continents} />;
+      case "Difficulty":
+        return <GenericPickerPanel key={panel} typedItems={difficulties} />;
       default:
         return <CountryPanel countries={data} />;
     }
   };
+
+  console.log(store)
 
   return (
     <div className={classes.container}>
@@ -46,7 +55,7 @@ export default function Home(props: any) {
         <link rel="icon" href="/funHistoryLogo.png" />
         <style>{dom.css()}</style>
       </Head>
-      {panelHandler(store?.panel)}
+      {panelHandler(store?.currentPanel)}
     </div>
   );
 }
