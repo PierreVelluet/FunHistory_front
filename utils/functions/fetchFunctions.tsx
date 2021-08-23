@@ -12,5 +12,14 @@ const getRandomQuestionsFromCountry = async (params: object) => {
     if (err) console.log(err);
   }
 };
+const getAllCountries = async () => {
+  try {
+    return await axios
+      .get<string>(`${process.env.NEXT_PUBLIC_BACKEND}/countries`)
+      .then((response: any) => response.data);
+  } catch (err) {
+    if (err) console.log(err);
+  }
+};
 
-export { getRandomQuestionsFromCountry };
+export { getRandomQuestionsFromCountry, getAllCountries };

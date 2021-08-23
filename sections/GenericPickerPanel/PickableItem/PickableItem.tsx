@@ -24,17 +24,10 @@ const PickableItem = (props: any) => {
     attention: boolean;
   } = props;
 
-  const { store, setLoading, setSelectedCountry, setQuestions, setPanel }: any =
-    useGlobalContext();
+  const { store, setLoading }: any = useGlobalContext();
 
   const [selected, setSelected] = useState(false);
-
   const itemId = item.id;
-  item.onClick = () => {
-    console.log(itemId);
-  };
-
-  console.log(out === attention);
 
   const innerAnimations = {
     container: [

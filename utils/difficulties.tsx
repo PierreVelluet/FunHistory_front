@@ -7,7 +7,8 @@ const difficulties: IDifficulty[] = [
     numberOfQuestions: 5,
     timeout: 20,
     bgImage: "/easy.jpeg",
-    type: "IDifficulty"
+    step: "IDifficulty",
+    nextStep: "QuizzPanel"
   },
   {
     name: "Moderate",
@@ -15,7 +16,8 @@ const difficulties: IDifficulty[] = [
     numberOfQuestions: 10,
     timeout: 15,
     bgImage: "/moderate.jpeg",
-    type: "IDifficulty"
+    step: "IDifficulty",
+    nextStep: "QuizzPanel"
   },
   {
     name: "Hard",
@@ -23,7 +25,8 @@ const difficulties: IDifficulty[] = [
     numberOfQuestions: 15,
     timeout: 10,
     bgImage: "/hard.jpeg",
-    type: "IDifficulty"
+    step: "IDifficulty",
+    nextStep: "QuizzPanel"
   },
   {
     name: "Insane",
@@ -31,7 +34,8 @@ const difficulties: IDifficulty[] = [
     numberOfQuestions: 20,
     timeout: 5,
     bgImage: "/insane.jpeg",
-    type: "IDifficulty"
+    step: "IDifficulty",
+    nextStep: "QuizzPanel"
   },
 ];
 

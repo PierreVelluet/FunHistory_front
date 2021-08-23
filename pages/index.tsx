@@ -1,48 +1,62 @@
 import React from "react";
 
 import Head from "next/head";
-import axios from "axios";
 import { config, dom } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
-
-import { ICountry } from "interfaces/general_interfaces";
 
 import { useGlobalContext } from "utils/globalState/store";
 
 import CountryPanel from "sections/CountryPanel/CountryPanel";
-import ActivitiesPanel from "sections/ActivitiesPanel/ActivitiesPanel";
 import QuizzPanel from "sections/QuizzPanel/QuizzPanel";
-
-import classes from "./index.module.less";
-import DifficultyPanel from "sections/DifficultyPanel/DifficultyPanel";
 import GenericPickerPanel from "sections/GenericPickerPanel/GenericPickerPanel";
-import { PickableItemType, ITheme } from "typescript/interfaces/interfaces";
+
+import { ICountry } from "interfaces/general_interfaces";
+import { PickableItemType } from "typescript/interfaces/interfaces";
+
 import { themes } from "utils/themes";
 import { difficulties } from "utils/difficulties";
 import { continents } from "utils/continents";
+import { getAllCountries } from "utils/functions/fetchFunctions";
+
+import classes from "./index.module.less";
 
 export default function Home(props: any) {
   const data: [ICountry] = props.data.data;
   const { store }: any = useGlobalContext();
 
   const panelHandler = (panel: string) => {
+    const genericPanelItemHandler = (panel: string): PickableItemType[] => {
+      switch (panel) {
+        case "IDifficulty":
+          return difficulties;
+        case "ITheme":
+          return themes;
+        case "IContinent":
+          return continents;
+        default:
+          return continents;
+      }
+    };
     switch (panel) {
       case "CountryPanel":
         return <CountryPanel countries={data} />;
       case "QuizzPanel":
         return <QuizzPanel />;
-      case "Theme":
-        return <GenericPickerPanel key={panel} typedItems={themes} />;
-      case "Continent":
-        return <GenericPickerPanel key={panel} typedItems={continents} />;
-      case "Difficulty":
-        return <GenericPickerPanel key={panel} typedItems={difficulties} />;
+      case "ITheme":
+      case "IContinent":
+      case "IDifficulty":
+        return (
+          <GenericPickerPanel
+            key={panel}
+            typedItems={genericPanelItemHandler(panel)}
+          />
+        );
       default:
-        return <CountryPanel countries={data} />;
+        return <GenericPickerPanel key={panel} typedItems={"continents"} />;
     }
   };
 
-  console.log(store)
+  console.log(store);
 
   return (
     <div className={classes.container}>
@@ -61,9 +75,7 @@ export default function Home(props: any) {
 }
 
 export async function getStaticProps() {
-  const data = await axios
-    .get<string>(`${process.env.NEXT_PUBLIC_BACKEND}/countries`)
-    .then((response: any) => response.data);
+  const data = await getAllCountries();
 
   return {
     props: { data },

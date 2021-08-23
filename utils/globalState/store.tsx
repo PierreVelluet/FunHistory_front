@@ -8,7 +8,7 @@ const initialState: IGlobalState = {
   country: "Japan",
   numberOfQuestions: 10,
   currentQuestionNumber: 0,
-  currentPanel: "Continent",
+  currentPanel: "IContinent",
   theme: "Culture",
   continent: "Asia",
   questions: {},

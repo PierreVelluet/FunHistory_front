@@ -39,7 +39,7 @@ const CountryChooser = (props: any) => {
     setOut(true);
 
       setTimeout(() => {
-        setCurrentPanel("Theme");
+        setCurrentPanel("ITheme");
       }, 1500);
   };
 

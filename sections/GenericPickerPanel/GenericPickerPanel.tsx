@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  PickableItemType,
-} from "typescript/interfaces/interfaces";
 import { useGlobalContext } from "utils/globalState/store";
 
-import classes from "./GenericPickerPanel.module.less";
 import PickableItem from "./PickableItem/PickableItem";
+import { PickableItemType } from "typescript/interfaces/interfaces";
+
+import classes from "./GenericPickerPanel.module.less";
 
 const GenericPickerPanel = (props: any) => {
   const typedItems: PickableItemType[] = props.typedItems;
@@ -20,51 +19,62 @@ const GenericPickerPanel = (props: any) => {
   }: any = useGlobalContext();
 
   const [items, setItems] = useState<PickableItemType[]>(typedItems);
-  const [attention, setAttention] = useState<boolean[]>(
-    Array(items?.length).fill(false)
-  );
-  const [out, setOut] = useState<boolean[]>(Array(items?.length).fill(false));
+  const boolArray: boolean[] = Array(items?.length).fill(false);
+  const [attention, setAttention] = useState<boolean[]>(boolArray);
+  const [out, setOut] = useState<boolean[]>(boolArray);
 
-  const setAnimationsStates = (selectedItem: number) => {
-    const newAttention = attention?.map((el: boolean, index: number) => {
-      return index === selectedItem - 1 ? !el : el;
-    });
-    const newOut = out?.map((el: boolean, index: number) => {
-      return index === selectedItem - 1 ? el : !el;
+  const setAnimationsStates = (
+    selectedItem: number
+  ): { newAttention: boolean[]; newOut: boolean[] } => {
+    const newAttention: boolean[] = [];
+    const newOut: boolean[] = [];
+    boolArray?.forEach((el: boolean, index: number) => {
+      if (index === selectedItem - 1) {
+        newAttention.push(!el);
+        newOut.push(el);
+      } else {
+        newAttention.push(el);
+        newOut.push(!el);
+      }
     });
     return { newAttention, newOut };
   };
 
   const updateState = (item: PickableItemType): void => {
-    switch (item.type) {
+    switch (item?.step) {
       case "IContinent":
         setContinent(item?.name);
         setTimeout(() => {
-          setCurrentPanel("CountryPanel");
+          setCurrentPanel(item?.nextStep);
         }, 3000);
         break;
       case "ITheme":
         setTheme(item?.name);
         setTimeout(() => {
-          setCurrentPanel("Difficulty");
+          setCurrentPanel(item?.nextStep);
         }, 3000);
         break;
       case "IDifficulty":
         setDifficulty(item?.name);
         setTimeout(() => {
-          setCurrentPanel("QuizzPanel");
+          setCurrentPanel(item?.nextStep);
         }, 3000);
         break;
       default:
         setTimeout(() => {
-          setCurrentPanel("Continent");
+          setCurrentPanel(item?.nextStep);
         }, 3000);
         break;
     }
   };
 
   const selectItemHandler = (selectedItem: PickableItemType) => {
-    const { newAttention, newOut } = setAnimationsStates(selectedItem.id);
+    const {
+      newAttention,
+      newOut,
+    }: { newAttention: boolean[]; newOut: boolean[] } = setAnimationsStates(
+      selectedItem.id
+    );
     setAttention(newAttention);
     setOut(newOut);
     updateState(selectedItem);
@@ -75,12 +85,6 @@ const GenericPickerPanel = (props: any) => {
       setLoading(false);
     }, 2500);
   }, [store?.currentPanel]);
-
-  if (store?.currentPanel === "Difficulty")
-  {
-    console.log(items)
-  }
-    
 
   return (
     <div className={classes.pickableItemsContainer}>

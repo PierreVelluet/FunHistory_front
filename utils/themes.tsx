@@ -6,28 +6,32 @@ const themes: ITheme[] = [
     bgImage: "/history.jpeg",
     active: true,
     id: 1,
-    type: "ITheme"
+    step: "ITheme",
+    nextStep: "IDifficulty"
   },
   {
     name: "Geography",
     bgImage: "/geography.jpeg",
     active: true,
     id: 2,
-    type: "ITheme"
+    step: "ITheme",
+    nextStep: "IDifficulty"
   },
   {
     name: "Politic",
     bgImage: "/politic.jpeg",
     active: false,
     id: 3,
-    type: "ITheme"
+    step: "ITheme",
+    nextStep: "IDifficulty"
   },
   {
     name: "Culture",
     bgImage: "/culture.jpg",
     active: false,
     id: 4,
-    type: "ITheme"
+    step: "ITheme",
+    nextStep: "IDifficulty"
   },
 ];
 
