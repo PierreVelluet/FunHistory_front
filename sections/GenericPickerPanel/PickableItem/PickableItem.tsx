@@ -57,11 +57,13 @@ const PickableItem = (props: any) => {
       `${animations.inDown} ${animations[`delay${itemId}`]}`,
       { [classes.unselectedPickableItem]: out },
       { [classes.selectedPickableItem]: selected },
+      { [classes.unactivePickableItem]: !item?.active },
     ],
+    unavailableText: [classes.unavailableText],
   };
 
   const innerOnClickHandler = () => {
-    if (store?.loading) return;
+    if (store?.loading || !item?.active) return;
     setLoading(true);
     selectItemHandler(item);
     setSelected(true);
@@ -82,6 +84,9 @@ const PickableItem = (props: any) => {
             alt={`${item?.name} picture`}
             unoptimized={process.env.NODE_ENV === "development"}
           />
+          <div className={cx(...innerAnimations.unavailableText)}>
+            {!item?.active ? "Comming soon" : ""}
+          </div>
         </Card>
       </div>
     </div>

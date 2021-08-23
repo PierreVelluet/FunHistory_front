@@ -34,18 +34,34 @@
   }
 }
 
-.pickableItem.disabled {
-  &:hover {
-    filter: none !important;
-  }
-}
+// .pickableItem.disabled {
+//   &:hover {
+//     filter: none !important;
+//   }
+// }
 
 .selectedPickableItem {
-  filter: brightness(110%) !important;
+  filter: brightness(110%) ;
 }
 
 .unselectedPickableItem {
   &:hover {
-    filter: brightness(90%) !important;
+    filter: brightness(90%) ;
   }
+}
+
+.unactivePickableItem {
+  filter: brightness(45%)!important;
+  &:hover {
+    filter: brightness(45%)!important;
+    cursor: default;
+  }
+}
+
+.unavailableText {
+  text-align: center;
+  z-index: 999;
+  position: relative;
+  font-size: 25px;
+  color: white;
 }

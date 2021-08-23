@@ -12,7 +12,7 @@ const themes: ITheme[] = [
   {
     name: "Geography",
     bgImage: "/geography.jpeg",
-    active: true,
+    active: false,
     id: 2,
     step: "ITheme",
     nextStep: "IDifficulty"

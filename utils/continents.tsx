@@ -12,7 +12,7 @@ const continents: IContinent[] = [
   {
     name: "Africa",
     bgImage: "/africa.jpeg",
-    active: true,
+    active: false,
     id: 2,
     step: "IContinent",
     nextStep: "CountryPanel"

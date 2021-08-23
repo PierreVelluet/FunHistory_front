@@ -75,7 +75,7 @@ export default function Home(props: any) {
 }
 
 export async function getStaticProps() {
-  const data = await getAllCountries();
+  const data = await getAllCountries().then((response: any) => response.data);;
 
   return {
     props: { data },

@@ -5,10 +5,10 @@ interface ICardItem {
   onClick?: any;
   step: string;
   nextStep: string;
+  active?: boolean;
 }
 
 export interface ITheme extends ICardItem {
-  active: boolean;
 }
 
 export interface IDifficulty extends ICardItem {
@@ -17,7 +17,6 @@ export interface IDifficulty extends ICardItem {
 }
 
 export interface IContinent extends ICardItem {
-  active: boolean;
 }
 
 export type PickableItemType = ITheme | IDifficulty | IContinent;
