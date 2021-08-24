@@ -5,18 +5,19 @@ import Image from "next/image";
 import { Card, Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import Typist from "react-typist";
 
 import { animations } from "utils/animations";
 import { useGlobalContext } from "utils/globalState/store";
 import { getRandomQuestionsFromCountry } from "utils/functions/fetchFunctions";
 
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import Countdown from "./Countdown/Countdown";
 
 import classes from "./QuizzPanel.module.less";
 import cx from "classnames";
-import { IAnswer, IQuestion } from "typescript/interfaces/general_interfaces";
-import Answer from "./Answer/Answer";
+import { IQuestion } from "typescript/interfaces/general_interfaces";
+import Answer from "./AnswerSide/Answer/Answer";
+import AnswerSide from "./AnswerSide/AnswerSide";
+import QuestionSide from "./QuestionSide/QuestionSide";
 
 const QuizzPanel = () => {
   const {
@@ -31,12 +32,18 @@ const QuizzPanel = () => {
   const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(
     null
   );
+  const [animationsState, setAnimationsState] = useState(false);
 
   const [timeout, setTimeout] = useState<boolean>(false);
 
   const innerStyle = {
     inDownContainer: [animations.inDown],
     cardContainer: [classes.card, { [animations.shake]: timeout }],
+    countdownContainer: [
+      classes.countdownContainer,
+      { [animations.inDown]: animationsState },
+    ],
+    answersContainer: [classes.answersContainer],
   };
 
   const timeoutHandler = () => {
@@ -44,7 +51,7 @@ const QuizzPanel = () => {
   };
 
   const startHandler = () => {
-    setRunning(prevState => !prevState)
+    setRunning((prevState) => !prevState);
   };
 
   useEffect(() => {
@@ -67,6 +74,8 @@ const QuizzPanel = () => {
     setLoading(false);
   }, []);
 
+  console.log(animationsState)
+
   return (
     <div className={cx(...innerStyle.inDownContainer)}>
       <Card
@@ -74,34 +83,23 @@ const QuizzPanel = () => {
         className={cx(...innerStyle.cardContainer)}
       >
         <div className={cx(classes.mainContainer)}>
-          <div className={classes.countdownContainer}>
-            <CountdownCircleTimer
-              isPlaying
-              duration={3 || store?.difficulty?.timeout}
-              size={150}
-              colors={[
-                ["#40a9ff", 0.33],
-                ["#045daf", 0.33],
-                ["#02284b", 0.33],
-              ]}
-              trailColor="invisible"
-              onComplete={() => timeoutHandler()}
-            >
-              {({ remainingTime }) => remainingTime}
-            </CountdownCircleTimer>
+          <div className={cx(...innerStyle?.countdownContainer)}>
+            <Countdown running={running} timeoutHandler={timeoutHandler} />
           </div>
-          <div className={classes.answersContainer}>
-            {currentQuestion?.answers?.map((el: IAnswer) => {
-              return <Answer answer={el} key={el.answerNumber} />;
-            })}
+          <div className={cx(innerStyle?.answersContainer)}>
+            <AnswerSide
+              animationsState={animationsState}
+              setAnimationsState={setAnimationsState}
+              answers={currentQuestion?.answers}
+              type={currentQuestion?.type}
+            />
           </div>
           <div className={classes.questionContainer}>
-            <div className={classes.question}>
-            <Typist cursor={{ show: false }} key={store.country}>
-          <span className={classes.carouselTitle}>hello</span>
-        </Typist>
-              
-              </div>
+            <QuestionSide
+            setAnimationsState={setAnimationsState}
+              running={running}
+              question={currentQuestion?.question}
+            />
           </div>
           <div className={classes.imgContainer}>
             <Image

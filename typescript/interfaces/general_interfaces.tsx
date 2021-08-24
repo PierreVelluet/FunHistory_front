@@ -38,7 +38,7 @@ export interface IActivity {
   number: number;
 }
 
-export interface IAnswer {
+export interface ISingleChoiceAnswer {
   answer: string;
   answerNumber: number;
   correct: boolean;
@@ -47,7 +47,7 @@ export interface IAnswer {
 export interface IQuestion {
   country: string;
   question: string;
-  answers: IAnswer[];
+  answers: ISingleChoiceAnswer[];
   type: string;
   correctAnswerImage: string;
   explanation: string;
