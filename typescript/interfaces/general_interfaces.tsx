@@ -18,13 +18,12 @@ export interface ICountry {
 export interface IGlobalState {
   loading: boolean;
   country: string;
-  numberOfQuestions: number;
   currentPanel: string;
   theme: string;
   continent: string;
   questions: object;
   currentQuestionNumber: number;
-  difficulty: string;
+  difficulty: object;
 }
 
 export interface IFetchResult {

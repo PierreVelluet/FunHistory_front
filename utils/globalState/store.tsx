@@ -1,18 +1,19 @@
 import React, { createContext, useReducer, useContext } from "react";
 import Reducer from "./reducer";
 
+import { difficulties } from "utils/difficulties";
+
 import { IGlobalState } from "typescript/interfaces/general_interfaces";
 
 const initialState: IGlobalState = {
   loading: true,
   country: "Japan",
-  numberOfQuestions: 10,
   currentQuestionNumber: 0,
-  currentPanel: "IContinent",
-  theme: "Culture",
+  currentPanel: "QuizzPanel",
+  theme: "History",
   continent: "Asia",
   questions: {},
-  difficulty: "Moderate",
+  difficulty: difficulties[0],
 };
 
 const Store = ({ children }: { children: any }) => {

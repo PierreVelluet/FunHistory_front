@@ -55,7 +55,7 @@ const GenericPickerPanel = (props: any) => {
         }, 3000);
         break;
       case "IDifficulty":
-        setDifficulty(item?.name);
+        setDifficulty(item);
         setTimeout(() => {
           setCurrentPanel(item?.nextStep);
         }, 3000);

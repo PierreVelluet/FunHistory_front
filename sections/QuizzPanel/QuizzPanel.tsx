@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import Image from "next/image";
 
-import { Card } from "antd";
+import { Card, Button } from "antd";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import Typist from "react-typist";
+
 import { animations } from "utils/animations";
 import { useGlobalContext } from "utils/globalState/store";
 import { getRandomQuestionsFromCountry } from "utils/functions/fetchFunctions";
@@ -39,6 +43,10 @@ const QuizzPanel = () => {
     setTimeout(true);
   };
 
+  const startHandler = () => {
+    setRunning(prevState => !prevState)
+  };
+
   useEffect(() => {
     setCurrentQuestion(store?.questions?.[store?.currentQuestionNumber]);
   }, [store?.currentQuestionNumber, store?.questions]);
@@ -46,7 +54,7 @@ const QuizzPanel = () => {
   useEffect(() => {
     const params: object = {
       country: store?.country,
-      category: store?.category,
+      theme: store?.theme,
       num: store?.numberOfQuestions,
     };
 
@@ -59,8 +67,6 @@ const QuizzPanel = () => {
     setLoading(false);
   }, []);
 
-  console.log(store);
-
   return (
     <div className={cx(...innerStyle.inDownContainer)}>
       <Card
@@ -71,7 +77,7 @@ const QuizzPanel = () => {
           <div className={classes.countdownContainer}>
             <CountdownCircleTimer
               isPlaying
-              duration={5}
+              duration={3 || store?.difficulty?.timeout}
               size={150}
               colors={[
                 ["#40a9ff", 0.33],
@@ -90,7 +96,12 @@ const QuizzPanel = () => {
             })}
           </div>
           <div className={classes.questionContainer}>
-            <div className={classes.question}>{currentQuestion?.question}</div>
+            <div className={classes.question}>
+            <Typist cursor={{ show: false }} key={store.country}>
+          <span className={classes.carouselTitle}>hello</span>
+        </Typist>
+              
+              </div>
           </div>
           <div className={classes.imgContainer}>
             <Image
@@ -102,6 +113,16 @@ const QuizzPanel = () => {
               className={classes.flagImage}
             />
           </div>
+          <Button
+            icon={<FontAwesomeIcon icon={faPlay} className={classes.btnIcon} />}
+            onClick={startHandler}
+            className={classes.startBtn}
+            type="primary"
+            shape="round"
+            size={"large"}
+          >
+            Start !
+          </Button>
         </div>
       </Card>
     </div>

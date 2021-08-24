@@ -10,11 +10,6 @@ const Reducer = (state: object, action: any) => {
         ...state,
         country: action.payload,
       };
-    case "SET_NUMBER_OF_QUESTIONS":
-      return {
-        ...state,
-        numberOfQuestions: action.payload,
-      };
     case "SET_CURRENT_PANEL":
       return {
         ...state,

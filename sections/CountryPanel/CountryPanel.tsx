@@ -38,9 +38,9 @@ const CountryChooser = (props: any) => {
     setLoading(true);
     setOut(true);
 
-      setTimeout(() => {
-        setCurrentPanel("ITheme");
-      }, 1500);
+    setTimeout(() => {
+      setCurrentPanel("ITheme");
+    }, 1500);
   };
 
   const innerStyles = {
@@ -84,7 +84,7 @@ const CountryChooser = (props: any) => {
     <>
       <Card className={cx(...innerStyles.title)} bodyStyle={{ padding: "0" }}>
         <Typist cursor={{ show: false }} key={store.country}>
-          <span className={classes.carouselTitle}>{store.country} </span>
+          <span className={classes.carouselTitle}>{store?.country} </span>
         </Typist>
       </Card>
       <Carousel
