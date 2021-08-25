@@ -1,4 +1,4 @@
-import { ITheme } from "typescript/interfaces/interfaces";
+import { ITheme } from "typescript/interfaces/pickableItems_interfaces";
 
 const themes: ITheme[] = [
   {

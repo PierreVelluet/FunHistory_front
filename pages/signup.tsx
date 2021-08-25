@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-import SignupSection from "sections/signupSection/SignupSection";
+// import SignupSection from "sections/signupSection/SignupSection";
 const Signup = () => {
   return (
     <div className={"d-flex justify-content-center align-items-center w-100"}>
@@ -12,7 +12,7 @@ const Signup = () => {
         alt="Japanese samourai sun"
         unoptimized={process.env.NODE_ENV === "development"}
       />
-      <SignupSection />
+      {/* <SignupSection /> */}
     </div>
   );
 };

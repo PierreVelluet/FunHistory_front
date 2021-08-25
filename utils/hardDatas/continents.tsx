@@ -1,4 +1,4 @@
-import { IContinent } from "typescript/interfaces/interfaces";
+import { IContinent } from "typescript/interfaces/pickableItems_interfaces";
 
 const continents: IContinent[] = [
   {

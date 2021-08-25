@@ -25,20 +25,13 @@ export interface ICountry extends ICardItem {
   continent: string;
 }
 
-export interface ITheme extends ICardItem {
-}
+export interface ITheme extends ICardItem {}
 
 export interface IDifficulty extends ICardItem {
   numberOfQuestions: number;
   timeout: number;
 }
 
-export interface IContinent extends ICardItem {
-}
+export interface IContinent extends ICardItem {}
 
-export type PickableItemType = ITheme | IDifficulty | IContinent | ICountry; 
-
-
-export interface SearchFn {
-  (subString: string): Promise<ICountry[]>;
-}
+export type PickableItemType = ITheme | IDifficulty | IContinent | ICountry;

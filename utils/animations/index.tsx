@@ -18,4 +18,4 @@ const animations = {
   delay5: "animate__delay-5s",
 };
 
-export { animations };
+export default animations ;

@@ -1,4 +1,4 @@
-import { IDifficulty } from "typescript/interfaces/interfaces";
+import { IDifficulty } from "typescript/interfaces/pickableItems_interfaces";
 
 const difficulties: IDifficulty[] = [
   {

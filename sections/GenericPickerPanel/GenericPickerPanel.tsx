@@ -4,7 +4,9 @@ import { useGlobalContext } from "utils/globalState/store";
 
 import PickableItem from "./PickableItem/PickableItem";
 
-import { PickableItemType } from "typescript/interfaces/interfaces";
+import { PickableItemType } from "typescript/interfaces/pickableItems_interfaces";
+
+import { booleanArrayHandler } from "utils/functions/functions";
 
 import hardData from "utils/hardDatas";
 import { getAllCountriesByContinent } from "utils/functions/fetchFunctions";
@@ -15,10 +17,10 @@ const GenericPickerPanel = (props: any) => {
   const {
     store,
     setLoading,
-    setContinent,
     setCurrentPanel,
-    setTheme,
+    setContinent,
     setCountry,
+    setTheme,
     setDifficulty,
   }: any = useGlobalContext();
 
@@ -63,9 +65,7 @@ const GenericPickerPanel = (props: any) => {
   };
 
   const selectItemHandler = (selectedItem: PickableItemType) => {
-    const newOut: boolean[] = out.map((el: boolean, index: number) => {
-      return index === selectedItem.id - 1 ? el : !el;
-    });
+    const newOut: boolean[] = booleanArrayHandler(out, selectedItem?.id);
     setOut(newOut);
     updateState(selectedItem);
   };
@@ -77,7 +77,7 @@ const GenericPickerPanel = (props: any) => {
   }, [store?.currentPanel]);
 
   useEffect(() => {
-    const fetchCountries = async (): Promise<void> => {
+    const fetchCountriesAndAssignProperties = async (): Promise<void> => {
       const countries: PickableItemType[] = await getAllCountriesByContinent(
         store?.continent
       )
@@ -94,7 +94,7 @@ const GenericPickerPanel = (props: any) => {
     };
 
     if (store?.currentPanel === "Countries") {
-      fetchCountries();
+      fetchCountriesAndAssignProperties();
     }
   }, []);
 

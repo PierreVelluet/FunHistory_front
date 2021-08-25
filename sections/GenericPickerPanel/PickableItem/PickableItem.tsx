@@ -8,8 +8,8 @@ import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 import { useGlobalContext } from "../../../utils/globalState/store";
 
-import { PickableItemType } from "typescript/interfaces/interfaces";
-import { animations } from "utils/animations";
+import { PickableItemType } from "typescript/interfaces/pickableItems_interfaces";
+import animations  from "utils/animations";
 
 import classes from "./PickableItem.module.less";
 import cx from "classnames";

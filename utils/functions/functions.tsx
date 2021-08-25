@@ -8,4 +8,10 @@ const capitalize = (s: any) => {
   }
 };
 
-export { capitalize };
+const booleanArrayHandler = (boolArray: boolean[], id: number) => {
+  return boolArray.map((el: boolean, index: number) => {
+    return index === id - 1 ? el : !el;
+  });
+};
+
+export { capitalize, booleanArrayHandler };
