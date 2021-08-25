@@ -5,7 +5,7 @@ const Reducer = (state: object, action: any) => {
         ...state,
         loading: action.payload,
       };
-    case "SET_SELECTED_COUNTRY":
+    case "SET_COUNTRY":
       return {
         ...state,
         country: action.payload,

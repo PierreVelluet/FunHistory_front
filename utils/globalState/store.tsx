@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from "react";
 import Reducer from "./reducer";
 
-import { difficulties } from "utils/difficulties";
+import { difficulties } from "utils/hardDatas/difficulties";
 
 import { IGlobalState } from "typescript/interfaces/general_interfaces";
 
@@ -9,7 +9,7 @@ const initialState: IGlobalState = {
   loading: true,
   country: "Japan",
   currentQuestionNumber: 0,
-  currentPanel: "IContinent",
+  currentPanel: "Continents",
   theme: "History",
   continent: "Asia",
   questions: {},
@@ -24,9 +24,9 @@ const Store = ({ children }: { children: any }) => {
       type: "SET_LOADING", // The name of the reducer
       payload: boolean, // The new state of the reducer
     });
-  const setSelectedCountry = (string: string) =>
+  const setCountry = (string: string) =>
     dispatch({
-      type: "SET_SELECTED_COUNTRY",
+      type: "SET_COUNTRY",
       payload: string,
     });
   const setNumberOfQuestions = (string: string) =>
@@ -71,7 +71,7 @@ const Store = ({ children }: { children: any }) => {
         //@ts-ignore
         store,
         setLoading,
-        setSelectedCountry,
+        setCountry,
         setNumberOfQuestions,
         setCurrentPanel,
         setTheme,

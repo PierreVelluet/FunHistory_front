@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Card } from "antd";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
+
 import { useGlobalContext } from "../../../utils/globalState/store";
 
 import { PickableItemType } from "typescript/interfaces/interfaces";
@@ -16,27 +19,25 @@ const PickableItem = (props: any) => {
     item,
     selectItemHandler,
     out,
-    attention,
   }: {
     item: PickableItemType;
     selectItemHandler: any;
     out: boolean;
-    attention: boolean;
   } = props;
 
   const { store, setLoading }: any = useGlobalContext();
 
   const [selected, setSelected] = useState(false);
-  const itemId = item.id;
+  const itemId = item?.id;
 
-  const innerAnimations = {
+  const innerStyle = {
     container: [
       classes.cardContainer,
-      { [animations.attention]: attention },
+      { [animations.attention]: selected },
       { [classes.loadingState]: store?.loading },
       {
         // @ts-ignore
-        [`${animations.fadeOutDown} ${animations.delay2}`]: out,
+        [`${animations.fadeOutDown} ${animations.delay2}`]: out, // conflicts with countries
       },
     ],
     subcontainer: [
@@ -53,9 +54,9 @@ const PickableItem = (props: any) => {
     ],
     card: [
       classes.pickableItem,
-      {[classes.countryType]: store?.currentPanel === "ICountry"},
+      { [classes.countryType]: store?.currentPanel === "Countries" },
       // @ts-ignore
-      `${animations.inDown} ${animations[`delay${itemId}`]}`,
+      `${animations.inDown} ${animations[`delay${itemId - 1}`]}`,
       { [classes.unselectedPickableItem]: out },
       { [classes.selectedPickableItem]: selected },
       { [classes.unactivePickableItem]: item?.inactive },
@@ -70,16 +71,11 @@ const PickableItem = (props: any) => {
     setSelected(true);
   };
 
-  console.log(typeof(item))
-
   return (
-    <div
-      onClick={innerOnClickHandler}
-      className={cx(...innerAnimations.container)}
-    >
-      <div className={cx(...innerAnimations.subcontainer)}>
-        <p className={cx(...innerAnimations.cardTitle)}>{item?.name}</p>
-        <Card className={cx(...innerAnimations.card)}>
+    <div onClick={innerOnClickHandler} className={cx(...innerStyle.container)}>
+      <div className={cx(...innerStyle.subcontainer)}>
+        <p className={cx(...innerStyle.cardTitle)}>{item?.name}</p>
+        <Card className={cx(...innerStyle.card)}>
           <Image
             src={item?.bgImage ?? "/placeholder.png"}
             layout="fill"
@@ -87,8 +83,15 @@ const PickableItem = (props: any) => {
             alt={`${item?.name} picture`}
             unoptimized={process.env.NODE_ENV === "development"}
           />
-          <div className={cx(...innerAnimations.unavailableText)}>
-            {item?.inactive ? "Comming soon" : ""}
+          <div className={cx(...innerStyle.unavailableText)}>
+            {item?.inactive ? (
+              <span className="me-2">
+                <FontAwesomeIcon icon={faLock} className="me-2" />
+                Locked
+              </span>
+            ) : (
+              ""
+            )}
           </div>
         </Card>
       </div>
