@@ -14,4 +14,13 @@ const booleanArrayHandler = (boolArray: boolean[], id: number) => {
   });
 };
 
-export { capitalize, booleanArrayHandler };
+const addIdHandler = (data: []) => {
+  return data?.map((el: any, index: number) => {
+    return {
+      ...el,
+      id: index + 1,
+    };
+  });
+};
+
+export { capitalize, booleanArrayHandler, addIdHandler };

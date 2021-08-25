@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-import { useGlobalContext } from "utils/globalState/store";
-
 import PickableItem from "./PickableItem/PickableItem";
 
 import { PickableItemType } from "typescript/interfaces/pickableItems_interfaces";
 
-import { booleanArrayHandler } from "utils/functions/functions";
-
-import hardData from "utils/hardDatas";
+import staticData from "utils/staticData";
+import { useGlobalContext } from "utils/globalState/store";
+import { booleanArrayHandler, addIdHandler } from "utils/functions/functions";
 import { getAllCountriesByContinent } from "utils/functions/fetchFunctions";
 
 import classes from "./GenericPickerPanel.module.less";
 
-const GenericPickerPanel = (props: any) => {
+const GenericPickerPanel = () => {
   const {
     store,
     setLoading,
@@ -25,9 +23,9 @@ const GenericPickerPanel = (props: any) => {
   }: any = useGlobalContext();
 
   const [items, setItems] = useState<PickableItemType[]>(
-    hardData[store?.currentPanel]
+    staticData[store?.currentPanel]
   );
-  const boolArray: boolean[] = Array(items?.length).fill(false);
+  const boolArray: boolean[] = Array(items?.length || 3).fill(false);
   const [out, setOut] = useState<boolean[]>(boolArray);
 
   const updateState = (item: PickableItemType): void => {
@@ -77,25 +75,16 @@ const GenericPickerPanel = (props: any) => {
   }, [store?.currentPanel]);
 
   useEffect(() => {
-    const fetchCountriesAndAssignProperties = async (): Promise<void> => {
-      const countries: PickableItemType[] = await getAllCountriesByContinent(
-        store?.continent
-      )
-        .then((response: any) => response.data.data)
-        .then((data: any) =>
-          data?.map((el: any, index: number) => {
-            return {
-              ...el,
-              id: index + 1,
-            };
-          })
-        );
-      setItems(countries);
-    };
+    if (store?.currentPanel != "Countries") return;
 
-    if (store?.currentPanel === "Countries") {
-      fetchCountriesAndAssignProperties();
-    }
+    (async (): Promise<void> => {
+      await getAllCountriesByContinent(store?.continent)
+        .then((response: any) => response?.data?.data)
+        .then((data: any) => addIdHandler(data))
+        .then((data: any) => {
+          setItems(data);
+        });
+    })();
   }, []);
 
   return (

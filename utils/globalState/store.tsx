@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext } from "react";
 import Reducer from "./reducer";
 
-import { difficulties } from "utils/hardDatas/difficulties";
+import { difficulties } from "utils/staticData/difficulties";
 
 import { IGlobalState } from "typescript/interfaces/general_interfaces";
 

@@ -6,7 +6,7 @@ import { Card, Button } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 
-import { animations } from "utils/animations";
+import animations from "utils/animations";
 import { useGlobalContext } from "utils/globalState/store";
 import { getRandomQuestionsFromCountry } from "utils/functions/fetchFunctions";
 
@@ -74,7 +74,7 @@ const QuizzPanel = () => {
     setLoading(false);
   }, []);
 
-  console.log(animationsState)
+  console.log(animationsState);
 
   return (
     <div className={cx(...innerStyle.inDownContainer)}>
@@ -96,7 +96,7 @@ const QuizzPanel = () => {
           </div>
           <div className={classes.questionContainer}>
             <QuestionSide
-            setAnimationsState={setAnimationsState}
+              setAnimationsState={setAnimationsState}
               running={running}
               question={currentQuestion?.question}
             />

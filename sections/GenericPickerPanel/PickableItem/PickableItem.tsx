@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
 import Image from "next/image";
-import { Card } from "antd";
-
+import { Card, Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
-import { useGlobalContext } from "../../../utils/globalState/store";
-
 import { PickableItemType } from "typescript/interfaces/pickableItems_interfaces";
-import animations  from "utils/animations";
+
+import { useGlobalContext } from "utils/globalState/store";
+import animations from "utils/animations";
 
 import classes from "./PickableItem.module.less";
 import cx from "classnames";
+import CustomTooltip from "./CustomTooltip/CustomTooltip";
 
 const PickableItem = (props: any) => {
   const {
@@ -33,11 +33,10 @@ const PickableItem = (props: any) => {
   const innerStyle = {
     container: [
       classes.cardContainer,
-      { [animations.attention]: selected },
-      { [classes.loadingState]: store?.loading },
       {
-        // @ts-ignore
-        [`${animations.fadeOutDown} ${animations.delay2}`]: out, // conflicts with countries
+        [animations.attention]: selected,
+        [classes.loadingState]: store?.loading,
+        [`${animations.fadeOutDown} ${animations.delay2}`]: out,
       },
     ],
     subcontainer: [
@@ -54,12 +53,14 @@ const PickableItem = (props: any) => {
     ],
     card: [
       classes.pickableItem,
-      { [classes.countryType]: store?.currentPanel === "Countries" },
       // @ts-ignore
       `${animations.inDown} ${animations[`delay${itemId - 1}`]}`,
-      { [classes.unselectedPickableItem]: out },
-      { [classes.selectedPickableItem]: selected },
-      { [classes.unactivePickableItem]: item?.inactive },
+      {
+        [classes.countryType]: store?.currentPanel === "Countries",
+        [classes.unselectedPickableItem]: out,
+        [classes.selectedPickableItem]: selected,
+        [classes.unactivePickableItem]: item?.inactive,
+      },
     ],
     unavailableText: [classes.unavailableText],
   };
@@ -67,8 +68,8 @@ const PickableItem = (props: any) => {
   const innerOnClickHandler = () => {
     if (store?.loading || item?.inactive) return;
     setLoading(true);
-    selectItemHandler(item);
     setSelected(true);
+    selectItemHandler(item);
   };
 
   return (
@@ -76,13 +77,15 @@ const PickableItem = (props: any) => {
       <div className={cx(...innerStyle.subcontainer)}>
         <p className={cx(...innerStyle.cardTitle)}>{item?.name}</p>
         <Card className={cx(...innerStyle.card)}>
-          <Image
-            src={item?.bgImage ?? "/placeholder.png"}
-            layout="fill"
-            objectFit="cover"
-            alt={`${item?.name} picture`}
-            unoptimized={process.env.NODE_ENV === "development"}
-          />
+          <Tooltip placement="right" title={<CustomTooltip country={item} />}>
+            <Image
+              src={item?.bgImage ?? "/placeholder.png"}
+              layout="fill"
+              objectFit="cover"
+              alt={`${item?.name} picture`}
+              unoptimized={process.env.NODE_ENV === "development"}
+            />
+          </Tooltip>
           <div className={cx(...innerStyle.unavailableText)}>
             {item?.inactive ? (
               <span className="me-2">
