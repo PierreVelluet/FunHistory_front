@@ -53,21 +53,24 @@ const PickableItem = (props: any) => {
     ],
     card: [
       classes.pickableItem,
+      {[classes.countryType]: store?.currentPanel === "ICountry"},
       // @ts-ignore
       `${animations.inDown} ${animations[`delay${itemId}`]}`,
       { [classes.unselectedPickableItem]: out },
       { [classes.selectedPickableItem]: selected },
-      { [classes.unactivePickableItem]: !item?.active },
+      { [classes.unactivePickableItem]: item?.inactive },
     ],
     unavailableText: [classes.unavailableText],
   };
 
   const innerOnClickHandler = () => {
-    if (store?.loading || !item?.active) return;
+    if (store?.loading || item?.inactive) return;
     setLoading(true);
     selectItemHandler(item);
     setSelected(true);
   };
+
+  console.log(typeof(item))
 
   return (
     <div
@@ -85,7 +88,7 @@ const PickableItem = (props: any) => {
             unoptimized={process.env.NODE_ENV === "development"}
           />
           <div className={cx(...innerAnimations.unavailableText)}>
-            {!item?.active ? "Comming soon" : ""}
+            {item?.inactive ? "Comming soon" : ""}
           </div>
         </Card>
       </div>

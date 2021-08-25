@@ -3,7 +3,13 @@ import React, { useState, useEffect } from "react";
 import { useGlobalContext } from "utils/globalState/store";
 
 import PickableItem from "./PickableItem/PickableItem";
-import { PickableItemType } from "typescript/interfaces/interfaces";
+import {
+  ICountry,
+  PickableItemType,
+  SearchFn,
+} from "typescript/interfaces/interfaces";
+
+import { getAllCountriesByContinent } from "utils/functions/fetchFunctions";
 
 import classes from "./GenericPickerPanel.module.less";
 
@@ -85,6 +91,28 @@ const GenericPickerPanel = (props: any) => {
       setLoading(false);
     }, 2500);
   }, [store?.currentPanel]);
+
+  useEffect(() => {
+    const fetchCountries = async (): Promise<void> => {
+      const countries: PickableItemType[] = await getAllCountriesByContinent(
+        store?.continent
+      )
+        .then((response: any) => response.data.data)
+        .then((data: any) =>
+          data?.map((el: any, index: number) => {
+            return {
+              ...el,
+              id: index + 1,
+            };
+          })
+        );
+      setItems(countries);
+    };
+
+    if (store?.currentPanel === "ICountry") {
+      fetchCountries();
+    }
+  }, []);
 
   return (
     <div className={classes.pickableItemsContainer}>

@@ -45,6 +45,7 @@ export default function Home(props: any) {
       case "ITheme":
       case "IContinent":
       case "IDifficulty":
+      case "ICountry":
         return (
           <GenericPickerPanel
             key={panel}

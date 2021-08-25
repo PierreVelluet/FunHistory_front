@@ -14,12 +14,26 @@ const getRandomQuestionsFromCountry = async (params: object) => {
 };
 const getAllCountries = async () => {
   try {
-    return await axios
-      .get<string>(`${process.env.NEXT_PUBLIC_BACKEND}/countries`)
-      
+    return await axios.get<string>(
+      `${process.env.NEXT_PUBLIC_BACKEND}/countries`
+    );
   } catch (err) {
     if (err) console.log(err);
   }
 };
 
-export { getRandomQuestionsFromCountry, getAllCountries };
+const getAllCountriesByContinent = async (continent: string) => {
+  try {
+    return await axios.get<string>(
+      `${process.env.NEXT_PUBLIC_BACKEND}/countries/continent/${continent}`
+    );
+  } catch (err) {
+    if (err) console.log(err);
+  }
+};
+
+export {
+  getRandomQuestionsFromCountry,
+  getAllCountries,
+  getAllCountriesByContinent,
+};

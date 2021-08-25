@@ -9,7 +9,6 @@ const difficulties: IDifficulty[] = [
     bgImage: "/easy.jpeg",
     step: "IDifficulty",
     nextStep: "QuizzPanel",
-    active: true
   },
   {
     name: "Moderate",
@@ -19,7 +18,6 @@ const difficulties: IDifficulty[] = [
     bgImage: "/moderate.jpeg",
     step: "IDifficulty",
     nextStep: "QuizzPanel",
-    active: true
   },
   {
     name: "Hard",
@@ -29,7 +27,6 @@ const difficulties: IDifficulty[] = [
     bgImage: "/hard.jpeg",
     step: "IDifficulty",
     nextStep: "QuizzPanel",
-    active: true
   },
   {
     name: "Insane",
@@ -39,7 +36,7 @@ const difficulties: IDifficulty[] = [
     bgImage: "/insane.jpeg",
     step: "IDifficulty",
     nextStep: "QuizzPanel",
-    active: false
+    inactive: true
   },
 ];
 

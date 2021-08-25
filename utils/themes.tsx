@@ -4,7 +4,6 @@ const themes: ITheme[] = [
   {
     name: "History",
     bgImage: "/history.jpeg",
-    active: true,
     id: 1,
     step: "ITheme",
     nextStep: "IDifficulty"
@@ -12,7 +11,7 @@ const themes: ITheme[] = [
   {
     name: "Geography",
     bgImage: "/geography.jpeg",
-    active: false,
+    inactive: true,
     id: 2,
     step: "ITheme",
     nextStep: "IDifficulty"
@@ -20,7 +19,7 @@ const themes: ITheme[] = [
   {
     name: "Politic",
     bgImage: "/politic.jpeg",
-    active: false,
+    inactive: true,
     id: 3,
     step: "ITheme",
     nextStep: "IDifficulty"
@@ -28,7 +27,7 @@ const themes: ITheme[] = [
   {
     name: "Culture",
     bgImage: "/culture.jpg",
-    active: false,
+    inactive: true,
     id: 4,
     step: "ITheme",
     nextStep: "IDifficulty"

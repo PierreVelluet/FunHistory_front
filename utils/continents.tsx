@@ -2,44 +2,43 @@ import { IContinent } from "typescript/interfaces/interfaces";
 
 const continents: IContinent[] = [
   {
-    name: "Asia",
-    bgImage: "/asia.jpeg",
-    active: true,
-    id: 1,
-    step: "IContinent",
-    nextStep: "CountryPanel"
-  },
-  {
     name: "Africa",
     bgImage: "/africa.jpeg",
-    active: false,
+    inactive: true,
+    id: 1,
+    step: "IContinent",
+    nextStep: "ICountry"
+  },
+  {
+    name: "Asia",
+    bgImage: "/asia.jpeg",
     id: 2,
     step: "IContinent",
-    nextStep: "CountryPanel"
+    nextStep: "ICountry"
   },
   {
     name: "America",
     bgImage: "/america.jpeg",
-    active: false,
+    inactive: true,
     id: 3,
     step: "IContinent",
-    nextStep: "CountryPanel"
+    nextStep: "ICountry"
   },
   {
     name: "Europe",
     bgImage: "/europe.jpeg",
-    active: false,
+    inactive: true,
     id: 4,
     step: "IContinent",
-    nextStep: "CountryPanel"
+    nextStep: "ICountry"
   },
   {
     name: "Australia",
     bgImage: "/australia.jpeg",
-    active: false,
+    inactive: true,
     id: 5,
     step: "IContinent",
-    nextStep: "CountryPanel"
+    nextStep: "ICountry"
   },
 ];
 
