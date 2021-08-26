@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import Typist from "react-typist";
 
 import { Tooltip } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,12 +19,15 @@ import {
   faCoins,
 } from "@fortawesome/free-solid-svg-icons";
 
+import animations from "utils/animations";
+
 import { capitalize } from "utils/functions/functions";
 
+import cx from "classnames";
 import classes from "./InformationsItem.module.less";
 
 const InformationItems = (props: any) => {
-  const infos: string[] = props.infos;
+  const { infos, index }: { infos: string[]; index: number } = props;
   const { toolTipPlacement } = props;
   let unit = "";
 
@@ -40,20 +44,20 @@ const InformationItems = (props: any) => {
       case "government":
         return <FontAwesomeIcon icon={faLandmark} className={classes.icon} />;
       case "area":
-        unit = " km²"
+        unit = " km²";
         return <FontAwesomeIcon icon={faChartArea} className={classes.icon} />;
       case "population":
-        unit = " people"
+        unit = " people";
         return <FontAwesomeIcon icon={faUsers} className={classes.icon} />;
       case "timezone":
         return <FontAwesomeIcon icon={faClock} className={classes.icon} />;
       case "density":
-        unit = " people / km²"
+        unit = " people / km²";
         return <FontAwesomeIcon icon={faLayerGroup} className={classes.icon} />;
       case "greeting":
         return <FontAwesomeIcon icon={faHandshake} className={classes.icon} />;
       case "gross domestic product per capita":
-        unit= " $"
+        unit = " $";
         return <FontAwesomeIcon icon={faCoins} className={classes.icon} />;
       case "establishment":
         return <FontAwesomeIcon icon={faHistory} className={classes.icon} />;
@@ -64,17 +68,35 @@ const InformationItems = (props: any) => {
     }
   };
 
+  const [style, setStyle] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setStyle(animations.fadeIn);
+      console.log(index);
+    }, index * 300);
+  }, []);
+
   return (
-    <div className={classes.infoItem}>
+    <div className={cx(classes.infoItem)} >
+      {style != "" ? (
+        <>
       <Tooltip
         title={capitalize(infos?.[0])}
         placement={toolTipPlacement}
         color={"#045daf"}
         key={infos?.[0]}
       >
-        <div className={classes.iconContainer}>{iconChooser(infos[0])}</div>
+          <div className={cx(classes.iconContainer, style)}>
+            {iconChooser(infos[0])}
+          </div>
       </Tooltip>
+      <Typist cursor={{ show: false }} key={index}>
+
       <p>{`${capitalize(infos?.[1])}${unit}`}</p>
+      </Typist>
+      </>
+        ) : null}
     </div>
   );
 };

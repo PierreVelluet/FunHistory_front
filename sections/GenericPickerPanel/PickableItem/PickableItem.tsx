@@ -73,11 +73,31 @@ const PickableItem = (props: any) => {
   };
 
   return (
-    <div onClick={innerOnClickHandler} className={cx(...innerStyle.container)}>
+    <div
+      onClick={
+        store?.currentPanel != "Countries" ? innerOnClickHandler : () => {}
+      }
+      className={cx(...innerStyle.container)}
+    >
       <div className={cx(...innerStyle.subcontainer)}>
         <p className={cx(...innerStyle.cardTitle)}>{item?.name}</p>
         <Card className={cx(...innerStyle.card)}>
-          <Tooltip placement="right" title={<CustomTooltip country={item} />}>
+          <Tooltip
+            trigger="click"
+            color="#181818"
+            placement="right"
+            title={
+              store?.currentPanel === "Countries" ? (
+                <CustomTooltip
+                  country={item}
+                  innerOnClickHandler={innerOnClickHandler}
+                  arrowPointAtCenter
+                />
+              ) : (
+                false
+              )
+            }
+          >
             <Image
               src={item?.bgImage ?? "/placeholder.png"}
               layout="fill"

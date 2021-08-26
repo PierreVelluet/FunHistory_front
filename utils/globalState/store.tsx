@@ -9,7 +9,7 @@ const initialState: IGlobalState = {
   loading: true,
   country: "Japan",
   currentQuestionNumber: 0,
-  currentPanel: "Continents",
+  currentPanel: "Countries",
   theme: "History",
   continent: "Asia",
   questions: {},
