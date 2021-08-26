@@ -63,14 +63,12 @@ const CustomTooltip = (props: any) => {
         informations
       ).map((el: string[], index:number) => {
         return (
-          <div className={animations.fadeIn}>
           <InformationItems
             toolTipPlacement={"left"}
             key={el?.[0]}
             infos={el}
             index={index}
           />
-          </div>
         );
       })}
       <Button

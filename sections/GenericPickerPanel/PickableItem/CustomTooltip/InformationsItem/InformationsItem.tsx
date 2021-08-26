@@ -72,7 +72,7 @@ const InformationItems = (props: any) => {
 
   useEffect(() => {
     setTimeout(() => {
-      setStyle(animations.fadeIn);
+      setStyle(animations.rotateIn);
       console.log(index);
     }, index * 300);
   }, []);

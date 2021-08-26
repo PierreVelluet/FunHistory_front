@@ -8,7 +8,7 @@ const animations = {
   fadeOut: "animate__animated animate__fadeOut",
   fadeOutRight: "animate__animated animate__fadeOutRight",
   fadeOutDown: "animate__animated animate__fadeOutDown",
-  fadeIn: "animate__animated animate__fadeIn",
+  rotateIn: "animate__animated animate__rotateIn",
   attention: "animate__animated animate__rubberBand",
   shake: "animate__animated animate__shakeX",
   hinge: "animate__animated animate__hinge",
