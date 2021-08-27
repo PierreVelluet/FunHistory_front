@@ -57,9 +57,7 @@ const settingMenu = (): JSX.Element => {
   );
 };
 
-const gradeCalculator = (gamesCompleted:number) => {
-
-}
+const gradeCalculator = (gamesCompleted: number) => {};
 
 const ProfileCard = (props: any) => {
   const { user }: { user: Iuser } = props;

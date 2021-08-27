@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 
-import Image from "next/image";
-import { Card, Tooltip } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
+import { Card } from "antd";
+
+import CardBody from "./CardBody/CardBody";
 
 import { PickableItemType } from "typescript/interfaces/pickableItems_interfaces";
-
 import { useGlobalContext } from "utils/globalState/store";
 import animations from "utils/animations";
 
 import classes from "./PickableItem.module.less";
 import cx from "classnames";
-import CustomTooltip from "./CustomTooltip/CustomTooltip";
 
 const PickableItem = (props: any) => {
   const {
@@ -62,7 +59,6 @@ const PickableItem = (props: any) => {
         [classes.unactivePickableItem]: item?.inactive,
       },
     ],
-    unavailableText: [classes.unavailableText],
   };
 
   const innerOnClickHandler = () => {
@@ -82,40 +78,7 @@ const PickableItem = (props: any) => {
       <div className={cx(...innerStyle.subcontainer)}>
         <p className={cx(...innerStyle.cardTitle)}>{item?.name}</p>
         <Card className={cx(...innerStyle.card)}>
-          <Tooltip
-            trigger="click"
-            color="#181818"
-            placement="right"
-            title={
-              store?.currentPanel === "Countries" ? (
-                <CustomTooltip
-                  country={item}
-                  innerOnClickHandler={innerOnClickHandler}
-                  arrowPointAtCenter
-                />
-              ) : (
-                false
-              )
-            }
-          >
-            <Image
-              src={item?.bgImage ?? "/placeholder.png"}
-              layout="fill"
-              objectFit="cover"
-              alt={`${item?.name} picture`}
-              unoptimized={process.env.NODE_ENV === "development"}
-            />
-          </Tooltip>
-          <div className={cx(...innerStyle.unavailableText)}>
-            {item?.inactive ? (
-              <span className="me-2">
-                <FontAwesomeIcon icon={faLock} className="me-2" />
-                Locked
-              </span>
-            ) : (
-              ""
-            )}
-          </div>
+          <CardBody item={item} innerOnClickHandler={innerOnClickHandler} />
         </Card>
       </div>
     </div>
