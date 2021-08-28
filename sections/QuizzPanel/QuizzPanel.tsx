@@ -86,31 +86,7 @@ const QuizzPanel = () => {
           <div className={cx(...innerStyle?.countdownContainer)}>
             <Countdown running={running} timeoutHandler={timeoutHandler} />
           </div>
-          <div className={cx(innerStyle?.answersContainer)}>
-            <AnswerSide
-              animationsState={animationsState}
-              setAnimationsState={setAnimationsState}
-              answers={currentQuestion?.answers}
-              type={currentQuestion?.type}
-            />
-          </div>
-          <div className={classes.questionContainer}>
-            <QuestionSide
-              setAnimationsState={setAnimationsState}
-              running={running}
-              question={currentQuestion?.question}
-            />
-          </div>
-          <div className={classes.imgContainer}>
-            <Image
-              src={`/humanEvolution.png`}
-              layout="fill"
-              objectFit="contain"
-              alt={`flag`}
-              unoptimized={process.env.NODE_ENV === "development"}
-              className={classes.flagImage}
-            />
-          </div>
+         
           <Button
             icon={<FontAwesomeIcon icon={faPlay} className={classes.btnIcon} />}
             onClick={startHandler}
@@ -128,3 +104,29 @@ const QuizzPanel = () => {
 };
 
 export default QuizzPanel;
+
+ {/* <div className={cx(innerStyle?.answersContainer)}>
+            <AnswerSide
+              animationsState={animationsState}
+              setAnimationsState={setAnimationsState}
+              answers={currentQuestion?.answers}
+              type={currentQuestion?.type}
+            />
+          </div>
+          <div className={classes.questionContainer}>
+            <QuestionSide
+              setAnimationsState={setAnimationsState}
+              running={running}
+              question={currentQuestion?.question}
+            />
+          </div> */}
+          {/* <div className={classes.imgContainer}>
+            <Image
+              src={`/humanEvolution.png`}
+              layout="fill"
+              objectFit="contain"
+              alt={`flag`}
+              unoptimized={process.env.NODE_ENV === "development"}
+              className={classes.flagImage}
+            />
+          </div> */}

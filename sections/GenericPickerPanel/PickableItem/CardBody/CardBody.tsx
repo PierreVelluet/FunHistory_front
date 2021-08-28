@@ -11,6 +11,7 @@ import CustomTooltip from '../CustomTooltip/CustomTooltip'
 import { useGlobalContext } from 'utils/globalState/store'
 
 import classes from './CardBody.module.less'
+import cx from "classnames";
 
 const CardBody = (props: any) => {
     const {
@@ -27,6 +28,7 @@ const CardBody = (props: any) => {
         <>
             <Tooltip
                 destroyTooltipOnHide
+                key={store?.country}
                 trigger="click"
                 color="#181818"
                 placement="right"

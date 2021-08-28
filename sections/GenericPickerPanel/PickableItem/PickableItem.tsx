@@ -76,7 +76,7 @@ const PickableItem = (props: any) => {
             <div className={cx(...innerStyle.subcontainer)}>
                 <p className={cx(...innerStyle.cardTitle)}>{item?.name}</p>
                 <Card className={cx(...innerStyle.card)}>
-                    <CardBody key={selected} item={item} innerOnClickHandler={innerOnClickHandler} />
+                    <CardBody item={item} innerOnClickHandler={innerOnClickHandler} />
                 </Card>
             </div>
         </div>
