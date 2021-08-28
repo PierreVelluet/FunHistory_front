@@ -1,83 +1,74 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 
-import {Button } from "antd";
+import { Button } from 'antd'
 
-import InformationItems from "./InformationsItem/InformationsItem";
+import InformationItems from './InformationsItem/InformationsItem'
 
-import { useGlobalContext } from "utils/globalState/store";
+import { useGlobalContext } from 'utils/globalState/store'
+import animations from 'utils/animations'
 
-import animations from "utils/animations";
-import classes from "./CustomTooltip.module.less";
-import cx from "classnames";
+import classes from './CustomTooltip.module.less'
+import cx from 'classnames'
 
 const CustomTooltip = (props: any) => {
-  const { country, innerOnClickHandler }: { country: any; innerOnClickHandler:any } = props;
+    const { country, innerOnClickHandler }: { country: any; innerOnClickHandler: any } = props
+    const { store }: any = useGlobalContext()
 
-  let {
-    __v,
-    __id,
-    bgImage,
-    ...rest
-  }: { __v: object; __id: object; bgImage: object; informations: object[] } =
-    country;
-  const informations: string[][] = Object.entries(rest);
+    const [buttonVisibility, setButtonVisibility] = useState<boolean>(false)
+    const [countryInformations, setCountryInformations] = useState<string[][]>([])
+    const actualInformations: string[][] = Object.entries(country)
 
-  const { store, setLoading }: any = useGlobalContext();
+    let sortCountryInformations = (): void => {
+        const desiredInformations: string[] = [
+            'name',
+            'native country name',
+            'capital',
+            'language',
+            'government',
+            'leader',
+            'area',
+            'population',
+            'density',
+            'gross domestic product per capita',
+            'timezone',
+            'establishment',
+            'greeting',
+        ]
+        const result: string[][] = []
+        desiredInformations.map((desiredString: string) => {
+            actualInformations?.forEach((allInfoElement: string[]) => {
+                if (desiredString === allInfoElement?.[0]) result.push(allInfoElement)
+            })
+        })
+        setCountryInformations(result)
+    }
 
-  let sortCountryInformations = (
-    desiredInformations: string[],
-    informations: string[][]
-  ): string[][] => {
-    const result: string[][] = [];
+    useEffect(() => {
+        sortCountryInformations()
+        const timeout = actualInformations?.length * 200
+        setTimeout(() => {
+            setButtonVisibility(true)
+        }, timeout)
+    }, [])
 
-    desiredInformations?.map((desiredString: string) => {
-      informations?.map((allInfoElement: string[]) => {
-        if (desiredString === allInfoElement?.[0]) result.push(allInfoElement);
-      });
-    });
-    return result;
-  };
+    return (
+        <div className={cx(classes.container)}>
+            {countryInformations.map((el: string[], index: number) => {
+                return <InformationItems toolTipPlacement={'left'} key={el?.[0]} infos={el} index={index} />
+            })}
+            <div className={classes.btnContainer}>
+                {buttonVisibility ? (
+                    <Button
+                        onClick={!store?.loading ? innerOnClickHandler : () => {}}
+                        type="primary"
+                        className={cx(classes.btn, animations?.fadeIn)}
+                    >
+                        {`Test your knowledge !`}
+                    </Button>
+                ) : null}
+            </div>
+        </div>
+    )
+}
 
-  const inOneByOne = () => {
-    setInterval(function(){ alert("Hello"); }, 3000);
-  }
-
-  return (
-    <div className={cx(classes.container)}>
-      {sortCountryInformations(
-        [
-          "name",
-          "native country name",
-          "capital",
-          "language",
-          "government",
-          "leader",
-          "area",
-          "population",
-          "density",
-          "gross domestic product per capita",
-          "timezone",
-          "establishment",
-          "greeting",
-        ],
-        informations
-      ).map((el: string[], index:number) => {
-        return (
-          <InformationItems
-            toolTipPlacement={"left"}
-            key={el?.[0]}
-            infos={el}
-            index={index}
-          />
-        );
-      })}
-      <Button
-          onClick={!store?.loading ? innerOnClickHandler : () => {}}
-          // icon={<FontAwesomeIcon icon={faScroll} className={classes.btnIcon} />}
-          type="primary"
-        >{`Test your knowledge !`}</Button>
-    </div>
-  );
-};
-
-export default CustomTooltip;
+export default CustomTooltip
