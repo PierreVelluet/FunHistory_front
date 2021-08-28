@@ -29,6 +29,8 @@ import classes from './InformationsItem.module.less'
 const InformationItems = (props: any) => {
     const { infos, index }: { infos: string[]; index: number } = props
     const { toolTipPlacement } = props
+
+    const [style, setStyle] = useState('')
     let unit = ''
 
     const iconChooser: any = (label: string) => {
@@ -68,7 +70,7 @@ const InformationItems = (props: any) => {
         }
     }
 
-    const [style, setStyle] = useState('')
+  
 
     useEffect(() => {
         setTimeout(() => {

@@ -12,8 +12,8 @@ const initialState: IGlobalState = {
     currentPanel: 'QuizzPanel',
     theme: 'History',
     continent: 'Asia',
-    questions: {},
-    difficulty: difficulties[0],
+    questions: [],
+    difficulty: difficulties[1],
 }
 
 const Store = ({ children }: { children: any }) => {

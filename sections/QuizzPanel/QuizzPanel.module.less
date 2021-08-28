@@ -1,15 +1,17 @@
 @import (reference) "../../styles/variables.less";
 
 .card {
-  width: 1000px;
-  height: 90vh!important;
+  width: 1200px;
+  height: 650px!important;
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content:space-between!important;
   border: 1px solid @secondary;
   box-shadow: @classic-shadow;
   background: linear-gradient(90deg, @fourth 50%, @fifth 50%);
 }
+
 
 .mainContainer {
   display: flex;
@@ -56,7 +58,7 @@
   height: 250px;
   width: 250px;
   left: 50%;
-  top: 0%;
+  top: 14%;
   transform: translate(-50%, -50%);
   font-size: 35px;
   font-weight: 600;
@@ -66,11 +68,14 @@
 .startBtn {
   position: absolute;
   z-index: 999;
-  height: 250px;
-  width: 250px;
+  height: 150px!important;
+  width: 150px!important;
   left: 50%;
-  top: 85%;
+  top: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 50%!important;
+  font-size: 30px!important;
+  box-shadow: @classic-shadow;
 }
 
 .btnIcon {

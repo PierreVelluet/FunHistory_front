@@ -1,37 +1,56 @@
-import React from "react";
+import React from 'react'
 
-import { CountdownCircleTimer } from "react-countdown-circle-timer";
-import { useGlobalContext } from "utils/globalState/store";
+import { CountdownCircleTimer } from 'react-countdown-circle-timer'
+import { useGlobalContext } from 'utils/globalState/store'
+
+import animations from 'utils/animations'
+
+import classes from './Countdown.module.less'
+import cx from 'classnames'
 
 const Countdown = (props: any) => {
-  const {
-    running = false,
-    timeoutHandler = () => {},
-  }: { running: boolean; timeoutHandler: any } = props;
-  const {
-    store,
-    setLoading,
-    setQuestions,
-    setCurrentQuestionNumber,
-    setPanel,
-  }: any = useGlobalContext();
+    const {
+        startTimer,
+        timeoutHandler = () => {},
+        innerStyle,
+    }: { startTimer: boolean; timeoutHandler: any; innerStyle: any } = props
+    const { store  }: any = useGlobalContext()
 
-  return (
-    <CountdownCircleTimer
-      isPlaying={running}
-      duration={3 || store?.difficulty?.timeout}
-      size={150}
-      colors={[
-        ["#40a9ff", 0.33],
-        ["#045daf", 0.33],
-        ["#02284b", 0.33],
-      ]}
-      trailColor="invisible"
-      onComplete={() => timeoutHandler()}
-    >
-      {({ remainingTime }) => remainingTime}
-    </CountdownCircleTimer>
-  );
-};
+    const renderTime = ({ remainingTime }: { remainingTime: number }) => {
+        if (remainingTime === 0) {
+            return <div className={cx(classes.timerText, classes.timeoutText)}>Time out!</div>
+        }
 
-export default Countdown;
+        return (
+            <div className={classes.timerText}>
+                <div>Remaining</div>
+                <div style={{ fontSize: '25px' }}>{remainingTime}</div>
+                <div>seconds</div>
+            </div>
+        )
+    }
+
+    return (
+        <div className={cx(...innerStyle?.countdownContainer)}>
+            <div className={cx(...innerStyle?.countdownAnimationContainer)}>
+                <CountdownCircleTimer
+                    isPlaying={startTimer}
+                    duration={6 || store?.difficulty?.timeout}
+                    size={150}
+                    colors={[
+                        ['#004777', 0.33],
+                        ['#F7B801', 0.33],
+                        ['#A30000', 0.33],
+                    ]}
+                    trailColor="darkgray"
+                    strokeWidth={9}
+                    onComplete={() => timeoutHandler()}
+                >
+                    {renderTime}
+                </CountdownCircleTimer>
+            </div>
+        </div>
+    )
+}
+
+export default Countdown

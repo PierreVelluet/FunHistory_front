@@ -1,132 +1,94 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
 
-import Image from "next/image";
+import { Card, Button } from 'antd'
 
-import { Card, Button } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
+import animations from 'utils/animations'
+import { useGlobalContext } from 'utils/globalState/store'
+import { getRandomQuestionsFromCountry } from 'utils/functions/fetchFunctions'
 
-import animations from "utils/animations";
-import { useGlobalContext } from "utils/globalState/store";
-import { getRandomQuestionsFromCountry } from "utils/functions/fetchFunctions";
+import Countdown from './Countdown/Countdown'
+import CardBodySplitter from './CardBodySplitter/CardBodySplitter'
+import { IQuestion } from 'typescript/interfaces/general_interfaces'
 
-import Countdown from "./Countdown/Countdown";
-
-import classes from "./QuizzPanel.module.less";
-import cx from "classnames";
-import { IQuestion } from "typescript/interfaces/general_interfaces";
-import Answer from "./AnswerSide/Answer/Answer";
-import AnswerSide from "./AnswerSide/AnswerSide";
-import QuestionSide from "./QuestionSide/QuestionSide";
+import classes from './QuizzPanel.module.less'
+import cx from 'classnames'
 
 const QuizzPanel = () => {
-  const {
-    store,
-    setLoading,
-    setQuestions,
-    setCurrentQuestionNumber,
-    setPanel,
-  }: any = useGlobalContext();
+    const { store, setLoading, setQuestions, setCurrentQuestionNumber }: any = useGlobalContext()
 
-  const [running, setRunning] = useState<boolean>(false);
-  const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(
-    null
-  );
-  const [animationsState, setAnimationsState] = useState(false);
+    const [setup, setSetup] = useState<boolean>(false)
+    const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(null)
 
-  const [timeout, setTimeout] = useState<boolean>(false);
+    const [startTimer, setStartTimer] = useState<boolean>(false)
+    const [timeout, setTimeout] = useState<boolean>(false)
 
-  const innerStyle = {
-    inDownContainer: [animations.inDown],
-    cardContainer: [classes.card, { [animations.shake]: timeout }],
-    countdownContainer: [
-      classes.countdownContainer,
-      { [animations.inDown]: animationsState },
-    ],
-    answersContainer: [classes.answersContainer],
-  };
+    const innerStyle = {
+        inDownContainer: [animations.inDown],
+        cardBody: {
+            margin: 0,
+            padding: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+        },
+        countdownContainer: [classes.countdownContainer, animations?.fadeIn, animations?.delay3],
+        countdownAnimationContainer: [{ [animations.attention]: timeout }],
+        answersContainer: [classes.answersContainer],
+    }
 
-  const timeoutHandler = () => {
-    setTimeout(true);
-  };
+    const timeoutHandler = () => {
+        setTimeout(true)
+    }
 
-  const startHandler = () => {
-    setRunning((prevState) => !prevState);
-  };
+    const setupHandler = () => {
+        setSetup((prevState) => !prevState)
+    }
 
-  useEffect(() => {
-    setCurrentQuestion(store?.questions?.[store?.currentQuestionNumber]);
-  }, [store?.currentQuestionNumber, store?.questions]);
+    useEffect(() => {
+        setCurrentQuestion(store?.questions?.[store?.currentQuestionNumber])
+    }, [store?.currentQuestionNumber, store?.questions])
 
-  useEffect(() => {
-    const params: object = {
-      country: store?.country,
-      theme: store?.theme,
-      num: store?.numberOfQuestions,
-    };
+    useEffect(() => {
+        const params: object = {
+            country: store?.country,
+            theme: store?.theme,
+            num: store?.difficulty?.numberOfQuestions,
+        }
 
-    getRandomQuestionsFromCountry(params).then((response) => {
-      if (!response?.data?.success) return;
+        getRandomQuestionsFromCountry(params).then((response) => {
+            if (!response?.data?.success) return
 
-      setQuestions(response?.data?.results);
-    });
+            setQuestions(response?.data?.results)
+        })
 
-    setLoading(false);
-  }, []);
+        setLoading(false)
+    }, [])
 
-  console.log(animationsState);
-
-  return (
-    <div className={cx(...innerStyle.inDownContainer)}>
-      <Card
-        bodyStyle={{ margin: 0, padding: 0, width: "100%", height: "100%" }}
-        className={cx(...innerStyle.cardContainer)}
-      >
-        <div className={cx(classes.mainContainer)}>
-          <div className={cx(...innerStyle?.countdownContainer)}>
-            <Countdown running={running} timeoutHandler={timeoutHandler} />
-          </div>
-         
-          <Button
-            icon={<FontAwesomeIcon icon={faPlay} className={classes.btnIcon} />}
-            onClick={startHandler}
-            className={classes.startBtn}
-            type="primary"
-            shape="round"
-            size={"large"}
-          >
-            Start !
-          </Button>
+    return (
+        <div className={cx(...innerStyle.inDownContainer)}>
+            <Card bodyStyle={innerStyle?.cardBody} className={classes.card}>
+                <CardBodySplitter setup={setup}>
+                <p>THis will be the question component</p>
+                </CardBodySplitter>
+                {setup ? (
+                    <Countdown innerStyle={innerStyle} startTimer={startTimer} timeoutHandler={timeoutHandler} />
+                ) : (
+                    false
+                )}
+                <Button
+                    onClick={setupHandler}
+                    className={cx(classes.startBtn, { [animations?.fadeOut]: setup })}
+                    type="primary"
+                    shape="round"
+                    size={'large'}
+                >
+                    Start !
+                </Button>
+            </Card>
         </div>
-      </Card>
-    </div>
-  );
-};
+    )
+}
 
-export default QuizzPanel;
-
- {/* <div className={cx(innerStyle?.answersContainer)}>
-            <AnswerSide
-              animationsState={animationsState}
-              setAnimationsState={setAnimationsState}
-              answers={currentQuestion?.answers}
-              type={currentQuestion?.type}
-            />
-          </div>
-          <div className={classes.questionContainer}>
-            <QuestionSide
-              setAnimationsState={setAnimationsState}
-              running={running}
-              question={currentQuestion?.question}
-            />
-          </div> */}
-          {/* <div className={classes.imgContainer}>
-            <Image
-              src={`/humanEvolution.png`}
-              layout="fill"
-              objectFit="contain"
-              alt={`flag`}
-              unoptimized={process.env.NODE_ENV === "development"}
-              className={classes.flagImage}
-            />
-          </div> */}
+export default QuizzPanel
