@@ -19,14 +19,14 @@ export default function Home() {
         Generic: <GenericPickerPanel key={store?.currentPanel} />,
     }
 
-    console.log(store)
+    // console.log(store)
 
     return (
         <div className={classes.container}>
             <Head>
                 <title>FunHistory</title>
                 <meta name="FunHistory website" content="Geopolitic and history website" />
-                <link rel="icon" href="/funHistoryLogo.png" />
+                <link rel="icon" href="/world.png" />
                 <style>{dom.css()}</style>
             </Head>
             {components[store?.currentPanel] || components['Generic']}

@@ -1,3 +1,5 @@
+import { IQuestion, IQuestionState } from "typescript/interfaces/general_interfaces";
+
 const capitalize = (s: any) => {
   if (typeof s === "string") {
     return (s && s[0].toUpperCase() + s.slice(1)) || "";
@@ -23,4 +25,13 @@ const addIdHandler = (data: []) => {
   });
 };
 
-export { capitalize, booleanArrayHandler, addIdHandler };
+const initializeQuestionsState = (questions: IQuestion[]): IQuestionState[] => {
+  return questions.map((el: IQuestion, index: number) => {
+    return {
+        number: index + 1,
+        state: index === 0 ? 'current' : 'upcoming',
+    }
+})
+}
+
+export { capitalize, booleanArrayHandler, addIdHandler, initializeQuestionsState };

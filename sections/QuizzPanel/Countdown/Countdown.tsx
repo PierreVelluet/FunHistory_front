@@ -10,11 +10,17 @@ import cx from 'classnames'
 
 const Countdown = (props: any) => {
     const {
+        setup,
         startTimer,
-        timeoutHandler = () => {},
-        innerStyle,
-    }: { startTimer: boolean; timeoutHandler: any; innerStyle: any } = props
-    const { store  }: any = useGlobalContext()
+        timeoutHandler,
+        timeout,
+    }: { setup: boolean; startTimer: boolean; timeoutHandler: any; timeout: any } = props
+    const { store }: any = useGlobalContext()
+
+    const innerStyle = {
+        countdownContainer: [classes.countdown, animations?.fadeIn, animations?.delay3],
+        countdownAnimationContainer: [{ [animations.attention]: timeout }],
+    }
 
     const renderTime = ({ remainingTime }: { remainingTime: number }) => {
         if (remainingTime === 0) {
@@ -31,11 +37,12 @@ const Countdown = (props: any) => {
     }
 
     return (
+        setup ?
         <div className={cx(...innerStyle?.countdownContainer)}>
             <div className={cx(...innerStyle?.countdownAnimationContainer)}>
                 <CountdownCircleTimer
                     isPlaying={startTimer}
-                    duration={6 || store?.difficulty?.timeout}
+                    duration={1 || store?.difficulty?.timeout}
                     size={150}
                     colors={[
                         ['#004777', 0.33],
@@ -50,6 +57,8 @@ const Countdown = (props: any) => {
                 </CountdownCircleTimer>
             </div>
         </div>
+        :
+        null
     )
 }
 

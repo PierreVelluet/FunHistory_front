@@ -35,6 +35,11 @@ const Reducer = (state: object, action: any) => {
                 ...state,
                 questions: action.payload,
             }
+        case 'SET_QUESTIONS_STATE':
+            return {
+                ...state,
+                questionsState: action.payload,
+            }
         case 'SET_DIFFICULTY':
             return {
                 ...state,

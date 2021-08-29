@@ -1,4 +1,4 @@
-@import (reference) "../../../../styles/variables.less";
+@import (reference) "../../../../../../styles/variables.less";
 
 .answerContainer {
     display: flex;
@@ -33,4 +33,20 @@
     width: 45px;
     margin-right: 10px;
     padding-right: 5px;
+}
+
+.selected {
+    background-color: @thirdary;
+}
+
+.correctAnswer {
+    background-color: green;
+     transition: background-color 1000ms linear;
+     pointer-events: none;
+}
+
+.wrongAnswer {
+    background-color: red;
+     transition: background-color 1000ms linear;
+     pointer-events: none;
 }

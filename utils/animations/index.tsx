@@ -6,6 +6,7 @@ const animations = {
   inLeft: "animate__animated animate__bounceInLeft",
   inUp: "animate__animated animate__bounceInUp",
   flipIn: "animate__animated animate__zoomIn",
+  pulse: "animate__animated animate__pulse",
   fadeInDown: "animate__animated animate__fadeInDown",
   fadeOut: "animate__animated animate__fadeOut",
   fadeOutRight: "animate__animated animate__fadeOutRight",

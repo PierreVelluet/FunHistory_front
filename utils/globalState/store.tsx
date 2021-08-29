@@ -13,6 +13,7 @@ const initialState: IGlobalState = {
     theme: 'History',
     continent: 'Asia',
     questions: [],
+    questionsState: [],
     difficulty: difficulties[1],
 }
 
@@ -29,11 +30,11 @@ const Store = ({ children }: { children: any }) => {
             type: 'SET_COUNTRY',
             payload: string,
         })
-    const setNumberOfQuestions = (string: string) =>
-        dispatch({
-            type: 'SET_NUMBER_OF_QUESTIONS',
-            payload: string,
-        })
+    // const setNumberOfQuestions = (string: string) =>
+    //     dispatch({
+    //         type: 'SET_NUMBER_OF_QUESTIONS',
+    //         payload: string,
+    //     })
     const setCurrentPanel = (string: string) =>
         dispatch({
             type: 'SET_CURRENT_PANEL',
@@ -54,6 +55,11 @@ const Store = ({ children }: { children: any }) => {
             type: 'SET_QUESTIONS',
             payload: object,
         })
+    const setQuestionsState = (object: number) =>
+        dispatch({
+            type: 'SET_QUESTIONS_STATE',
+            payload: object,
+        })
     const setCurrentQuestionNumber = (object: object) =>
         dispatch({
             type: 'SET_CURRENT_QUESTION_NUMBER',
@@ -72,7 +78,7 @@ const Store = ({ children }: { children: any }) => {
                 store,
                 setLoading,
                 setCountry,
-                setNumberOfQuestions,
+                setQuestionsState,
                 setCurrentPanel,
                 setTheme,
                 setContinent,

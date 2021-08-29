@@ -15,7 +15,7 @@ import cx from 'classnames'
 const QuestionsSteps = () => {
     const { store }: any = useGlobalContext()
 
-    const [questionsState, setQuestionsState] = useState<IQuestionState[] | []>([{ number: 1, state: 'current' }])
+    // const [questionsState, setQuestionsState] = useState<IQuestionState[] | []>([{ number: 1, state: 'current' }])
 
     const icons = {
         success: faLightbulb,
@@ -24,23 +24,23 @@ const QuestionsSteps = () => {
         current: faExclamation,
     }
 
-    useEffect(() => {
-        const newQuestionsState = store?.questions?.map((el: IQuestion, index: number) => {
-            // return {
-            //     number: index + 1,
-            //     state: index === 0 ? 'current' : 'upcoming',
-            // }
-            return {
-                number: index + 1,
-                state: index === 2 ? 'current' : index === 0 ? 'success' : index === 1 ? 'fail' : 'upcoming',
-            }
-        })
-        setQuestionsState(newQuestionsState)
-    }, [store?.questions])
+    // useEffect(() => {
+    //     const newQuestionsState = store?.questions?.map((el: IQuestion, index: number) => {
+    //         // return {
+    //         //     number: index + 1,
+    //         //     state: index === 0 ? 'current' : 'upcoming',
+    //         // }
+    //         return {
+    //             number: index + 1,
+    //             state: index === 2 ? 'current' : index === 0 ? 'success' : index === 1 ? 'fail' : 'upcoming',
+    //         }
+    //     })
+    //     setQuestionsState(newQuestionsState)
+    // }, [store?.questions])
 
     return (
         <Steps current={2}>
-            {questionsState?.map((el: IQuestionState) => {
+            {/* {store?.questionsState?.map((el: IQuestionState) => {
                 return (
                     <Steps.Step
                         className={cx(animations?.fadeIn, animations?.delay2)}
@@ -51,7 +51,7 @@ const QuestionsSteps = () => {
                         }
                     />
                 )
-            })}
+            })} */}
         </Steps>
     )
 }

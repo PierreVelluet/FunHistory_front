@@ -22,6 +22,7 @@ export interface IGlobalState {
     theme: string
     continent: string
     questions: object
+    questionsState: object
     currentQuestionNumber: number
     difficulty: object
 }
@@ -38,7 +39,7 @@ export interface IActivity {
     number: number
 }
 
-export interface ISingleChoiceAnswer {
+export interface ISingleOrMultipleChoicesAnswer {
     answer: string
     answerNumber: number
     correct: boolean

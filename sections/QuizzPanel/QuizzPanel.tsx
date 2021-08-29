@@ -7,17 +7,19 @@ import { useGlobalContext } from 'utils/globalState/store'
 import { getRandomQuestionsFromCountry } from 'utils/functions/fetchFunctions'
 
 import Countdown from './Countdown/Countdown'
-import CardBodySplitter from './CardBodySplitter/CardBodySplitter'
-import { IQuestion } from 'typescript/interfaces/general_interfaces'
+import { IQuestion, IQuestionState, ISingleOrMultipleChoicesAnswer } from 'typescript/interfaces/general_interfaces'
+import { initializeQuestionsState } from 'utils/functions/functions'
 
 import classes from './QuizzPanel.module.less'
 import cx from 'classnames'
+import QuestionContainer from './QuestionContainer/QuestionContainer'
 
 const QuizzPanel = () => {
-    const { store, setLoading, setQuestions, setCurrentQuestionNumber }: any = useGlobalContext()
+    const { store, setLoading, setQuestions, setCurrentQuestionNumber, setQuestionsState }: any = useGlobalContext()
 
     const [setup, setSetup] = useState<boolean>(false)
     const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(null)
+    const [selectedAnswers, setSelectedAnswers] = useState<ISingleOrMultipleChoicesAnswer | any>([])
 
     const [startTimer, setStartTimer] = useState<boolean>(false)
     const [timeout, setTimeout] = useState<boolean>(false)
@@ -40,11 +42,42 @@ const QuizzPanel = () => {
 
     const timeoutHandler = () => {
         setTimeout(true)
+        resultHandler()
     }
 
-    const setupHandler = () => {
-        setSetup((prevState) => !prevState)
+    const resultHandler = () => {
+        const rightAnswer: any = currentQuestion?.answers?.filter(
+            (el: ISingleOrMultipleChoicesAnswer) => {
+                if (el?.correct) return el
+            }
+        )[0]
+
+        console.log(selectedAnswers, rightAnswer)
+
+        const success = selectedAnswers?.answerNumber === rightAnswer?.answerNumber ? true : false
+
+        console.log(success)
+
+        const newQuestionsState = store?.questionsState?.map((el: IQuestionState) => {
+            if (currentQuestion?.type === 'SingleChoice') {
+                if (success) {
+                  console.log('passed')
+                    return el?.number === rightAnswer?.answerNumber
+                        ? {
+                              ...el,
+                              state: 'success',
+                          }
+                        : el
+                }
+            }
+            // if (selectedAnswers?.answerNumber)
+        })
+        setQuestionsState(newQuestionsState)
     }
+
+    useEffect(() => {
+      console.log("selectedAnswers are", selectedAnswers)
+    }, [selectedAnswers])
 
     useEffect(() => {
         setCurrentQuestion(store?.questions?.[store?.currentQuestionNumber])
@@ -57,11 +90,15 @@ const QuizzPanel = () => {
             num: store?.difficulty?.numberOfQuestions,
         }
 
-        getRandomQuestionsFromCountry(params).then((response) => {
-            if (!response?.data?.success) return
+        getRandomQuestionsFromCountry(params)
+            .then((response) => {
+                if (!response?.data?.success) return
 
-            setQuestions(response?.data?.results)
-        })
+                setQuestions(response?.data?.results)
+                const newQuestionsState = initializeQuestionsState(response?.data?.results)
+                setQuestionsState(newQuestionsState)
+            })
+            .then(() => setSetup((prevState) => !prevState))
 
         setLoading(false)
     }, [])
@@ -69,23 +106,14 @@ const QuizzPanel = () => {
     return (
         <div className={cx(...innerStyle.inDownContainer)}>
             <Card bodyStyle={innerStyle?.cardBody} className={classes.card}>
-                <CardBodySplitter setup={setup}>
-                <p>THis will be the question component</p>
-                </CardBodySplitter>
-                {setup ? (
-                    <Countdown innerStyle={innerStyle} startTimer={startTimer} timeoutHandler={timeoutHandler} />
-                ) : (
-                    false
-                )}
-                <Button
-                    onClick={setupHandler}
-                    className={cx(classes.startBtn, { [animations?.fadeOut]: setup })}
-                    type="primary"
-                    shape="round"
-                    size={'large'}
-                >
-                    Start !
-                </Button>
+                <QuestionContainer
+                    timeout={timeout}
+                    setStartTimer={setStartTimer}
+                    setup={setup}
+                    question={currentQuestion}
+                    setSelectedAnswers={setSelectedAnswers}
+                />
+                <Countdown setup={setup} timeout={timeout} startTimer={startTimer} timeoutHandler={timeoutHandler} />
             </Card>
         </div>
     )
