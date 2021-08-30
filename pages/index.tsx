@@ -9,17 +9,18 @@ import { useGlobalContext } from 'utils/globalState/store'
 import QuizzPanel from 'sections/QuizzPanel/QuizzPanel'
 import GenericPickerPanel from 'sections/GenericPickerPanel/GenericPickerPanel'
 
+import { panelName, useRecoilValue } from './recoil/panelState'
+
 import classes from './index.module.less'
 
 export default function Home() {
     const { store }: any = useGlobalContext()
+    const panel = useRecoilValue(panelName);
 
     const components: any = {
         QuizzPanel: <QuizzPanel />,
         Generic: <GenericPickerPanel key={store?.currentPanel} />,
     }
-
-    // console.log(store)
 
     return (
         <div className={classes.container}>
