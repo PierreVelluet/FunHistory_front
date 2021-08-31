@@ -62,15 +62,14 @@ const PickableItem = (props: any) => {
     }
 
     const innerOnClickHandler = () => {
-        if (store?.loading || item?.inactive) return
+        // if (store?.loading || item?.inactive) return
         setLoading(true)
         setSelected(true)
         selectItemHandler(item)
     }
-
     return (
         <div
-            onClick={store?.currentPanel != 'Countries' ? innerOnClickHandler : () => {}}
+            onClick={innerOnClickHandler}
             className={cx(...innerStyle.container)}
         >
             <div className={cx(...innerStyle.subcontainer)}>

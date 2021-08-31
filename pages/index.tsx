@@ -1,26 +1,23 @@
-import React from 'react'
+import React from 'react';
 
-import Head from 'next/head'
-import { config, dom } from '@fortawesome/fontawesome-svg-core'
-config.autoAddCss = false
+import Head from 'next/head';
+import { config, dom } from '@fortawesome/fontawesome-svg-core';
+config.autoAddCss = false;
 
-import { useGlobalContext } from 'utils/globalState/store'
+import QuizzPanel from 'sections/QuizzPanel/QuizzPanel';
+import GenericPickerPanel from 'sections/GenericPickerPanel/GenericPickerPanel';
 
-import QuizzPanel from 'sections/QuizzPanel/QuizzPanel'
-import GenericPickerPanel from 'sections/GenericPickerPanel/GenericPickerPanel'
+import { panelName, useRecoilValue } from '../recoil/panelState';
 
-import { panelName, useRecoilValue } from './recoil/panelState'
-
-import classes from './index.module.less'
+import classes from './index.module.less';
 
 export default function Home() {
-    const { store }: any = useGlobalContext()
     const panel = useRecoilValue(panelName);
 
     const components: any = {
         QuizzPanel: <QuizzPanel />,
-        Generic: <GenericPickerPanel key={store?.currentPanel} />,
-    }
+        Generic: <GenericPickerPanel key={panel} />,
+    };
 
     return (
         <div className={classes.container}>
@@ -30,7 +27,7 @@ export default function Home() {
                 <link rel="icon" href="/world.png" />
                 <style>{dom.css()}</style>
             </Head>
-            {components[store?.currentPanel] || components['Generic']}
+            {components[panel] || components['Generic']}
         </div>
-    )
+    );
 }

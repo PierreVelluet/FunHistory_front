@@ -5,10 +5,10 @@ import { continents } from "utils/staticData/continents";
 
 
 const items:any =  {
-    Continents: continents,
-    Countries: [],
-    Themes: themes,
-    Difficulties: difficulties,
+    continents,
+    countries: [],
+    themes,
+    difficulties,
   };
 
 export default items;
