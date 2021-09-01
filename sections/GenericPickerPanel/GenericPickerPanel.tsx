@@ -7,7 +7,7 @@ import staticData from 'utils/staticData';
 import { booleanArrayHandler, addIdHandler } from 'utils/functions/functions';
 import { getAllCountriesByContinent } from 'utils/functions/fetchFunctions';
 
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { loadingState } from 'recoil/loadingState';
 import { settingsStateSelector } from 'recoil/settingsState';
 
@@ -15,7 +15,6 @@ import classes from './GenericPickerPanel.module.less';
 import { ISettings } from 'typescript/interfaces/general_interfaces';
 
 const GenericPickerPanel = () => {
-
     const [loading, setLoading] = useRecoilState<boolean>(loadingState);
     const [settings, setSettings] = useRecoilState<any>(settingsStateSelector);
 
@@ -23,7 +22,7 @@ const GenericPickerPanel = () => {
     const boolArray: boolean[] = Array(items?.length || 3).fill(false);
     const [out, setOut] = useState<boolean[]>(boolArray);
 
-    console.log(settings);
+    console.log(loading);
 
     const selectItemHandler = (selectedItem: PickableItemType) => {
         const newOut: boolean[] = booleanArrayHandler(out, selectedItem?.id);
@@ -36,20 +35,20 @@ const GenericPickerPanel = () => {
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
-            console.log('ok')
         }, 3000);
     }, [settings?.panel]);
 
     useEffect(() => {
-        if (settings?.panel != 'Countries') return;
-        (async (): Promise<void> => {
-            await getAllCountriesByContinent(settings?.continents)
-                .then((response: any) => response?.data?.data)
-                .then((data: any) => addIdHandler(data))
-                .then((data: any) => {
-                    setItems(data);
-                });
-        })();
+        if (settings?.panel === 'countries') {
+            (async (): Promise<void> => {
+                await getAllCountriesByContinent(settings?.continents)
+                    .then((response: any) => response?.data?.data)
+                    .then((data: any) => addIdHandler(data))
+                    .then((data: any) => {
+                        setItems(data);
+                    });
+            })();
+        }
     }, []);
 
     return (

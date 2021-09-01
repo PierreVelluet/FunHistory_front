@@ -8,7 +8,9 @@ import { PickableItemType } from 'typescript/interfaces/pickableItems_interfaces
 
 import CustomTooltip from '../CustomTooltip/CustomTooltip'
 
-import { useGlobalContext } from 'utils/globalState/store'
+import { useRecoilState } from 'recoil';
+import { loadingState } from 'recoil/loadingState';
+import { settingsStateSelector } from 'recoil/settingsState';
 
 import classes from './CardBody.module.less'
 import cx from "classnames";
@@ -22,18 +24,19 @@ const CardBody = (props: any) => {
         innerOnClickHandler: any
     } = props
 
-    const { store }: any = useGlobalContext()
+    const [loading, setLoading] = useRecoilState<boolean>(loadingState);
+    const [settings, setSettings] = useRecoilState<any>(settingsStateSelector);
 
     return (
         <>
             <Tooltip
                 destroyTooltipOnHide
-                key={store?.country}
+                key={settings?.country}
                 trigger="click"
                 color="#181818"
                 placement="right"
                 title={
-                    store?.currentPanel === 'Countries' ? (
+                    settings?.panel === 'countries' ? (
                         <CustomTooltip country={item} innerOnClickHandler={innerOnClickHandler} arrowPointAtCenter />
                     ) : (
                         false

@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
-import { Button } from 'antd'
+import { Button } from 'antd';
 
-import InformationItems from './InformationsItem/InformationsItem'
+import InformationItems from './InformationsItem/InformationsItem';
 
-import { useGlobalContext } from 'utils/globalState/store'
-import animations from 'utils/animations'
+import animations from 'utils/animations';
 
-import classes from './CustomTooltip.module.less'
-import cx from 'classnames'
+import { useRecoilState } from 'recoil';
+import { loadingState } from 'recoil/loadingState';
+
+import classes from './CustomTooltip.module.less';
+import cx from 'classnames';
 
 const CustomTooltip = (props: any) => {
-    const { country, innerOnClickHandler }: { country: any; innerOnClickHandler: any } = props
-    const { store }: any = useGlobalContext()
+    const { country, innerOnClickHandler }: { country: any; innerOnClickHandler: any } = props;
 
-    const [buttonVisibility, setButtonVisibility] = useState<boolean>(false)
-    const [countryInformations, setCountryInformations] = useState<string[][]>([])
-    const actualInformations: string[][] = Object.entries(country)
+    const [loading, setLoading] = useRecoilState<boolean>(loadingState);
+
+    const [buttonVisibility, setButtonVisibility] = useState<boolean>(false);
+    const [countryInformations, setCountryInformations] = useState<string[][]>([]);
+    const actualInformations: string[][] = Object.entries(country);
 
     let sortCountryInformations = (): void => {
         const desiredInformations: string[] = [
@@ -33,33 +36,33 @@ const CustomTooltip = (props: any) => {
             'timezone',
             'establishment',
             'greeting',
-        ]
-        const result: string[][] = []
+        ];
+        const result: string[][] = [];
         desiredInformations.map((desiredString: string) => {
             actualInformations?.forEach((allInfoElement: string[]) => {
-                if (desiredString === allInfoElement?.[0]) result.push(allInfoElement)
-            })
-        })
-        setCountryInformations(result)
-    }
+                if (desiredString === allInfoElement?.[0]) result.push(allInfoElement);
+            });
+        });
+        setCountryInformations(result);
+    };
 
     useEffect(() => {
-        sortCountryInformations()
-        const timeout = actualInformations?.length * 200
+        sortCountryInformations();
+        const timeout = actualInformations?.length * 200;
         setTimeout(() => {
-            setButtonVisibility(true)
-        }, timeout)
-    }, [])
+            setButtonVisibility(true);
+        }, timeout);
+    }, []);
 
     return (
         <div className={cx(classes.container)}>
             {countryInformations.map((el: string[], index: number) => {
-                return <InformationItems toolTipPlacement={'left'} key={el?.[0]} infos={el} index={index} />
+                return <InformationItems toolTipPlacement={'left'} key={el?.[0]} infos={el} index={index} />;
             })}
             <div className={classes.btnContainer}>
                 {buttonVisibility ? (
                     <Button
-                        onClick={!store?.loading ? innerOnClickHandler : () => {}}
+                        onClick={!loading ? innerOnClickHandler : () => {}}
                         type="primary"
                         className={cx(classes.btn, animations?.fadeIn)}
                     >
@@ -68,7 +71,7 @@ const CustomTooltip = (props: any) => {
                 ) : null}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CustomTooltip
+export default CustomTooltip;
