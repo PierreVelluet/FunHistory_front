@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+import { ISettings } from 'typescript/interfaces/general_interfaces';
 
 type panelName = {
     [key: string]: string;
@@ -11,8 +12,8 @@ const nextPanel: panelName = {
     difficulties: 'QuizzPanel',
 };
 
-const settingsState = atom({
-    key: 'stepsState',
+const settingsState = atom<ISettings>({
+    key: 'SettingsState',
     default: {
         panel: 'continents',
         continents: '',
@@ -22,8 +23,8 @@ const settingsState = atom({
     },
 });
 
-const settingsStateSelector = selector({
-    key: 'StepsSelector',
+const settingsStateSelector = selector<ISettings>({
+    key: 'SettingsStateSelector',
     get: ({ get }) => get(settingsState),
     set: ({ set, get }, newValue) => {
         const currentPanel: string = get(settingsState).panel;

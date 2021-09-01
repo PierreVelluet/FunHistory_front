@@ -27,6 +27,16 @@ export interface IGlobalState {
     difficulty: object
 }
 
+
+export interface ISettings {
+    [key: string] : string | object
+    panel: string;
+    continents: string;
+    country: string;
+    theme: string;
+    difficulty: object;
+}
+
 export interface IFetchResult {
     success: boolean
     results: IQuestion[]

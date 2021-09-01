@@ -4,25 +4,22 @@ import PickableItem from './PickableItem/PickableItem';
 
 import { PickableItemType } from 'typescript/interfaces/pickableItems_interfaces';
 import staticData from 'utils/staticData';
-import { useGlobalContext } from 'utils/globalState/store';
 import { booleanArrayHandler, addIdHandler } from 'utils/functions/functions';
 import { getAllCountriesByContinent } from 'utils/functions/fetchFunctions';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { loadingState } from 'recoil/loadingState';
-import { panelName } from 'recoil/panelState';
 import { settingsStateSelector } from 'recoil/settingsState';
 
 import classes from './GenericPickerPanel.module.less';
+import { ISettings } from 'typescript/interfaces/general_interfaces';
 
 const GenericPickerPanel = () => {
-    const { store, setContinent, setCountry, setTheme, setDifficulty }: any = useGlobalContext();
 
     const [loading, setLoading] = useRecoilState<boolean>(loadingState);
-    const [panel, setPanel] = useRecoilState<string>(panelName);
-    const [settings, setSettings] = useRecoilState(settingsStateSelector);
+    const [settings, setSettings] = useRecoilState<any>(settingsStateSelector);
 
-    const [items, setItems] = useState<PickableItemType[]>(staticData[panel]);
+    const [items, setItems] = useState<PickableItemType[]>(staticData[settings?.panel]);
     const boolArray: boolean[] = Array(items?.length || 3).fill(false);
     const [out, setOut] = useState<boolean[]>(boolArray);
 
@@ -41,12 +38,12 @@ const GenericPickerPanel = () => {
             setLoading(false);
             console.log('ok')
         }, 3000);
-    }, [panel]);
+    }, [settings?.panel]);
 
     useEffect(() => {
-        if (panel != 'Countries') return;
+        if (settings?.panel != 'Countries') return;
         (async (): Promise<void> => {
-            await getAllCountriesByContinent(store?.continent)
+            await getAllCountriesByContinent(settings?.continents)
                 .then((response: any) => response?.data?.data)
                 .then((data: any) => addIdHandler(data))
                 .then((data: any) => {

@@ -7,16 +7,17 @@ config.autoAddCss = false;
 import QuizzPanel from 'sections/QuizzPanel/QuizzPanel';
 import GenericPickerPanel from 'sections/GenericPickerPanel/GenericPickerPanel';
 
-import { panelName, useRecoilValue } from '../recoil/panelState';
+import {useRecoilValue} from "recoil"
+import { settingsStateSelector } from 'recoil/settingsState';
 
 import classes from './index.module.less';
 
 export default function Home() {
-    const panel = useRecoilValue(panelName);
+    const settings = useRecoilValue(settingsStateSelector);
 
     const components: any = {
         QuizzPanel: <QuizzPanel />,
-        Generic: <GenericPickerPanel key={panel} />,
+        Generic: <GenericPickerPanel key={settings?.panel} />,
     };
 
     return (
@@ -27,7 +28,7 @@ export default function Home() {
                 <link rel="icon" href="/world.png" />
                 <style>{dom.css()}</style>
             </Head>
-            {components[panel] || components['Generic']}
+            {components[settings?.panel] || components['Generic']}
         </div>
     );
 }
