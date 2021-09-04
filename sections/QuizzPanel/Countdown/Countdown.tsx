@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { CountdownCircleTimer } from 'react-countdown-circle-timer'
-import { useGlobalContext } from 'utils/globalState/store'
 
 import animations from 'utils/animations'
 
@@ -15,7 +14,6 @@ const Countdown = (props: any) => {
         timeoutHandler,
         timeout,
     }: { setup: boolean; startTimer: boolean; timeoutHandler: any; timeout: any } = props
-    const { store }: any = useGlobalContext()
 
     const innerStyle = {
         countdownContainer: [classes.countdown, animations?.fadeIn, animations?.delay3],

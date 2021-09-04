@@ -7,7 +7,7 @@ config.autoAddCss = false;
 import QuizzPanel from 'sections/QuizzPanel/QuizzPanel';
 import GenericPickerPanel from 'sections/GenericPickerPanel/GenericPickerPanel';
 
-import {useRecoilValue} from "recoil"
+import { useRecoilValue } from 'recoil';
 import { settingsStateSelector } from 'recoil/settingsState';
 
 import classes from './index.module.less';

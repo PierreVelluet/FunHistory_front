@@ -12,7 +12,6 @@ import { loadingState } from 'recoil/loadingState';
 import { settingsStateSelector } from 'recoil/settingsState';
 
 import classes from './GenericPickerPanel.module.less';
-import { ISettings } from 'typescript/interfaces/general_interfaces';
 
 const GenericPickerPanel = () => {
     const [loading, setLoading] = useRecoilState<boolean>(loadingState);
@@ -22,12 +21,11 @@ const GenericPickerPanel = () => {
     const boolArray: boolean[] = Array(items?.length || 3).fill(false);
     const [out, setOut] = useState<boolean[]>(boolArray);
 
-    console.log(loading);
-
     const selectItemHandler = (selectedItem: PickableItemType) => {
         const newOut: boolean[] = booleanArrayHandler(out, selectedItem?.id);
         setOut(newOut);
         setTimeout(() => {
+            // Set both value of clicked item, and next panel.
             setSettings(selectedItem?.name);
         }, 3000);
     };

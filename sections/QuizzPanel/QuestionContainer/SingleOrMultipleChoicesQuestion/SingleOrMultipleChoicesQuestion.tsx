@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useGlobalContext } from 'utils/globalState/store'
 import classes from './SingleOrMultipleChoicesQuestion.module.less'
 import cx from 'classnames'
 import { IQuestion } from 'typescript/interfaces/general_interfaces'
@@ -8,7 +7,6 @@ import AnswerSide from './AnswerSide/AnswerSide'
 
 const SingleOrMultipleChoicesQuestion = (props: any) => {
     const { question, setup, setStartTimer, setSelectedAnswers,timeout }: { question: IQuestion; setup: boolean; setStartTimer:any, setSelectedAnswers:any, timeout:boolean } = props
-    const { store, setLoading, setQuestions, setCurrentQuestionNumber }: any = useGlobalContext()
 
     const [answersIn, setAnswersIn] = useState<boolean>(false)
     const [questionIn, setQuestionIn] = useState<boolean>(false)

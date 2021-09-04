@@ -1,28 +1,34 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 
-import { Card, Button } from 'antd'
+import { Card, Button } from 'antd';
 
-import animations from 'utils/animations'
-import { useGlobalContext } from 'utils/globalState/store'
-import { getRandomQuestionsFromCountry } from 'utils/functions/fetchFunctions'
+import animations from 'utils/animations';
+import { getRandomQuestionsFromCountry } from 'utils/functions/fetchFunctions';
 
-import Countdown from './Countdown/Countdown'
-import { IQuestion, IQuestionState, ISingleOrMultipleChoicesAnswer } from 'typescript/interfaces/general_interfaces'
-import { initializeQuestionsState } from 'utils/functions/functions'
+import Countdown from './Countdown/Countdown';
+import { IQuestion, IQuestionState, ISingleOrMultipleChoicesAnswer } from 'typescript/interfaces/general_interfaces';
+import { initializeQuestionsState } from 'utils/functions/functions';
 
-import classes from './QuizzPanel.module.less'
-import cx from 'classnames'
-import QuestionContainer from './QuestionContainer/QuestionContainer'
+import { useRecoilState } from 'recoil';
+import { loadingState } from 'recoil/loadingState';
+import { quizzStateSelector } from 'recoil/quizzState';
+import { settingsStateSelector } from 'recoil/settingsState';
+
+import classes from './QuizzPanel.module.less';
+import cx from 'classnames';
+import QuestionContainer from './QuestionContainer/QuestionContainer';
 
 const QuizzPanel = () => {
-    const { store, setLoading, setQuestions, setCurrentQuestionNumber, setQuestionsState }: any = useGlobalContext()
+    const [loading, setLoading] = useRecoilState<boolean>(loadingState);
+    const [settings, setSettings] = useRecoilState<any>(settingsStateSelector);
+    const [quizzState, setQuizzState] = useRecoilState<any>(quizzStateSelector);
 
-    const [setup, setSetup] = useState<boolean>(false)
-    const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(null)
-    const [selectedAnswers, setSelectedAnswers] = useState<ISingleOrMultipleChoicesAnswer | any>([])
+    const [setup, setSetup] = useState<boolean>(false);
+    const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(null);
+    const [selectedAnswers, setSelectedAnswers] = useState<ISingleOrMultipleChoicesAnswer | any>([]);
 
-    const [startTimer, setStartTimer] = useState<boolean>(false)
-    const [timeout, setTimeout] = useState<boolean>(false)
+    const [startTimer, setStartTimer] = useState<boolean>(false);
+    const [timeout, setTimeout] = useState<boolean>(false);
 
     const innerStyle = {
         inDownContainer: [animations.inDown],
@@ -38,70 +44,68 @@ const QuizzPanel = () => {
         countdownContainer: [classes.countdownContainer, animations?.fadeIn, animations?.delay3],
         countdownAnimationContainer: [{ [animations.attention]: timeout }],
         answersContainer: [classes.answersContainer],
-    }
+    };
 
     const timeoutHandler = () => {
-        setTimeout(true)
-        resultHandler()
-    }
+        setTimeout(true);
+        resultHandler();
+    };
 
     const resultHandler = () => {
-        const rightAnswer: any = currentQuestion?.answers?.filter(
-            (el: ISingleOrMultipleChoicesAnswer) => {
-                if (el?.correct) return el
-            }
-        )[0]
+        const rightAnswer: any = currentQuestion?.answers?.filter((el: ISingleOrMultipleChoicesAnswer) => {
+            if (el?.correct) return el;
+        })[0];
 
-        console.log(selectedAnswers, rightAnswer)
+        console.log(selectedAnswers, rightAnswer);
 
-        const success = selectedAnswers?.answerNumber === rightAnswer?.answerNumber ? true : false
+        const success = selectedAnswers?.answerNumber === rightAnswer?.answerNumber ? true : false;
 
-        console.log(success)
+        console.log(success);
 
-        const newQuestionsState = store?.questionsState?.map((el: IQuestionState) => {
-            if (currentQuestion?.type === 'SingleChoice') {
-                if (success) {
-                  console.log('passed')
-                    return el?.number === rightAnswer?.answerNumber
-                        ? {
-                              ...el,
-                              state: 'success',
-                          }
-                        : el
-                }
-            }
-            // if (selectedAnswers?.answerNumber)
-        })
-        setQuestionsState(newQuestionsState)
-    }
+        // const newQuestionsState = store?.questionsState?.map((el: IQuestionState) => {
+        //     if (currentQuestion?.type === 'SingleChoice') {
+        //         if (success) {
+        //           console.log('passed')
+        //             return el?.number === rightAnswer?.answerNumber
+        //                 ? {
+        //                       ...el,
+        //                       state: 'success',
+        //                   }
+        //                 : el
+        //         }
+        //     }
+        //     // if (selectedAnswers?.answerNumber)
+        // })
+        // setQuestionsState(newQuestionsState)
+    };
 
     useEffect(() => {
-      console.log("selectedAnswers are", selectedAnswers)
-    }, [selectedAnswers])
+        console.log('selectedAnswers are', selectedAnswers);
+    }, [selectedAnswers]);
 
     useEffect(() => {
-        setCurrentQuestion(store?.questions?.[store?.currentQuestionNumber])
-    }, [store?.currentQuestionNumber, store?.questions])
+        setCurrentQuestion(quizzState?.questions?.[quizzState?.currentQuestionNumber]);
+    }, [quizzState?.currentQuestionNumber, quizzState?.questions]);
 
     useEffect(() => {
         const params: object = {
-            country: store?.country,
-            theme: store?.theme,
-            num: store?.difficulty?.numberOfQuestions,
-        }
+            country: settings?.country,
+            theme: settings?.theme,
+            num: settings?.difficulty?.numberOfQuestions,
+        };
 
         getRandomQuestionsFromCountry(params)
             .then((response) => {
-                if (!response?.data?.success) return
+                if (!response?.data?.success) return;
 
-                setQuestions(response?.data?.results)
-                const newQuestionsState = initializeQuestionsState(response?.data?.results)
-                setQuestionsState(newQuestionsState)
+                setQuizzState({ questions: response?.data?.results });
+                const newQuestionsState = initializeQuestionsState(response?.data?.results);
+                setQuizzState(newQuestionsState);
             })
-            .then(() => setSetup((prevState) => !prevState))
+            .then(() => setSetup((prevState) => !prevState));
 
-        setLoading(false)
-    }, [])
+        setLoading(false);
+    }, []);
 
     return (
         <div className={cx(...innerStyle.inDownContainer)}>
@@ -116,7 +120,7 @@ const QuizzPanel = () => {
                 <Countdown setup={setup} timeout={timeout} startTimer={startTimer} timeoutHandler={timeoutHandler} />
             </Card>
         </div>
-    )
-}
+    );
+};
 
-export default QuizzPanel
+export default QuizzPanel;

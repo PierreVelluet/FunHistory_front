@@ -67,7 +67,6 @@ const PickableItem = (props: any) => {
     };
 
     const innerOnClickHandler = () => {
-        console.log("clicked")
         if (loading || item.inactive) return;
         setLoading(true);
         setSelected(true);

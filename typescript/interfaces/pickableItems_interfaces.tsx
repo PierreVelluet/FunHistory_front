@@ -28,7 +28,6 @@ export interface ICountry extends ICardItem {
 export interface ITheme extends ICardItem {}
 
 export interface IDifficulty extends ICardItem {
-  numberOfQuestions: number;
   timeout: number;
 }
 

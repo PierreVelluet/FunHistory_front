@@ -4,7 +4,6 @@ import Steps from 'rc-steps'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faQuestion, faExclamation } from '@fortawesome/free-solid-svg-icons'
 
-import { useGlobalContext } from 'utils/globalState/store'
 import { IQuestion, IQuestionState } from 'typescript/interfaces/general_interfaces'
 import animations from 'utils/animations'
 
@@ -13,7 +12,6 @@ import classes from './QuestionsSteps.module.less'
 import cx from 'classnames'
 
 const QuestionsSteps = () => {
-    const { store }: any = useGlobalContext()
 
     // const [questionsState, setQuestionsState] = useState<IQuestionState[] | []>([{ number: 1, state: 'current' }])
 

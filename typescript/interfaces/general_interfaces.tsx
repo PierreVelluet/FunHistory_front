@@ -15,19 +15,6 @@ export interface ICountry {
     flagImage: string
 }
 
-export interface IGlobalState {
-    loading: boolean
-    country: string
-    currentPanel: string
-    theme: string
-    continent: string
-    questions: object
-    questionsState: object
-    currentQuestionNumber: number
-    difficulty: object
-}
-
-
 export interface ISettings {
     [key: string] : string | object
     panel: string;
@@ -35,6 +22,12 @@ export interface ISettings {
     country: string;
     theme: string;
     difficulty: object;
+}
+
+export interface IQuizzState {
+    questions: object;
+    currentQuestionNumber: number;
+    questionsState: IQuestionState[];
 }
 
 export interface IFetchResult {
@@ -74,7 +67,6 @@ export interface IQuestionState {
 export interface IDifficulty {
     name: string
     difficultyNumber: number
-    numberOfquestions: number
     timeout: number
     backgroundImage: string
 }

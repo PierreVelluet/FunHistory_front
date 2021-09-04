@@ -1,5 +1,4 @@
 import React from 'react'
-import { useGlobalContext } from 'utils/globalState/store'
 import classes from './QuestionContainer.module.less'
 import cx from 'classnames'
 import { IQuestion } from 'typescript/interfaces/general_interfaces'
@@ -11,7 +10,6 @@ const QuestionContainer = (props: any) => {
         question,
         setup,
     }: { question: IQuestion; setup: boolean;} = props
-    const { store, setLoading, setQuestions, setCurrentQuestionNumber }: any = useGlobalContext()
 
     const components: any = {
         SingleChoice: <SingleorMultipleChoicesQuestion {...props} />,

@@ -1,48 +1,30 @@
-import React from 'react'
+import React from 'react';
 
-import Image from 'next/image'
-import { Tooltip } from 'antd'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock } from '@fortawesome/free-solid-svg-icons'
-import { PickableItemType } from 'typescript/interfaces/pickableItems_interfaces'
+import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { PickableItemType } from 'typescript/interfaces/pickableItems_interfaces';
 
-import CustomTooltip from '../CustomTooltip/CustomTooltip'
+import WrappingTooltip from './WrappingTooltip/WrappingTooltip';
 
 import { useRecoilState } from 'recoil';
 import { loadingState } from 'recoil/loadingState';
 import { settingsStateSelector } from 'recoil/settingsState';
 
-import classes from './CardBody.module.less'
-import cx from "classnames";
+import classes from './CardBody.module.less';
 
 const CardBody = (props: any) => {
     const {
         item,
         innerOnClickHandler,
     }: {
-        item: PickableItemType
-        innerOnClickHandler: any
-    } = props
-
-    const [loading, setLoading] = useRecoilState<boolean>(loadingState);
-    const [settings, setSettings] = useRecoilState<any>(settingsStateSelector);
+        item: PickableItemType;
+        innerOnClickHandler: any;
+    } = props;
 
     return (
         <>
-            <Tooltip
-                destroyTooltipOnHide
-                key={settings?.country}
-                trigger="click"
-                color="#181818"
-                placement="right"
-                title={
-                    settings?.panel === 'countries' ? (
-                        <CustomTooltip country={item} innerOnClickHandler={innerOnClickHandler} arrowPointAtCenter />
-                    ) : (
-                        false
-                    )
-                }
-            >
+            <WrappingTooltip item={item} innerOnClickHandler={innerOnClickHandler}>
                 <Image
                     src={item?.bgImage ?? '/placeholder.png'}
                     layout="fill"
@@ -50,7 +32,7 @@ const CardBody = (props: any) => {
                     alt={`${item?.name} picture`}
                     unoptimized={process.env.NODE_ENV === 'development'}
                 />
-            </Tooltip>
+            </WrappingTooltip>
             <div className={classes.unavailableText}>
                 {item?.inactive ? (
                     <span className="me-2">
@@ -62,7 +44,7 @@ const CardBody = (props: any) => {
                 )}
             </div>
         </>
-    )
-}
+    );
+};
 
-export default CardBody
+export default CardBody;
