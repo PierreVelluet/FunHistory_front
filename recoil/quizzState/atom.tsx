@@ -3,7 +3,7 @@ import { IQuizzState } from 'typescript/interfaces/general_interfaces';
 
 const quizzState = atom<IQuizzState>({
     key: 'QuizzState',
-    default: { questions: [], currentQuestionNumber: 0, questionsState: [] },
+    default: { questions: [], currentQuestion: null, currentQuestionNumber: 0, questionsState: [], selectedAnswers: null },
 });
 
 const quizzStateSelector = selector<IQuizzState>({

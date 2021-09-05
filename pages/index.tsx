@@ -20,6 +20,8 @@ export default function Home() {
         Generic: <GenericPickerPanel key={settings?.panel} />,
     };
 
+    // console.log("settings are:", settings)
+
     return (
         <div className={classes.container}>
             <Head>

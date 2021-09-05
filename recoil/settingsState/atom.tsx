@@ -15,11 +15,18 @@ const nextPanel: panelName = {
 const settingsState = atom<ISettings>({
     key: 'SettingsState',
     default: {
-        panel: 'continents',
-        continents: '',
-        country: '',
-        theme: '',
-        difficulty: {},
+        panel: 'QuizzPanel',
+        continents: 'Asia',
+        country: 'Japan',
+        theme: 'History',
+        difficulty: {
+            name: 'Hard',
+            id: 3,
+            timeout: 10,
+            bgImage: '/hard.jpeg',
+            step: 'IDifficulty',
+            nextStep: 'QuizzPanel',
+        },
     },
 });
 

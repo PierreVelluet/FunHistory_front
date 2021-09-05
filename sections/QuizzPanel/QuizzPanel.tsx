@@ -24,9 +24,6 @@ const QuizzPanel = () => {
     const [quizzState, setQuizzState] = useRecoilState<any>(quizzStateSelector);
 
     const [setup, setSetup] = useState<boolean>(false);
-    const [currentQuestion, setCurrentQuestion] = useState<IQuestion | null>(null);
-    const [selectedAnswers, setSelectedAnswers] = useState<ISingleOrMultipleChoicesAnswer | any>([]);
-
     const [startTimer, setStartTimer] = useState<boolean>(false);
     const [timeout, setTimeout] = useState<boolean>(false);
 
@@ -52,46 +49,65 @@ const QuizzPanel = () => {
     };
 
     const resultHandler = () => {
-        const rightAnswer: any = currentQuestion?.answers?.filter((el: ISingleOrMultipleChoicesAnswer) => {
-            if (el?.correct) return el;
-        })[0];
+        const rightAnswers: ISingleOrMultipleChoicesAnswer[] = quizzState?.currentQuestion?.answers?.filter(
+            (el: ISingleOrMultipleChoicesAnswer) => {
+                if (el?.correct) return el;
+            }
+        )[0];
 
-        console.log(selectedAnswers, rightAnswer);
+        const selectedAnswers: ISingleOrMultipleChoicesAnswer[] = quizzState?.selectedAnswers?.answers?.filter(
+            (el: ISingleOrMultipleChoicesAnswer) => {
+                if (el?.correct) return el;
+            }
+        );
 
-        const success = selectedAnswers?.answerNumber === rightAnswer?.answerNumber ? true : false;
+        const compareQuestionsAndAnswers = (
+            rightAnswers: ISingleOrMultipleChoicesAnswer[],
+            selectedAnswers: ISingleOrMultipleChoicesAnswer[]
+        ): boolean => {
+            selectedAnswers?.forEach((el: ISingleOrMultipleChoicesAnswer, index: number) => {
+                if (!rightAnswers?.some((rightAnswer) => rightAnswer === el)) return false;
+            });
 
-        console.log(success);
+            return true;
+        };
 
-        // const newQuestionsState = store?.questionsState?.map((el: IQuestionState) => {
-        //     if (currentQuestion?.type === 'SingleChoice') {
+        const isSuccess: boolean = compareQuestionsAndAnswers(rightAnswers, selectedAnswers);
+
+        console.log("isSuccess is:", isSuccess)
+
+        // const success = quizzState?.selectedAnswers?.answerNumber === rightAnswers?.answerNumber ? true : false;
+
+        // const newQuestionsState = quizzState?.questionsState?.map((el: IQuestionState) => {
+        //     if (quizzState?.currentQuestion?.type === 'SingleChoice') {
         //         if (success) {
-        //           console.log('passed')
-        //             return el?.number === rightAnswer?.answerNumber
+        //             console.log('passed');
+        //             return el?.number === rightAnswers?.answerNumber
         //                 ? {
         //                       ...el,
         //                       state: 'success',
         //                   }
-        //                 : el
+        //                 : el;
         //         }
         //     }
-        //     // if (selectedAnswers?.answerNumber)
-        // })
-        // setQuestionsState(newQuestionsState)
+        //     // if (quizzState?.selectedAnswers?.answerNumber)
+        // });
+        // setQuizzState({ questionsState: newQuestionsState });
     };
 
     useEffect(() => {
-        console.log('selectedAnswers are', selectedAnswers);
-    }, [selectedAnswers]);
+        console.log('selectedAnswers are', quizzState?.selectedAnswers);
+    }, [quizzState?.selectedAnswers]);
 
     useEffect(() => {
-        setCurrentQuestion(quizzState?.questions?.[quizzState?.currentQuestionNumber]);
+        setQuizzState({ currentQuestion: quizzState?.questions?.[quizzState?.currentQuestionNumber] });
     }, [quizzState?.currentQuestionNumber, quizzState?.questions]);
 
     useEffect(() => {
         const params: object = {
             country: settings?.country,
             theme: settings?.theme,
-            num: settings?.difficulty?.numberOfQuestions,
+            num: 10,
         };
 
         getRandomQuestionsFromCountry(params)
@@ -100,23 +116,19 @@ const QuizzPanel = () => {
 
                 setQuizzState({ questions: response?.data?.results });
                 const newQuestionsState = initializeQuestionsState(response?.data?.results);
-                setQuizzState(newQuestionsState);
+                setQuizzState({ questionsState: newQuestionsState });
             })
             .then(() => setSetup((prevState) => !prevState));
 
         setLoading(false);
     }, []);
 
+    console.log('quizzState is:', quizzState);
+
     return (
         <div className={cx(...innerStyle.inDownContainer)}>
             <Card bodyStyle={innerStyle?.cardBody} className={classes.card}>
-                <QuestionContainer
-                    timeout={timeout}
-                    setStartTimer={setStartTimer}
-                    setup={setup}
-                    question={currentQuestion}
-                    setSelectedAnswers={setSelectedAnswers}
-                />
+                <QuestionContainer timeout={timeout} setStartTimer={setStartTimer} setup={setup} />
                 <Countdown setup={setup} timeout={timeout} startTimer={startTimer} timeoutHandler={timeoutHandler} />
             </Card>
         </div>

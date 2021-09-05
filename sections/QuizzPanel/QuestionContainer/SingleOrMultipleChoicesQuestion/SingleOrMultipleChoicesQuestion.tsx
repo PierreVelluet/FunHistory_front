@@ -5,9 +5,16 @@ import { IQuestion } from 'typescript/interfaces/general_interfaces'
 import QuestionSide from './QuestionSide/QuestionSide'
 import AnswerSide from './AnswerSide/AnswerSide'
 
-const SingleOrMultipleChoicesQuestion = (props: any) => {
-    const { question, setup, setStartTimer, setSelectedAnswers,timeout }: { question: IQuestion; setup: boolean; setStartTimer:any, setSelectedAnswers:any, timeout:boolean } = props
+import { useRecoilState } from 'recoil';
+import { loadingState } from 'recoil/loadingState';
+import { quizzStateSelector } from 'recoil/quizzState';
+import { settingsStateSelector } from 'recoil/settingsState';
 
+
+const SingleOrMultipleChoicesQuestion = (props: any) => {
+    const { setup, setStartTimer, timeout }: { setup: boolean; setStartTimer:any, timeout:boolean } = props
+
+    const [quizzState, setQuizzState] = useRecoilState<any>(quizzStateSelector);
     const [answersIn, setAnswersIn] = useState<boolean>(false)
     const [questionIn, setQuestionIn] = useState<boolean>(false)
 
@@ -20,10 +27,10 @@ const SingleOrMultipleChoicesQuestion = (props: any) => {
     return (
         <div className={classes.mainContainer}>
             <div className={classes.answersSide}>
-                {answersIn ? <AnswerSide timeout={timeout} setSelectedAnswers={setSelectedAnswers} setStartTimer={setStartTimer} answers={question?.answers} setup={setup} type={question?.type} /> : null}
+                {answersIn ? <AnswerSide timeout={timeout} setStartTimer={setStartTimer} setup={setup} /> : null}
             </div>
             <div className={classes.questionSide}>
-                {questionIn ? <QuestionSide setAnswersIn={setAnswersIn} question={question?.question} /> : null}
+                {questionIn ? <QuestionSide setAnswersIn={setAnswersIn} /> : null}
             </div>
         </div>
     )

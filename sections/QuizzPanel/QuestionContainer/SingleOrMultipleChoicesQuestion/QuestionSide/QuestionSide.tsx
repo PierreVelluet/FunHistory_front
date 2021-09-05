@@ -1,18 +1,25 @@
-import React from 'react'
+import React from 'react';
 
-import Typist from 'react-typist'
+import Typist from 'react-typist';
 
-import classes from './QuestionSide.module.less'
-import cx from 'classnames'
+import { useRecoilState } from 'recoil';
+import { loadingState } from 'recoil/loadingState';
+import { quizzStateSelector } from 'recoil/quizzState';
+import { settingsStateSelector } from 'recoil/settingsState';
+
+import classes from './QuestionSide.module.less';
+import cx from 'classnames';
 
 const QuestionSide = (props: any) => {
-    const { question, setAnswersIn }: { question: string; setAnswersIn: any } = props
+    const { setAnswersIn }: { setAnswersIn: any } = props;
+
+    const [quizzState, setQuizzState] = useRecoilState<any>(quizzStateSelector);
 
     return (
         <Typist cursor={{ show: false }} onTypingDone={() => setAnswersIn(true)}>
-            <div className={cx(classes.question)}>{question ?? ''}</div>
+            <div className={cx(classes.question)}>{quizzState?.currentQuestion?.question ?? ''}</div>
         </Typist>
-    )
-}
+    );
+};
 
-export default QuestionSide
+export default QuestionSide;
