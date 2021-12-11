@@ -17,6 +17,7 @@ import { settingsStateSelector } from 'recoil/settingsState';
 import classes from './QuizzPanel.module.less';
 import cx from 'classnames';
 import QuestionContainer from './QuestionContainer/QuestionContainer';
+import { isQuestionSuccess } from 'utils/functions/quizzFunctions';
 
 const QuizzPanel = () => {
     const [loading, setLoading] = useRecoilState<boolean>(loadingState);
@@ -45,58 +46,14 @@ const QuizzPanel = () => {
 
     const timeoutHandler = () => {
         setTimeout(true);
-        resultHandler();
-    };
-
-    const resultHandler = () => {
-        const rightAnswers: ISingleOrMultipleChoicesAnswer[] = quizzState?.currentQuestion?.answers?.filter(
-            (el: ISingleOrMultipleChoicesAnswer) => {
-                if (el?.correct) return el;
-            }
-        )[0];
-
-        const selectedAnswers: ISingleOrMultipleChoicesAnswer[] = quizzState?.selectedAnswers?.answers?.filter(
-            (el: ISingleOrMultipleChoicesAnswer) => {
-                if (el?.correct) return el;
-            }
-        );
-
-        const compareQuestionsAndAnswers = (
-            rightAnswers: ISingleOrMultipleChoicesAnswer[],
-            selectedAnswers: ISingleOrMultipleChoicesAnswer[]
-        ): boolean => {
-            selectedAnswers?.forEach((el: ISingleOrMultipleChoicesAnswer, index: number) => {
-                if (!rightAnswers?.some((rightAnswer) => rightAnswer === el)) return false;
-            });
-
-            return true;
-        };
-
-        const isSuccess: boolean = compareQuestionsAndAnswers(rightAnswers, selectedAnswers);
-
-        console.log("isSuccess is:", isSuccess)
-
-        // const success = quizzState?.selectedAnswers?.answerNumber === rightAnswers?.answerNumber ? true : false;
-
-        // const newQuestionsState = quizzState?.questionsState?.map((el: IQuestionState) => {
-        //     if (quizzState?.currentQuestion?.type === 'SingleChoice') {
-        //         if (success) {
-        //             console.log('passed');
-        //             return el?.number === rightAnswers?.answerNumber
-        //                 ? {
-        //                       ...el,
-        //                       state: 'success',
-        //                   }
-        //                 : el;
-        //         }
-        //     }
-        //     // if (quizzState?.selectedAnswers?.answerNumber)
-        // });
-        // setQuizzState({ questionsState: newQuestionsState });
     };
 
     useEffect(() => {
-        console.log('selectedAnswers are', quizzState?.selectedAnswers);
+        if (!timeout) return;
+
+        console.log(isQuestionSuccess(quizzState))
+
+       
     }, [quizzState?.selectedAnswers]);
 
     useEffect(() => {
@@ -122,8 +79,6 @@ const QuizzPanel = () => {
 
         setLoading(false);
     }, []);
-
-    console.log('quizzState is:', quizzState);
 
     return (
         <div className={cx(...innerStyle.inDownContainer)}>

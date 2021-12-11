@@ -55,6 +55,8 @@ const AnswerSide = (props: any) => {
             }
         });
 
+        // console.log("newselectedanswer are :",newSelectedAnswer);
+
         setQuizzState({ selectedAnswers: newSelectedAnswer });
     }, [timeout]);
 

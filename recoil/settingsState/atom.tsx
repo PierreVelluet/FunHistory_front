@@ -15,7 +15,7 @@ const nextPanel: panelName = {
 const settingsState = atom<ISettings>({
     key: 'SettingsState',
     default: {
-        panel: 'QuizzPanel',
+        panel: 'continents',
         continents: 'Asia',
         country: 'Japan',
         theme: 'History',
