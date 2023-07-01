@@ -71,6 +71,7 @@ const PickableItem = (props: any) => {
         setLoading(true);
         setSelected(true);
         selectItemHandler(item);
+        console.log("lol")
     };
     return (
         <div onClick={!countriesPanelActive ? innerOnClickHandler : () => {}} className={cx(...innerStyle.container)}>
